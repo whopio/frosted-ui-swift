@@ -12,7 +12,7 @@ import FrostedUI_Swift
 struct FrostedSwiftUIDemoApp: App {
     
     init() {
-        InterDisplayFont.registerFonts()
+        FrostedUI.initialize()
     }
     
     var body: some Scene {

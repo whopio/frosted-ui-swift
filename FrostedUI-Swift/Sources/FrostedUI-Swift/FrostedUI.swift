@@ -1,7 +1,12 @@
 import Foundation
 import SwiftUI
 
-public struct InterDisplayFont {
+public struct FrostedUI {
+    
+    public static func initialize() {
+        registerFonts()
+    }
+    
     public static func registerFonts() {
         FontStyle.allCases.forEach { style in
             registerFont(bundle: .module, fontName: "\(FontFamily.inter.rawValue)\(style.rawValue)", fontExtension: "ttf")
