@@ -2,16 +2,15 @@
 //  ContentView.swift
 //  FrostedSwiftUIDemo
 //
-//  Created by Sakun Acharige on 8/16/24.
+//  Created by Sakun Acharige on 8/19/24.
 //
 
 import SwiftUI
-import FrostedUI_Swift
 
 struct ContentView: View {
     var body: some View {
         VStack {
-            Text("Frosted UI in Swift!")
+            Text("Frosted UI Swift!")
         }
         .padding()
     }
