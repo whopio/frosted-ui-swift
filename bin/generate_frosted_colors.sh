@@ -4,11 +4,11 @@
 REPO_URL="https://github.com/whopio/frosted-ui.git"
 REPO_DIR="frosted-ui"
 SOURCE_DIR="packages/frosted-ui-native-colors/colors"
-DEST_DIR="Sources/FrostedUI/Resources/Colors.xcassets/Frosted"
+DEST_DIR="FrostedUI/Sources/FrostedUI/Resources/Colors.xcassets/Frosted"
 
 # Get the root directory of the project
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ROOT_DIR="$(cd "$SCRIPT_DIR/../../../../.." && pwd)"
+ROOT_DIR="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 
 # Full paths for clarity
 REPO_PATH="$ROOT_DIR/$REPO_DIR"

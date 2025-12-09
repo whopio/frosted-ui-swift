@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Path to your Colors asset catalog
-COLORS_PATH="Sources/FrostedUI/Resources/Colors.xcassets"
+COLORS_PATH="FrostedUI/Sources/FrostedUI/Resources/Colors.xcassets"
 
 # Output file where the generated Swift enum will be written
-OUTPUT_FILE="Sources/FrostedUI/Color/Color+Extensions.swift"
+OUTPUT_FILE="FrostedUI/S/ources/FrostedUI/Color/Color+Extensions.swift"
 
 # Check if the colors path exists
 if [ ! -d "$COLORS_PATH" ]; then
