@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Generate Swift enums and IconSet definitions for all SVG icons
+# Generate Swift enums and FrostedIconSet definitions for all SVG icons
 # located in Sources/FrostedUI/Resources/Icons.xcassets.
 
 ICONS_PATH="Sources/FrostedUI/Resources/Icons.xcassets"
@@ -69,29 +69,7 @@ public extension Image {
     }
 }
 
-public struct IconSet {
-    public let size12: FrostedIcon
-    public let size16: FrostedIcon
-    public let size20: FrostedIcon
-    public let size24: FrostedIcon
-    public let size32: FrostedIcon
-
-    public init(
-        size12: FrostedIcon,
-        size16: FrostedIcon,
-        size20: FrostedIcon,
-        size24: FrostedIcon,
-        size32: FrostedIcon
-    ) {
-        self.size12 = size12
-        self.size16 = size16
-        self.size20 = size20
-        self.size24 = size24
-        self.size32 = size32
-    }
-}
-
-public extension IconSet {
+public extension FrostedIconSet {
 EOT
 
 # Build unique, sorted list of base names for IconSet definitions
@@ -120,7 +98,7 @@ for base in "${bases_sorted[@]}"; do
 
     if [ "$has_all" = "yes" ]; then
         echo "" >> "$OUTPUT_FILE"
-        echo "    static let ${base} = IconSet(" >> "$OUTPUT_FILE"
+        echo "    static let ${base} = FrostedIconSet(" >> "$OUTPUT_FILE"
         echo "        size12: .${base}12," >> "$OUTPUT_FILE"
         echo "        size16: .${base}16," >> "$OUTPUT_FILE"
         echo "        size20: .${base}20," >> "$OUTPUT_FILE"

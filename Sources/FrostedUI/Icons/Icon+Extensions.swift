@@ -1932,31 +1932,9 @@ public extension Image {
     }
 }
 
-public struct IconSet {
-    public let size12: FrostedIcon
-    public let size16: FrostedIcon
-    public let size20: FrostedIcon
-    public let size24: FrostedIcon
-    public let size32: FrostedIcon
+public extension FrostedIconSet {
 
-    public init(
-        size12: FrostedIcon,
-        size16: FrostedIcon,
-        size20: FrostedIcon,
-        size24: FrostedIcon,
-        size32: FrostedIcon
-    ) {
-        self.size12 = size12
-        self.size16 = size16
-        self.size20 = size20
-        self.size24 = size24
-        self.size32 = size32
-    }
-}
-
-public extension IconSet {
-
-    static let addUser = IconSet(
+    static let addUser = FrostedIconSet(
         size12: .addUser12,
         size16: .addUser16,
         size20: .addUser20,
@@ -1964,7 +1942,7 @@ public extension IconSet {
         size32: .addUser32
     )
 
-    static let alignCenter = IconSet(
+    static let alignCenter = FrostedIconSet(
         size12: .alignCenter12,
         size16: .alignCenter16,
         size20: .alignCenter20,
@@ -1972,7 +1950,7 @@ public extension IconSet {
         size32: .alignCenter32
     )
 
-    static let alignLeft = IconSet(
+    static let alignLeft = FrostedIconSet(
         size12: .alignLeft12,
         size16: .alignLeft16,
         size20: .alignLeft20,
@@ -1980,7 +1958,7 @@ public extension IconSet {
         size32: .alignLeft32
     )
 
-    static let alignRight = IconSet(
+    static let alignRight = FrostedIconSet(
         size12: .alignRight12,
         size16: .alignRight16,
         size20: .alignRight20,
@@ -1988,7 +1966,7 @@ public extension IconSet {
         size32: .alignRight32
     )
 
-    static let apps = IconSet(
+    static let apps = FrostedIconSet(
         size12: .apps12,
         size16: .apps16,
         size20: .apps20,
@@ -1996,7 +1974,7 @@ public extension IconSet {
         size32: .apps32
     )
 
-    static let arrowDown = IconSet(
+    static let arrowDown = FrostedIconSet(
         size12: .arrowDown12,
         size16: .arrowDown16,
         size20: .arrowDown20,
@@ -2004,7 +1982,7 @@ public extension IconSet {
         size32: .arrowDown32
     )
 
-    static let arrowDownAngleLeft = IconSet(
+    static let arrowDownAngleLeft = FrostedIconSet(
         size12: .arrowDownAngleLeft12,
         size16: .arrowDownAngleLeft16,
         size20: .arrowDownAngleLeft20,
@@ -2012,7 +1990,7 @@ public extension IconSet {
         size32: .arrowDownAngleLeft32
     )
 
-    static let arrowDownAngleRight = IconSet(
+    static let arrowDownAngleRight = FrostedIconSet(
         size12: .arrowDownAngleRight12,
         size16: .arrowDownAngleRight16,
         size20: .arrowDownAngleRight20,
@@ -2020,7 +1998,7 @@ public extension IconSet {
         size32: .arrowDownAngleRight32
     )
 
-    static let arrowDownLeft = IconSet(
+    static let arrowDownLeft = FrostedIconSet(
         size12: .arrowDownLeft12,
         size16: .arrowDownLeft16,
         size20: .arrowDownLeft20,
@@ -2028,7 +2006,7 @@ public extension IconSet {
         size32: .arrowDownLeft32
     )
 
-    static let arrowDownRight = IconSet(
+    static let arrowDownRight = FrostedIconSet(
         size12: .arrowDownRight12,
         size16: .arrowDownRight16,
         size20: .arrowDownRight20,
@@ -2036,7 +2014,7 @@ public extension IconSet {
         size32: .arrowDownRight32
     )
 
-    static let arrowDownToLine = IconSet(
+    static let arrowDownToLine = FrostedIconSet(
         size12: .arrowDownToLine12,
         size16: .arrowDownToLine16,
         size20: .arrowDownToLine20,
@@ -2044,7 +2022,7 @@ public extension IconSet {
         size32: .arrowDownToLine32
     )
 
-    static let arrowDownToLineSize = IconSet(
+    static let arrowDownToLineSize = FrostedIconSet(
         size12: .arrowDownToLineSize12,
         size16: .arrowDownToLineSize16,
         size20: .arrowDownToLineSize20,
@@ -2052,7 +2030,7 @@ public extension IconSet {
         size32: .arrowDownToLineSize32
     )
 
-    static let arrowFatDown = IconSet(
+    static let arrowFatDown = FrostedIconSet(
         size12: .arrowFatDown12,
         size16: .arrowFatDown16,
         size20: .arrowFatDown20,
@@ -2060,7 +2038,7 @@ public extension IconSet {
         size32: .arrowFatDown32
     )
 
-    static let arrowFatDownFilled = IconSet(
+    static let arrowFatDownFilled = FrostedIconSet(
         size12: .arrowFatDownFilled12,
         size16: .arrowFatDownFilled16,
         size20: .arrowFatDownFilled20,
@@ -2068,7 +2046,7 @@ public extension IconSet {
         size32: .arrowFatDownFilled32
     )
 
-    static let arrowFatUp = IconSet(
+    static let arrowFatUp = FrostedIconSet(
         size12: .arrowFatUp12,
         size16: .arrowFatUp16,
         size20: .arrowFatUp20,
@@ -2076,7 +2054,7 @@ public extension IconSet {
         size32: .arrowFatUp32
     )
 
-    static let arrowFatUpFilled = IconSet(
+    static let arrowFatUpFilled = FrostedIconSet(
         size12: .arrowFatUpFilled12,
         size16: .arrowFatUpFilled16,
         size20: .arrowFatUpFilled20,
@@ -2084,7 +2062,7 @@ public extension IconSet {
         size32: .arrowFatUpFilled32
     )
 
-    static let arrowLeft = IconSet(
+    static let arrowLeft = FrostedIconSet(
         size12: .arrowLeft12,
         size16: .arrowLeft16,
         size20: .arrowLeft20,
@@ -2092,7 +2070,7 @@ public extension IconSet {
         size32: .arrowLeft32
     )
 
-    static let arrowRight = IconSet(
+    static let arrowRight = FrostedIconSet(
         size12: .arrowRight12,
         size16: .arrowRight16,
         size20: .arrowRight20,
@@ -2100,7 +2078,7 @@ public extension IconSet {
         size32: .arrowRight32
     )
 
-    static let arrowUp = IconSet(
+    static let arrowUp = FrostedIconSet(
         size12: .arrowUp12,
         size16: .arrowUp16,
         size20: .arrowUp20,
@@ -2108,7 +2086,7 @@ public extension IconSet {
         size32: .arrowUp32
     )
 
-    static let arrowUpFromBracket = IconSet(
+    static let arrowUpFromBracket = FrostedIconSet(
         size12: .arrowUpFromBracket12,
         size16: .arrowUpFromBracket16,
         size20: .arrowUpFromBracket20,
@@ -2116,7 +2094,7 @@ public extension IconSet {
         size32: .arrowUpFromBracket32
     )
 
-    static let arrowUpLeft = IconSet(
+    static let arrowUpLeft = FrostedIconSet(
         size12: .arrowUpLeft12,
         size16: .arrowUpLeft16,
         size20: .arrowUpLeft20,
@@ -2124,7 +2102,7 @@ public extension IconSet {
         size32: .arrowUpLeft32
     )
 
-    static let arrowUpRight = IconSet(
+    static let arrowUpRight = FrostedIconSet(
         size12: .arrowUpRight12,
         size16: .arrowUpRight16,
         size20: .arrowUpRight20,
@@ -2132,7 +2110,7 @@ public extension IconSet {
         size32: .arrowUpRight32
     )
 
-    static let arrowUpRightFromBracket = IconSet(
+    static let arrowUpRightFromBracket = FrostedIconSet(
         size12: .arrowUpRightFromBracket12,
         size16: .arrowUpRightFromBracket16,
         size20: .arrowUpRightFromBracket20,
@@ -2140,7 +2118,7 @@ public extension IconSet {
         size32: .arrowUpRightFromBracket32
     )
 
-    static let arrowUpRightFromSquare = IconSet(
+    static let arrowUpRightFromSquare = FrostedIconSet(
         size12: .arrowUpRightFromSquare12,
         size16: .arrowUpRightFromSquare16,
         size20: .arrowUpRightFromSquare20,
@@ -2148,7 +2126,7 @@ public extension IconSet {
         size32: .arrowUpRightFromSquare32
     )
 
-    static let arrowUpRightFromSquareFlush = IconSet(
+    static let arrowUpRightFromSquareFlush = FrostedIconSet(
         size12: .arrowUpRightFromSquareFlush12,
         size16: .arrowUpRightFromSquareFlush16,
         size20: .arrowUpRightFromSquareFlush20,
@@ -2156,7 +2134,7 @@ public extension IconSet {
         size32: .arrowUpRightFromSquareFlush32
     )
 
-    static let atom = IconSet(
+    static let atom = FrostedIconSet(
         size12: .atom12,
         size16: .atom16,
         size20: .atom20,
@@ -2164,7 +2142,7 @@ public extension IconSet {
         size32: .atom32
     )
 
-    static let ban = IconSet(
+    static let ban = FrostedIconSet(
         size12: .ban12,
         size16: .ban16,
         size20: .ban20,
@@ -2172,7 +2150,7 @@ public extension IconSet {
         size32: .ban32
     )
 
-    static let bank = IconSet(
+    static let bank = FrostedIconSet(
         size12: .bank12,
         size16: .bank16,
         size20: .bank20,
@@ -2180,7 +2158,7 @@ public extension IconSet {
         size32: .bank32
     )
 
-    static let bannerPhoto = IconSet(
+    static let bannerPhoto = FrostedIconSet(
         size12: .bannerPhoto12,
         size16: .bannerPhoto16,
         size20: .bannerPhoto20,
@@ -2188,7 +2166,7 @@ public extension IconSet {
         size32: .bannerPhoto32
     )
 
-    static let barChart = IconSet(
+    static let barChart = FrostedIconSet(
         size12: .barChart12,
         size16: .barChart16,
         size20: .barChart20,
@@ -2196,7 +2174,7 @@ public extension IconSet {
         size32: .barChart32
     )
 
-    static let barsFilter = IconSet(
+    static let barsFilter = FrostedIconSet(
         size12: .barsFilter12,
         size16: .barsFilter16,
         size20: .barsFilter20,
@@ -2204,7 +2182,7 @@ public extension IconSet {
         size32: .barsFilter32
     )
 
-    static let beaker = IconSet(
+    static let beaker = FrostedIconSet(
         size12: .beaker12,
         size16: .beaker16,
         size20: .beaker20,
@@ -2212,7 +2190,7 @@ public extension IconSet {
         size32: .beaker32
     )
 
-    static let beakerFilled = IconSet(
+    static let beakerFilled = FrostedIconSet(
         size12: .beakerFilled12,
         size16: .beakerFilled16,
         size20: .beakerFilled20,
@@ -2220,7 +2198,7 @@ public extension IconSet {
         size32: .beakerFilled32
     )
 
-    static let bell = IconSet(
+    static let bell = FrostedIconSet(
         size12: .bell12,
         size16: .bell16,
         size20: .bell20,
@@ -2228,7 +2206,7 @@ public extension IconSet {
         size32: .bell32
     )
 
-    static let bellSlash = IconSet(
+    static let bellSlash = FrostedIconSet(
         size12: .bellSlash12,
         size16: .bellSlash16,
         size20: .bellSlash20,
@@ -2236,7 +2214,7 @@ public extension IconSet {
         size32: .bellSlash32
     )
 
-    static let bitcoin = IconSet(
+    static let bitcoin = FrostedIconSet(
         size12: .bitcoin12,
         size16: .bitcoin16,
         size20: .bitcoin20,
@@ -2244,7 +2222,7 @@ public extension IconSet {
         size32: .bitcoin32
     )
 
-    static let bold = IconSet(
+    static let bold = FrostedIconSet(
         size12: .bold12,
         size16: .bold16,
         size20: .bold20,
@@ -2252,7 +2230,7 @@ public extension IconSet {
         size32: .bold32
     )
 
-    static let book = IconSet(
+    static let book = FrostedIconSet(
         size12: .book12,
         size16: .book16,
         size20: .book20,
@@ -2260,7 +2238,7 @@ public extension IconSet {
         size32: .book32
     )
 
-    static let browser = IconSet(
+    static let browser = FrostedIconSet(
         size12: .browser12,
         size16: .browser16,
         size20: .browser20,
@@ -2268,7 +2246,7 @@ public extension IconSet {
         size32: .browser32
     )
 
-    static let bulb = IconSet(
+    static let bulb = FrostedIconSet(
         size12: .bulb12,
         size16: .bulb16,
         size20: .bulb20,
@@ -2276,7 +2254,7 @@ public extension IconSet {
         size32: .bulb32
     )
 
-    static let burger = IconSet(
+    static let burger = FrostedIconSet(
         size12: .burger12,
         size16: .burger16,
         size20: .burger20,
@@ -2284,7 +2262,7 @@ public extension IconSet {
         size32: .burger32
     )
 
-    static let calendar = IconSet(
+    static let calendar = FrostedIconSet(
         size12: .calendar12,
         size16: .calendar16,
         size20: .calendar20,
@@ -2292,7 +2270,7 @@ public extension IconSet {
         size32: .calendar32
     )
 
-    static let calendarPlus = IconSet(
+    static let calendarPlus = FrostedIconSet(
         size12: .calendarPlus12,
         size16: .calendarPlus16,
         size20: .calendarPlus20,
@@ -2300,7 +2278,7 @@ public extension IconSet {
         size32: .calendarPlus32
     )
 
-    static let calendarPlusSize = IconSet(
+    static let calendarPlusSize = FrostedIconSet(
         size12: .calendarPlusSize12,
         size16: .calendarPlusSize16,
         size20: .calendarPlusSize20,
@@ -2308,7 +2286,7 @@ public extension IconSet {
         size32: .calendarPlusSize32
     )
 
-    static let calendarX = IconSet(
+    static let calendarX = FrostedIconSet(
         size12: .calendarX12,
         size16: .calendarX16,
         size20: .calendarX20,
@@ -2316,7 +2294,7 @@ public extension IconSet {
         size32: .calendarX32
     )
 
-    static let calendarXSize = IconSet(
+    static let calendarXSize = FrostedIconSet(
         size12: .calendarXSize12,
         size16: .calendarXSize16,
         size20: .calendarXSize20,
@@ -2324,7 +2302,7 @@ public extension IconSet {
         size32: .calendarXSize32
     )
 
-    static let camera = IconSet(
+    static let camera = FrostedIconSet(
         size12: .camera12,
         size16: .camera16,
         size20: .camera20,
@@ -2332,7 +2310,7 @@ public extension IconSet {
         size32: .camera32
     )
 
-    static let cameraAdd = IconSet(
+    static let cameraAdd = FrostedIconSet(
         size12: .cameraAdd12,
         size16: .cameraAdd16,
         size20: .cameraAdd20,
@@ -2340,7 +2318,7 @@ public extension IconSet {
         size32: .cameraAdd32
     )
 
-    static let cameraAddFilled = IconSet(
+    static let cameraAddFilled = FrostedIconSet(
         size12: .cameraAddFilled12,
         size16: .cameraAddFilled16,
         size20: .cameraAddFilled20,
@@ -2348,7 +2326,7 @@ public extension IconSet {
         size32: .cameraAddFilled32
     )
 
-    static let cameraFilled = IconSet(
+    static let cameraFilled = FrostedIconSet(
         size12: .cameraFilled12,
         size16: .cameraFilled16,
         size20: .cameraFilled20,
@@ -2356,7 +2334,7 @@ public extension IconSet {
         size32: .cameraFilled32
     )
 
-    static let cartRemove = IconSet(
+    static let cartRemove = FrostedIconSet(
         size12: .cartRemove12,
         size16: .cartRemove16,
         size20: .cartRemove20,
@@ -2364,7 +2342,7 @@ public extension IconSet {
         size32: .cartRemove32
     )
 
-    static let chat = IconSet(
+    static let chat = FrostedIconSet(
         size12: .chat12,
         size16: .chat16,
         size20: .chat20,
@@ -2372,7 +2350,7 @@ public extension IconSet {
         size32: .chat32
     )
 
-    static let checklist = IconSet(
+    static let checklist = FrostedIconSet(
         size12: .checklist12,
         size16: .checklist16,
         size20: .checklist20,
@@ -2380,7 +2358,7 @@ public extension IconSet {
         size32: .checklist32
     )
 
-    static let checkmark = IconSet(
+    static let checkmark = FrostedIconSet(
         size12: .checkmark12,
         size16: .checkmark16,
         size20: .checkmark20,
@@ -2388,7 +2366,7 @@ public extension IconSet {
         size32: .checkmark32
     )
 
-    static let checkmarkCircle = IconSet(
+    static let checkmarkCircle = FrostedIconSet(
         size12: .checkmarkCircle12,
         size16: .checkmarkCircle16,
         size20: .checkmarkCircle20,
@@ -2396,7 +2374,7 @@ public extension IconSet {
         size32: .checkmarkCircle32
     )
 
-    static let checkmarkCircleFilled = IconSet(
+    static let checkmarkCircleFilled = FrostedIconSet(
         size12: .checkmarkCircleFilled12,
         size16: .checkmarkCircleFilled16,
         size20: .checkmarkCircleFilled20,
@@ -2404,7 +2382,7 @@ public extension IconSet {
         size32: .checkmarkCircleFilled32
     )
 
-    static let checkmarkShield = IconSet(
+    static let checkmarkShield = FrostedIconSet(
         size12: .checkmarkShield12,
         size16: .checkmarkShield16,
         size20: .checkmarkShield20,
@@ -2412,7 +2390,7 @@ public extension IconSet {
         size32: .checkmarkShield32
     )
 
-    static let chevronDown = IconSet(
+    static let chevronDown = FrostedIconSet(
         size12: .chevronDown12,
         size16: .chevronDown16,
         size20: .chevronDown20,
@@ -2420,7 +2398,7 @@ public extension IconSet {
         size32: .chevronDown32
     )
 
-    static let chevronLeft = IconSet(
+    static let chevronLeft = FrostedIconSet(
         size12: .chevronLeft12,
         size16: .chevronLeft16,
         size20: .chevronLeft20,
@@ -2428,7 +2406,7 @@ public extension IconSet {
         size32: .chevronLeft32
     )
 
-    static let chevronLeftToLineInBox = IconSet(
+    static let chevronLeftToLineInBox = FrostedIconSet(
         size12: .chevronLeftToLineInBox12,
         size16: .chevronLeftToLineInBox16,
         size20: .chevronLeftToLineInBox20,
@@ -2436,7 +2414,7 @@ public extension IconSet {
         size32: .chevronLeftToLineInBox32
     )
 
-    static let chevronLeftToLineInBoxSize = IconSet(
+    static let chevronLeftToLineInBoxSize = FrostedIconSet(
         size12: .chevronLeftToLineInBoxSize12,
         size16: .chevronLeftToLineInBoxSize16,
         size20: .chevronLeftToLineInBoxSize20,
@@ -2444,7 +2422,7 @@ public extension IconSet {
         size32: .chevronLeftToLineInBoxSize32
     )
 
-    static let chevronRight = IconSet(
+    static let chevronRight = FrostedIconSet(
         size12: .chevronRight12,
         size16: .chevronRight16,
         size20: .chevronRight20,
@@ -2452,7 +2430,7 @@ public extension IconSet {
         size32: .chevronRight32
     )
 
-    static let chevronUp = IconSet(
+    static let chevronUp = FrostedIconSet(
         size12: .chevronUp12,
         size16: .chevronUp16,
         size20: .chevronUp20,
@@ -2460,7 +2438,7 @@ public extension IconSet {
         size32: .chevronUp32
     )
 
-    static let clipboard = IconSet(
+    static let clipboard = FrostedIconSet(
         size12: .clipboard12,
         size16: .clipboard16,
         size20: .clipboard20,
@@ -2468,7 +2446,7 @@ public extension IconSet {
         size32: .clipboard32
     )
 
-    static let clipboardSize = IconSet(
+    static let clipboardSize = FrostedIconSet(
         size12: .clipboardSize12,
         size16: .clipboardSize16,
         size20: .clipboardSize20,
@@ -2476,7 +2454,7 @@ public extension IconSet {
         size32: .clipboardSize32
     )
 
-    static let clock = IconSet(
+    static let clock = FrostedIconSet(
         size12: .clock12,
         size16: .clock16,
         size20: .clock20,
@@ -2484,7 +2462,7 @@ public extension IconSet {
         size32: .clock32
     )
 
-    static let clockFilled = IconSet(
+    static let clockFilled = FrostedIconSet(
         size12: .clockFilled12,
         size16: .clockFilled16,
         size20: .clockFilled20,
@@ -2492,7 +2470,7 @@ public extension IconSet {
         size32: .clockFilled32
     )
 
-    static let closedCaptions = IconSet(
+    static let closedCaptions = FrostedIconSet(
         size12: .closedCaptions12,
         size16: .closedCaptions16,
         size20: .closedCaptions20,
@@ -2500,7 +2478,7 @@ public extension IconSet {
         size32: .closedCaptions32
     )
 
-    static let code = IconSet(
+    static let code = FrostedIconSet(
         size12: .code12,
         size16: .code16,
         size20: .code20,
@@ -2508,7 +2486,7 @@ public extension IconSet {
         size32: .code32
     )
 
-    static let codeblock = IconSet(
+    static let codeblock = FrostedIconSet(
         size12: .codeblock12,
         size16: .codeblock16,
         size20: .codeblock20,
@@ -2516,7 +2494,7 @@ public extension IconSet {
         size32: .codeblock32
     )
 
-    static let coinbase = IconSet(
+    static let coinbase = FrostedIconSet(
         size12: .coinbase12,
         size16: .coinbase16,
         size20: .coinbase20,
@@ -2524,7 +2502,7 @@ public extension IconSet {
         size32: .coinbase32
     )
 
-    static let collapseSidebar = IconSet(
+    static let collapseSidebar = FrostedIconSet(
         size12: .collapseSidebar12,
         size16: .collapseSidebar16,
         size20: .collapseSidebar20,
@@ -2532,7 +2510,7 @@ public extension IconSet {
         size32: .collapseSidebar32
     )
 
-    static let collapseSidebarFilled = IconSet(
+    static let collapseSidebarFilled = FrostedIconSet(
         size12: .collapseSidebarFilled12,
         size16: .collapseSidebarFilled16,
         size20: .collapseSidebarFilled20,
@@ -2540,7 +2518,7 @@ public extension IconSet {
         size32: .collapseSidebarFilled32
     )
 
-    static let command = IconSet(
+    static let command = FrostedIconSet(
         size12: .command12,
         size16: .command16,
         size20: .command20,
@@ -2548,7 +2526,7 @@ public extension IconSet {
         size32: .command32
     )
 
-    static let compass = IconSet(
+    static let compass = FrostedIconSet(
         size12: .compass12,
         size16: .compass16,
         size20: .compass20,
@@ -2556,7 +2534,7 @@ public extension IconSet {
         size32: .compass32
     )
 
-    static let compassFilled = IconSet(
+    static let compassFilled = FrostedIconSet(
         size12: .compassFilled12,
         size16: .compassFilled16,
         size20: .compassFilled20,
@@ -2564,7 +2542,7 @@ public extension IconSet {
         size32: .compassFilled32
     )
 
-    static let component19 = IconSet(
+    static let component19 = FrostedIconSet(
         size12: .component1912,
         size16: .component1916,
         size20: .component1920,
@@ -2572,7 +2550,7 @@ public extension IconSet {
         size32: .component1932
     )
 
-    static let compress = IconSet(
+    static let compress = FrostedIconSet(
         size12: .compress12,
         size16: .compress16,
         size20: .compress20,
@@ -2580,7 +2558,7 @@ public extension IconSet {
         size32: .compress32
     )
 
-    static let converge = IconSet(
+    static let converge = FrostedIconSet(
         size12: .converge12,
         size16: .converge16,
         size20: .converge20,
@@ -2588,7 +2566,7 @@ public extension IconSet {
         size32: .converge32
     )
 
-    static let copy = IconSet(
+    static let copy = FrostedIconSet(
         size12: .copy12,
         size16: .copy16,
         size20: .copy20,
@@ -2596,7 +2574,7 @@ public extension IconSet {
         size32: .copy32
     )
 
-    static let couponActive = IconSet(
+    static let couponActive = FrostedIconSet(
         size12: .couponActive12,
         size16: .couponActive16,
         size20: .couponActive20,
@@ -2604,7 +2582,7 @@ public extension IconSet {
         size32: .couponActive32
     )
 
-    static let couponExpired = IconSet(
+    static let couponExpired = FrostedIconSet(
         size12: .couponExpired12,
         size16: .couponExpired16,
         size20: .couponExpired20,
@@ -2612,7 +2590,7 @@ public extension IconSet {
         size32: .couponExpired32
     )
 
-    static let creditCard = IconSet(
+    static let creditCard = FrostedIconSet(
         size12: .creditCard12,
         size16: .creditCard16,
         size20: .creditCard20,
@@ -2620,7 +2598,7 @@ public extension IconSet {
         size32: .creditCard32
     )
 
-    static let creditCardFilled = IconSet(
+    static let creditCardFilled = FrostedIconSet(
         size12: .creditCardFilled12,
         size16: .creditCardFilled16,
         size20: .creditCardFilled20,
@@ -2628,7 +2606,7 @@ public extension IconSet {
         size32: .creditCardFilled32
     )
 
-    static let cube = IconSet(
+    static let cube = FrostedIconSet(
         size12: .cube12,
         size16: .cube16,
         size20: .cube20,
@@ -2636,7 +2614,7 @@ public extension IconSet {
         size32: .cube32
     )
 
-    static let cubeDisconnected = IconSet(
+    static let cubeDisconnected = FrostedIconSet(
         size12: .cubeDisconnected12,
         size16: .cubeDisconnected16,
         size20: .cubeDisconnected20,
@@ -2644,7 +2622,7 @@ public extension IconSet {
         size32: .cubeDisconnected32
     )
 
-    static let cubeFilled = IconSet(
+    static let cubeFilled = FrostedIconSet(
         size12: .cubeFilled12,
         size16: .cubeFilled16,
         size20: .cubeFilled20,
@@ -2652,7 +2630,7 @@ public extension IconSet {
         size32: .cubeFilled32
     )
 
-    static let cubeSize = IconSet(
+    static let cubeSize = FrostedIconSet(
         size12: .cubeSize12,
         size16: .cubeSize16,
         size20: .cubeSize20,
@@ -2660,7 +2638,7 @@ public extension IconSet {
         size32: .cubeSize32
     )
 
-    static let cursor = IconSet(
+    static let cursor = FrostedIconSet(
         size12: .cursor12,
         size16: .cursor16,
         size20: .cursor20,
@@ -2668,7 +2646,7 @@ public extension IconSet {
         size32: .cursor32
     )
 
-    static let cursorFilled = IconSet(
+    static let cursorFilled = FrostedIconSet(
         size12: .cursorFilled12,
         size16: .cursorFilled16,
         size20: .cursorFilled20,
@@ -2676,7 +2654,7 @@ public extension IconSet {
         size32: .cursorFilled32
     )
 
-    static let cursorOutline = IconSet(
+    static let cursorOutline = FrostedIconSet(
         size12: .cursorOutline12,
         size16: .cursorOutline16,
         size20: .cursorOutline20,
@@ -2684,7 +2662,7 @@ public extension IconSet {
         size32: .cursorOutline32
     )
 
-    static let dashboard = IconSet(
+    static let dashboard = FrostedIconSet(
         size12: .dashboard12,
         size16: .dashboard16,
         size20: .dashboard20,
@@ -2692,7 +2670,7 @@ public extension IconSet {
         size32: .dashboard32
     )
 
-    static let dashedCircle = IconSet(
+    static let dashedCircle = FrostedIconSet(
         size12: .dashedCircle12,
         size16: .dashedCircle16,
         size20: .dashedCircle20,
@@ -2700,7 +2678,7 @@ public extension IconSet {
         size32: .dashedCircle32
     )
 
-    static let dice = IconSet(
+    static let dice = FrostedIconSet(
         size12: .dice12,
         size16: .dice16,
         size20: .dice20,
@@ -2708,7 +2686,7 @@ public extension IconSet {
         size32: .dice32
     )
 
-    static let diceSize = IconSet(
+    static let diceSize = FrostedIconSet(
         size12: .diceSize12,
         size16: .diceSize16,
         size20: .diceSize20,
@@ -2716,7 +2694,7 @@ public extension IconSet {
         size32: .diceSize32
     )
 
-    static let discord = IconSet(
+    static let discord = FrostedIconSet(
         size12: .discord12,
         size16: .discord16,
         size20: .discord20,
@@ -2724,7 +2702,7 @@ public extension IconSet {
         size32: .discord32
     )
 
-    static let discordFilled = IconSet(
+    static let discordFilled = FrostedIconSet(
         size12: .discordFilled12,
         size16: .discordFilled16,
         size20: .discordFilled20,
@@ -2732,7 +2710,7 @@ public extension IconSet {
         size32: .discordFilled32
     )
 
-    static let discordFilledSize = IconSet(
+    static let discordFilledSize = FrostedIconSet(
         size12: .discordFilledSize12,
         size16: .discordFilledSize16,
         size20: .discordFilledSize20,
@@ -2740,7 +2718,7 @@ public extension IconSet {
         size32: .discordFilledSize32
     )
 
-    static let discordSize = IconSet(
+    static let discordSize = FrostedIconSet(
         size12: .discordSize12,
         size16: .discordSize16,
         size20: .discordSize20,
@@ -2748,7 +2726,7 @@ public extension IconSet {
         size32: .discordSize32
     )
 
-    static let dna = IconSet(
+    static let dna = FrostedIconSet(
         size12: .dna12,
         size16: .dna16,
         size20: .dna20,
@@ -2756,7 +2734,7 @@ public extension IconSet {
         size32: .dna32
     )
 
-    static let document = IconSet(
+    static let document = FrostedIconSet(
         size12: .document12,
         size16: .document16,
         size20: .document20,
@@ -2764,7 +2742,7 @@ public extension IconSet {
         size32: .document32
     )
 
-    static let documentLines = IconSet(
+    static let documentLines = FrostedIconSet(
         size12: .documentLines12,
         size16: .documentLines16,
         size20: .documentLines20,
@@ -2772,7 +2750,7 @@ public extension IconSet {
         size32: .documentLines32
     )
 
-    static let documentPlus = IconSet(
+    static let documentPlus = FrostedIconSet(
         size12: .documentPlus12,
         size16: .documentPlus16,
         size20: .documentPlus20,
@@ -2780,7 +2758,7 @@ public extension IconSet {
         size32: .documentPlus32
     )
 
-    static let dollarCircle = IconSet(
+    static let dollarCircle = FrostedIconSet(
         size12: .dollarCircle12,
         size16: .dollarCircle16,
         size20: .dollarCircle20,
@@ -2788,7 +2766,7 @@ public extension IconSet {
         size32: .dollarCircle32
     )
 
-    static let dollarCircleFilled = IconSet(
+    static let dollarCircleFilled = FrostedIconSet(
         size12: .dollarCircleFilled12,
         size16: .dollarCircleFilled16,
         size20: .dollarCircleFilled20,
@@ -2796,7 +2774,7 @@ public extension IconSet {
         size32: .dollarCircleFilled32
     )
 
-    static let dollarSign = IconSet(
+    static let dollarSign = FrostedIconSet(
         size12: .dollarSign12,
         size16: .dollarSign16,
         size20: .dollarSign20,
@@ -2804,7 +2782,7 @@ public extension IconSet {
         size32: .dollarSign32
     )
 
-    static let dollarSignSlashed = IconSet(
+    static let dollarSignSlashed = FrostedIconSet(
         size12: .dollarSignSlashed12,
         size16: .dollarSignSlashed16,
         size20: .dollarSignSlashed20,
@@ -2812,7 +2790,7 @@ public extension IconSet {
         size32: .dollarSignSlashed32
     )
 
-    static let download = IconSet(
+    static let download = FrostedIconSet(
         size12: .download12,
         size16: .download16,
         size20: .download20,
@@ -2820,7 +2798,7 @@ public extension IconSet {
         size32: .download32
     )
 
-    static let downloadDocument = IconSet(
+    static let downloadDocument = FrostedIconSet(
         size12: .downloadDocument12,
         size16: .downloadDocument16,
         size20: .downloadDocument20,
@@ -2828,7 +2806,7 @@ public extension IconSet {
         size32: .downloadDocument32
     )
 
-    static let downloadDocumentFilled = IconSet(
+    static let downloadDocumentFilled = FrostedIconSet(
         size12: .downloadDocumentFilled12,
         size16: .downloadDocumentFilled16,
         size20: .downloadDocumentFilled20,
@@ -2836,7 +2814,7 @@ public extension IconSet {
         size32: .downloadDocumentFilled32
     )
 
-    static let dragHandleHorizontal = IconSet(
+    static let dragHandleHorizontal = FrostedIconSet(
         size12: .dragHandleHorizontal12,
         size16: .dragHandleHorizontal16,
         size20: .dragHandleHorizontal20,
@@ -2844,7 +2822,7 @@ public extension IconSet {
         size32: .dragHandleHorizontal32
     )
 
-    static let dragHandleVertical = IconSet(
+    static let dragHandleVertical = FrostedIconSet(
         size12: .dragHandleVertical12,
         size16: .dragHandleVertical16,
         size20: .dragHandleVertical20,
@@ -2852,7 +2830,7 @@ public extension IconSet {
         size32: .dragHandleVertical32
     )
 
-    static let edit = IconSet(
+    static let edit = FrostedIconSet(
         size12: .edit12,
         size16: .edit16,
         size20: .edit20,
@@ -2860,7 +2838,7 @@ public extension IconSet {
         size32: .edit32
     )
 
-    static let editProfile = IconSet(
+    static let editProfile = FrostedIconSet(
         size12: .editProfile12,
         size16: .editProfile16,
         size20: .editProfile20,
@@ -2868,7 +2846,7 @@ public extension IconSet {
         size32: .editProfile32
     )
 
-    static let emailOut = IconSet(
+    static let emailOut = FrostedIconSet(
         size12: .emailOut12,
         size16: .emailOut16,
         size20: .emailOut20,
@@ -2876,7 +2854,7 @@ public extension IconSet {
         size32: .emailOut32
     )
 
-    static let errorCircle = IconSet(
+    static let errorCircle = FrostedIconSet(
         size12: .errorCircle12,
         size16: .errorCircle16,
         size20: .errorCircle20,
@@ -2884,7 +2862,7 @@ public extension IconSet {
         size32: .errorCircle32
     )
 
-    static let ethereum = IconSet(
+    static let ethereum = FrostedIconSet(
         size12: .ethereum12,
         size16: .ethereum16,
         size20: .ethereum20,
@@ -2892,7 +2870,7 @@ public extension IconSet {
         size32: .ethereum32
     )
 
-    static let etherium = IconSet(
+    static let etherium = FrostedIconSet(
         size12: .etherium12,
         size16: .etherium16,
         size20: .etherium20,
@@ -2900,7 +2878,7 @@ public extension IconSet {
         size32: .etherium32
     )
 
-    static let exclamationCircle = IconSet(
+    static let exclamationCircle = FrostedIconSet(
         size12: .exclamationCircle12,
         size16: .exclamationCircle16,
         size20: .exclamationCircle20,
@@ -2908,7 +2886,7 @@ public extension IconSet {
         size32: .exclamationCircle32
     )
 
-    static let exclamationTriangle = IconSet(
+    static let exclamationTriangle = FrostedIconSet(
         size12: .exclamationTriangle12,
         size16: .exclamationTriangle16,
         size20: .exclamationTriangle20,
@@ -2916,7 +2894,7 @@ public extension IconSet {
         size32: .exclamationTriangle32
     )
 
-    static let expand = IconSet(
+    static let expand = FrostedIconSet(
         size12: .expand12,
         size16: .expand16,
         size20: .expand20,
@@ -2924,7 +2902,7 @@ public extension IconSet {
         size32: .expand32
     )
 
-    static let export = IconSet(
+    static let export = FrostedIconSet(
         size12: .export12,
         size16: .export16,
         size20: .export20,
@@ -2932,7 +2910,7 @@ public extension IconSet {
         size32: .export32
     )
 
-    static let eye = IconSet(
+    static let eye = FrostedIconSet(
         size12: .eye12,
         size16: .eye16,
         size20: .eye20,
@@ -2940,7 +2918,7 @@ public extension IconSet {
         size32: .eye32
     )
 
-    static let eyeSlashed = IconSet(
+    static let eyeSlashed = FrostedIconSet(
         size12: .eyeSlashed12,
         size16: .eyeSlashed16,
         size20: .eyeSlashed20,
@@ -2948,7 +2926,7 @@ public extension IconSet {
         size32: .eyeSlashed32
     )
 
-    static let facebook = IconSet(
+    static let facebook = FrostedIconSet(
         size12: .facebook12,
         size16: .facebook16,
         size20: .facebook20,
@@ -2956,7 +2934,7 @@ public extension IconSet {
         size32: .facebook32
     )
 
-    static let facebookFilled = IconSet(
+    static let facebookFilled = FrostedIconSet(
         size12: .facebookFilled12,
         size16: .facebookFilled16,
         size20: .facebookFilled20,
@@ -2964,7 +2942,7 @@ public extension IconSet {
         size32: .facebookFilled32
     )
 
-    static let facebookFilledSize = IconSet(
+    static let facebookFilledSize = FrostedIconSet(
         size12: .facebookFilledSize12,
         size16: .facebookFilledSize16,
         size20: .facebookFilledSize20,
@@ -2972,7 +2950,7 @@ public extension IconSet {
         size32: .facebookFilledSize32
     )
 
-    static let facebookSize = IconSet(
+    static let facebookSize = FrostedIconSet(
         size12: .facebookSize12,
         size16: .facebookSize16,
         size20: .facebookSize20,
@@ -2980,7 +2958,7 @@ public extension IconSet {
         size32: .facebookSize32
     )
 
-    static let fileLines = IconSet(
+    static let fileLines = FrostedIconSet(
         size12: .fileLines12,
         size16: .fileLines16,
         size20: .fileLines20,
@@ -2988,7 +2966,7 @@ public extension IconSet {
         size32: .fileLines32
     )
 
-    static let fileLinesSize = IconSet(
+    static let fileLinesSize = FrostedIconSet(
         size12: .fileLinesSize12,
         size16: .fileLinesSize16,
         size20: .fileLinesSize20,
@@ -2996,7 +2974,7 @@ public extension IconSet {
         size32: .fileLinesSize32
     )
 
-    static let filterDown = IconSet(
+    static let filterDown = FrostedIconSet(
         size12: .filterDown12,
         size16: .filterDown16,
         size20: .filterDown20,
@@ -3004,7 +2982,7 @@ public extension IconSet {
         size32: .filterDown32
     )
 
-    static let flag = IconSet(
+    static let flag = FrostedIconSet(
         size12: .flag12,
         size16: .flag16,
         size20: .flag20,
@@ -3012,7 +2990,7 @@ public extension IconSet {
         size32: .flag32
     )
 
-    static let flagFilled = IconSet(
+    static let flagFilled = FrostedIconSet(
         size12: .flagFilled12,
         size16: .flagFilled16,
         size20: .flagFilled20,
@@ -3020,7 +2998,7 @@ public extension IconSet {
         size32: .flagFilled32
     )
 
-    static let folderAdd = IconSet(
+    static let folderAdd = FrostedIconSet(
         size12: .folderAdd12,
         size16: .folderAdd16,
         size20: .folderAdd20,
@@ -3028,7 +3006,7 @@ public extension IconSet {
         size32: .folderAdd32
     )
 
-    static let fullScreen = IconSet(
+    static let fullScreen = FrostedIconSet(
         size12: .fullScreen12,
         size16: .fullScreen16,
         size20: .fullScreen20,
@@ -3036,7 +3014,7 @@ public extension IconSet {
         size32: .fullScreen32
     )
 
-    static let gamepad = IconSet(
+    static let gamepad = FrostedIconSet(
         size12: .gamepad12,
         size16: .gamepad16,
         size20: .gamepad20,
@@ -3044,7 +3022,7 @@ public extension IconSet {
         size32: .gamepad32
     )
 
-    static let gamepadFilled = IconSet(
+    static let gamepadFilled = FrostedIconSet(
         size12: .gamepadFilled12,
         size16: .gamepadFilled16,
         size20: .gamepadFilled20,
@@ -3052,7 +3030,7 @@ public extension IconSet {
         size32: .gamepadFilled32
     )
 
-    static let gear = IconSet(
+    static let gear = FrostedIconSet(
         size12: .gear12,
         size16: .gear16,
         size20: .gear20,
@@ -3060,7 +3038,7 @@ public extension IconSet {
         size32: .gear32
     )
 
-    static let gif = IconSet(
+    static let gif = FrostedIconSet(
         size12: .gif12,
         size16: .gif16,
         size20: .gif20,
@@ -3068,7 +3046,7 @@ public extension IconSet {
         size32: .gif32
     )
 
-    static let gifFilled = IconSet(
+    static let gifFilled = FrostedIconSet(
         size12: .gifFilled12,
         size16: .gifFilled16,
         size20: .gifFilled20,
@@ -3076,7 +3054,7 @@ public extension IconSet {
         size32: .gifFilled32
     )
 
-    static let gift = IconSet(
+    static let gift = FrostedIconSet(
         size12: .gift12,
         size16: .gift16,
         size20: .gift20,
@@ -3084,7 +3062,7 @@ public extension IconSet {
         size32: .gift32
     )
 
-    static let globe = IconSet(
+    static let globe = FrostedIconSet(
         size12: .globe12,
         size16: .globe16,
         size20: .globe20,
@@ -3092,7 +3070,7 @@ public extension IconSet {
         size32: .globe32
     )
 
-    static let globeInSquare = IconSet(
+    static let globeInSquare = FrostedIconSet(
         size12: .globeInSquare12,
         size16: .globeInSquare16,
         size20: .globeInSquare20,
@@ -3100,7 +3078,7 @@ public extension IconSet {
         size32: .globeInSquare32
     )
 
-    static let grid = IconSet(
+    static let grid = FrostedIconSet(
         size12: .grid12,
         size16: .grid16,
         size20: .grid20,
@@ -3108,7 +3086,7 @@ public extension IconSet {
         size32: .grid32
     )
 
-    static let gridAdd = IconSet(
+    static let gridAdd = FrostedIconSet(
         size12: .gridAdd12,
         size16: .gridAdd16,
         size20: .gridAdd20,
@@ -3116,7 +3094,7 @@ public extension IconSet {
         size32: .gridAdd32
     )
 
-    static let handWave = IconSet(
+    static let handWave = FrostedIconSet(
         size12: .handWave12,
         size16: .handWave16,
         size20: .handWave20,
@@ -3124,7 +3102,7 @@ public extension IconSet {
         size32: .handWave32
     )
 
-    static let happy = IconSet(
+    static let happy = FrostedIconSet(
         size12: .happy12,
         size16: .happy16,
         size20: .happy20,
@@ -3132,7 +3110,7 @@ public extension IconSet {
         size32: .happy32
     )
 
-    static let happyFaceFilled = IconSet(
+    static let happyFaceFilled = FrostedIconSet(
         size12: .happyFaceFilled12,
         size16: .happyFaceFilled16,
         size20: .happyFaceFilled20,
@@ -3140,7 +3118,7 @@ public extension IconSet {
         size32: .happyFaceFilled32
     )
 
-    static let happyFacePlus = IconSet(
+    static let happyFacePlus = FrostedIconSet(
         size12: .happyFacePlus12,
         size16: .happyFacePlus16,
         size20: .happyFacePlus20,
@@ -3148,7 +3126,7 @@ public extension IconSet {
         size32: .happyFacePlus32
     )
 
-    static let happyFilled = IconSet(
+    static let happyFilled = FrostedIconSet(
         size12: .happyFilled12,
         size16: .happyFilled16,
         size20: .happyFilled20,
@@ -3156,7 +3134,7 @@ public extension IconSet {
         size32: .happyFilled32
     )
 
-    static let happyPlus = IconSet(
+    static let happyPlus = FrostedIconSet(
         size12: .happyPlus12,
         size16: .happyPlus16,
         size20: .happyPlus20,
@@ -3164,7 +3142,7 @@ public extension IconSet {
         size32: .happyPlus32
     )
 
-    static let hashtag = IconSet(
+    static let hashtag = FrostedIconSet(
         size12: .hashtag12,
         size16: .hashtag16,
         size20: .hashtag20,
@@ -3172,7 +3150,7 @@ public extension IconSet {
         size32: .hashtag32
     )
 
-    static let hashtagFilled = IconSet(
+    static let hashtagFilled = FrostedIconSet(
         size12: .hashtagFilled12,
         size16: .hashtagFilled16,
         size20: .hashtagFilled20,
@@ -3180,7 +3158,7 @@ public extension IconSet {
         size32: .hashtagFilled32
     )
 
-    static let heading = IconSet(
+    static let heading = FrostedIconSet(
         size12: .heading12,
         size16: .heading16,
         size20: .heading20,
@@ -3188,7 +3166,7 @@ public extension IconSet {
         size32: .heading32
     )
 
-    static let headphones = IconSet(
+    static let headphones = FrostedIconSet(
         size12: .headphones12,
         size16: .headphones16,
         size20: .headphones20,
@@ -3196,7 +3174,7 @@ public extension IconSet {
         size32: .headphones32
     )
 
-    static let heart = IconSet(
+    static let heart = FrostedIconSet(
         size12: .heart12,
         size16: .heart16,
         size20: .heart20,
@@ -3204,7 +3182,7 @@ public extension IconSet {
         size32: .heart32
     )
 
-    static let heartFilled = IconSet(
+    static let heartFilled = FrostedIconSet(
         size12: .heartFilled12,
         size16: .heartFilled16,
         size20: .heartFilled20,
@@ -3212,7 +3190,7 @@ public extension IconSet {
         size32: .heartFilled32
     )
 
-    static let home = IconSet(
+    static let home = FrostedIconSet(
         size12: .home12,
         size16: .home16,
         size20: .home20,
@@ -3220,7 +3198,7 @@ public extension IconSet {
         size32: .home32
     )
 
-    static let hourGlass = IconSet(
+    static let hourGlass = FrostedIconSet(
         size12: .hourGlass12,
         size16: .hourGlass16,
         size20: .hourGlass20,
@@ -3228,7 +3206,7 @@ public extension IconSet {
         size32: .hourGlass32
     )
 
-    static let illuminati = IconSet(
+    static let illuminati = FrostedIconSet(
         size12: .illuminati12,
         size16: .illuminati16,
         size20: .illuminati20,
@@ -3236,7 +3214,7 @@ public extension IconSet {
         size32: .illuminati32
     )
 
-    static let illuminatiFilled = IconSet(
+    static let illuminatiFilled = FrostedIconSet(
         size12: .illuminatiFilled12,
         size16: .illuminatiFilled16,
         size20: .illuminatiFilled20,
@@ -3244,7 +3222,7 @@ public extension IconSet {
         size32: .illuminatiFilled32
     )
 
-    static let inbox = IconSet(
+    static let inbox = FrostedIconSet(
         size12: .inbox12,
         size16: .inbox16,
         size20: .inbox20,
@@ -3252,7 +3230,7 @@ public extension IconSet {
         size32: .inbox32
     )
 
-    static let info = IconSet(
+    static let info = FrostedIconSet(
         size12: .info12,
         size16: .info16,
         size20: .info20,
@@ -3260,7 +3238,7 @@ public extension IconSet {
         size32: .info32
     )
 
-    static let infoCircle = IconSet(
+    static let infoCircle = FrostedIconSet(
         size12: .infoCircle12,
         size16: .infoCircle16,
         size20: .infoCircle20,
@@ -3268,7 +3246,7 @@ public extension IconSet {
         size32: .infoCircle32
     )
 
-    static let infoCircleFilled = IconSet(
+    static let infoCircleFilled = FrostedIconSet(
         size12: .infoCircleFilled12,
         size16: .infoCircleFilled16,
         size20: .infoCircleFilled20,
@@ -3276,7 +3254,7 @@ public extension IconSet {
         size32: .infoCircleFilled32
     )
 
-    static let infoFilled = IconSet(
+    static let infoFilled = FrostedIconSet(
         size12: .infoFilled12,
         size16: .infoFilled16,
         size20: .infoFilled20,
@@ -3284,7 +3262,7 @@ public extension IconSet {
         size32: .infoFilled32
     )
 
-    static let infoOutline = IconSet(
+    static let infoOutline = FrostedIconSet(
         size12: .infoOutline12,
         size16: .infoOutline16,
         size20: .infoOutline20,
@@ -3292,7 +3270,7 @@ public extension IconSet {
         size32: .infoOutline32
     )
 
-    static let infoSize = IconSet(
+    static let infoSize = FrostedIconSet(
         size12: .infoSize12,
         size16: .infoSize16,
         size20: .infoSize20,
@@ -3300,7 +3278,7 @@ public extension IconSet {
         size32: .infoSize32
     )
 
-    static let infoSquare = IconSet(
+    static let infoSquare = FrostedIconSet(
         size12: .infoSquare12,
         size16: .infoSquare16,
         size20: .infoSquare20,
@@ -3308,7 +3286,7 @@ public extension IconSet {
         size32: .infoSquare32
     )
 
-    static let information = IconSet(
+    static let information = FrostedIconSet(
         size12: .information12,
         size16: .information16,
         size20: .information20,
@@ -3316,7 +3294,7 @@ public extension IconSet {
         size32: .information32
     )
 
-    static let instagram = IconSet(
+    static let instagram = FrostedIconSet(
         size12: .instagram12,
         size16: .instagram16,
         size20: .instagram20,
@@ -3324,7 +3302,7 @@ public extension IconSet {
         size32: .instagram32
     )
 
-    static let instagramSize = IconSet(
+    static let instagramSize = FrostedIconSet(
         size12: .instagramSize12,
         size16: .instagramSize16,
         size20: .instagramSize20,
@@ -3332,7 +3310,7 @@ public extension IconSet {
         size32: .instagramSize32
     )
 
-    static let italic = IconSet(
+    static let italic = FrostedIconSet(
         size12: .italic12,
         size16: .italic16,
         size20: .italic20,
@@ -3340,7 +3318,7 @@ public extension IconSet {
         size32: .italic32
     )
 
-    static let k = IconSet(
+    static let k = FrostedIconSet(
         size12: .k12,
         size16: .k16,
         size20: .k20,
@@ -3348,7 +3326,7 @@ public extension IconSet {
         size32: .k32
     )
 
-    static let leaf = IconSet(
+    static let leaf = FrostedIconSet(
         size12: .leaf12,
         size16: .leaf16,
         size20: .leaf20,
@@ -3356,7 +3334,7 @@ public extension IconSet {
         size32: .leaf32
     )
 
-    static let leaveReview = IconSet(
+    static let leaveReview = FrostedIconSet(
         size12: .leaveReview12,
         size16: .leaveReview16,
         size20: .leaveReview20,
@@ -3364,7 +3342,7 @@ public extension IconSet {
         size32: .leaveReview32
     )
 
-    static let lightbulb = IconSet(
+    static let lightbulb = FrostedIconSet(
         size12: .lightbulb12,
         size16: .lightbulb16,
         size20: .lightbulb20,
@@ -3372,7 +3350,7 @@ public extension IconSet {
         size32: .lightbulb32
     )
 
-    static let lightsOff = IconSet(
+    static let lightsOff = FrostedIconSet(
         size12: .lightsOff12,
         size16: .lightsOff16,
         size20: .lightsOff20,
@@ -3380,7 +3358,7 @@ public extension IconSet {
         size32: .lightsOff32
     )
 
-    static let lightsOn = IconSet(
+    static let lightsOn = FrostedIconSet(
         size12: .lightsOn12,
         size16: .lightsOn16,
         size20: .lightsOn20,
@@ -3388,7 +3366,7 @@ public extension IconSet {
         size32: .lightsOn32
     )
 
-    static let lilstNumber = IconSet(
+    static let lilstNumber = FrostedIconSet(
         size12: .lilstNumber12,
         size16: .lilstNumber16,
         size20: .lilstNumber20,
@@ -3396,7 +3374,7 @@ public extension IconSet {
         size32: .lilstNumber32
     )
 
-    static let link = IconSet(
+    static let link = FrostedIconSet(
         size12: .link12,
         size16: .link16,
         size20: .link20,
@@ -3404,7 +3382,7 @@ public extension IconSet {
         size32: .link32
     )
 
-    static let linkAdd = IconSet(
+    static let linkAdd = FrostedIconSet(
         size12: .linkAdd12,
         size16: .linkAdd16,
         size20: .linkAdd20,
@@ -3412,7 +3390,7 @@ public extension IconSet {
         size32: .linkAdd32
     )
 
-    static let linkSlash = IconSet(
+    static let linkSlash = FrostedIconSet(
         size12: .linkSlash12,
         size16: .linkSlash16,
         size20: .linkSlash20,
@@ -3420,7 +3398,7 @@ public extension IconSet {
         size32: .linkSlash32
     )
 
-    static let linkedin = IconSet(
+    static let linkedin = FrostedIconSet(
         size12: .linkedin12,
         size16: .linkedin16,
         size20: .linkedin20,
@@ -3428,7 +3406,7 @@ public extension IconSet {
         size32: .linkedin32
     )
 
-    static let list = IconSet(
+    static let list = FrostedIconSet(
         size12: .list12,
         size16: .list16,
         size20: .list20,
@@ -3436,7 +3414,7 @@ public extension IconSet {
         size32: .list32
     )
 
-    static let listBullet = IconSet(
+    static let listBullet = FrostedIconSet(
         size12: .listBullet12,
         size16: .listBullet16,
         size20: .listBullet20,
@@ -3444,7 +3422,7 @@ public extension IconSet {
         size32: .listBullet32
     )
 
-    static let listCheck = IconSet(
+    static let listCheck = FrostedIconSet(
         size12: .listCheck12,
         size16: .listCheck16,
         size20: .listCheck20,
@@ -3452,7 +3430,7 @@ public extension IconSet {
         size32: .listCheck32
     )
 
-    static let listNumber = IconSet(
+    static let listNumber = FrostedIconSet(
         size12: .listNumber12,
         size16: .listNumber16,
         size20: .listNumber20,
@@ -3460,7 +3438,7 @@ public extension IconSet {
         size32: .listNumber32
     )
 
-    static let locationPin = IconSet(
+    static let locationPin = FrostedIconSet(
         size12: .locationPin12,
         size16: .locationPin16,
         size20: .locationPin20,
@@ -3468,7 +3446,7 @@ public extension IconSet {
         size32: .locationPin32
     )
 
-    static let lock = IconSet(
+    static let lock = FrostedIconSet(
         size12: .lock12,
         size16: .lock16,
         size20: .lock20,
@@ -3476,7 +3454,7 @@ public extension IconSet {
         size32: .lock32
     )
 
-    static let lockFilled = IconSet(
+    static let lockFilled = FrostedIconSet(
         size12: .lockFilled12,
         size16: .lockFilled16,
         size20: .lockFilled20,
@@ -3484,7 +3462,7 @@ public extension IconSet {
         size32: .lockFilled32
     )
 
-    static let lockOpen = IconSet(
+    static let lockOpen = FrostedIconSet(
         size12: .lockOpen12,
         size16: .lockOpen16,
         size20: .lockOpen20,
@@ -3492,7 +3470,7 @@ public extension IconSet {
         size32: .lockOpen32
     )
 
-    static let logout = IconSet(
+    static let logout = FrostedIconSet(
         size12: .logout12,
         size16: .logout16,
         size20: .logout20,
@@ -3500,7 +3478,7 @@ public extension IconSet {
         size32: .logout32
     )
 
-    static let magnifyingGlass = IconSet(
+    static let magnifyingGlass = FrostedIconSet(
         size12: .magnifyingGlass12,
         size16: .magnifyingGlass16,
         size20: .magnifyingGlass20,
@@ -3508,7 +3486,7 @@ public extension IconSet {
         size32: .magnifyingGlass32
     )
 
-    static let mail = IconSet(
+    static let mail = FrostedIconSet(
         size12: .mail12,
         size16: .mail16,
         size20: .mail20,
@@ -3516,7 +3494,7 @@ public extension IconSet {
         size32: .mail32
     )
 
-    static let mailFilled = IconSet(
+    static let mailFilled = FrostedIconSet(
         size12: .mailFilled12,
         size16: .mailFilled16,
         size20: .mailFilled20,
@@ -3524,7 +3502,7 @@ public extension IconSet {
         size32: .mailFilled32
     )
 
-    static let mailOut = IconSet(
+    static let mailOut = FrostedIconSet(
         size12: .mailOut12,
         size16: .mailOut16,
         size20: .mailOut20,
@@ -3532,7 +3510,7 @@ public extension IconSet {
         size32: .mailOut32
     )
 
-    static let markAsRead = IconSet(
+    static let markAsRead = FrostedIconSet(
         size12: .markAsRead12,
         size16: .markAsRead16,
         size20: .markAsRead20,
@@ -3540,7 +3518,7 @@ public extension IconSet {
         size32: .markAsRead32
     )
 
-    static let markAsUnread = IconSet(
+    static let markAsUnread = FrostedIconSet(
         size12: .markAsUnread12,
         size16: .markAsUnread16,
         size20: .markAsUnread20,
@@ -3548,7 +3526,7 @@ public extension IconSet {
         size32: .markAsUnread32
     )
 
-    static let medalCheck = IconSet(
+    static let medalCheck = FrostedIconSet(
         size12: .medalCheck12,
         size16: .medalCheck16,
         size20: .medalCheck20,
@@ -3556,7 +3534,7 @@ public extension IconSet {
         size32: .medalCheck32
     )
 
-    static let medalCheckSize = IconSet(
+    static let medalCheckSize = FrostedIconSet(
         size12: .medalCheckSize12,
         size16: .medalCheckSize16,
         size20: .medalCheckSize20,
@@ -3564,7 +3542,7 @@ public extension IconSet {
         size32: .medalCheckSize32
     )
 
-    static let medalCheckmark = IconSet(
+    static let medalCheckmark = FrostedIconSet(
         size12: .medalCheckmark12,
         size16: .medalCheckmark16,
         size20: .medalCheckmark20,
@@ -3572,7 +3550,7 @@ public extension IconSet {
         size32: .medalCheckmark32
     )
 
-    static let megaphone = IconSet(
+    static let megaphone = FrostedIconSet(
         size12: .megaphone12,
         size16: .megaphone16,
         size20: .megaphone20,
@@ -3580,7 +3558,7 @@ public extension IconSet {
         size32: .megaphone32
     )
 
-    static let mentionFilled = IconSet(
+    static let mentionFilled = FrostedIconSet(
         size12: .mentionFilled12,
         size16: .mentionFilled16,
         size20: .mentionFilled20,
@@ -3588,7 +3566,7 @@ public extension IconSet {
         size32: .mentionFilled32
     )
 
-    static let menu = IconSet(
+    static let menu = FrostedIconSet(
         size12: .menu12,
         size16: .menu16,
         size20: .menu20,
@@ -3596,7 +3574,7 @@ public extension IconSet {
         size32: .menu32
     )
 
-    static let merch = IconSet(
+    static let merch = FrostedIconSet(
         size12: .merch12,
         size16: .merch16,
         size20: .merch20,
@@ -3604,7 +3582,7 @@ public extension IconSet {
         size32: .merch32
     )
 
-    static let message = IconSet(
+    static let message = FrostedIconSet(
         size12: .message12,
         size16: .message16,
         size20: .message20,
@@ -3612,7 +3590,7 @@ public extension IconSet {
         size32: .message32
     )
 
-    static let messageEdit = IconSet(
+    static let messageEdit = FrostedIconSet(
         size12: .messageEdit12,
         size16: .messageEdit16,
         size20: .messageEdit20,
@@ -3620,7 +3598,7 @@ public extension IconSet {
         size32: .messageEdit32
     )
 
-    static let messageFilled = IconSet(
+    static let messageFilled = FrostedIconSet(
         size12: .messageFilled12,
         size16: .messageFilled16,
         size20: .messageFilled20,
@@ -3628,7 +3606,7 @@ public extension IconSet {
         size32: .messageFilled32
     )
 
-    static let messageNotification = IconSet(
+    static let messageNotification = FrostedIconSet(
         size12: .messageNotification12,
         size16: .messageNotification16,
         size20: .messageNotification20,
@@ -3636,7 +3614,7 @@ public extension IconSet {
         size32: .messageNotification32
     )
 
-    static let messageSlashed = IconSet(
+    static let messageSlashed = FrostedIconSet(
         size12: .messageSlashed12,
         size16: .messageSlashed16,
         size20: .messageSlashed20,
@@ -3644,7 +3622,7 @@ public extension IconSet {
         size32: .messageSlashed32
     )
 
-    static let messages = IconSet(
+    static let messages = FrostedIconSet(
         size12: .messages12,
         size16: .messages16,
         size20: .messages20,
@@ -3652,7 +3630,7 @@ public extension IconSet {
         size32: .messages32
     )
 
-    static let messagesQuestion = IconSet(
+    static let messagesQuestion = FrostedIconSet(
         size12: .messagesQuestion12,
         size16: .messagesQuestion16,
         size20: .messagesQuestion20,
@@ -3660,7 +3638,7 @@ public extension IconSet {
         size32: .messagesQuestion32
     )
 
-    static let micOff = IconSet(
+    static let micOff = FrostedIconSet(
         size12: .micOff12,
         size16: .micOff16,
         size20: .micOff20,
@@ -3668,7 +3646,7 @@ public extension IconSet {
         size32: .micOff32
     )
 
-    static let micOn = IconSet(
+    static let micOn = FrostedIconSet(
         size12: .micOn12,
         size16: .micOn16,
         size20: .micOn20,
@@ -3676,7 +3654,7 @@ public extension IconSet {
         size32: .micOn32
     )
 
-    static let microphone = IconSet(
+    static let microphone = FrostedIconSet(
         size12: .microphone12,
         size16: .microphone16,
         size20: .microphone20,
@@ -3684,7 +3662,7 @@ public extension IconSet {
         size32: .microphone32
     )
 
-    static let microphoneOff = IconSet(
+    static let microphoneOff = FrostedIconSet(
         size12: .microphoneOff12,
         size16: .microphoneOff16,
         size20: .microphoneOff20,
@@ -3692,7 +3670,7 @@ public extension IconSet {
         size32: .microphoneOff32
     )
 
-    static let minimize = IconSet(
+    static let minimize = FrostedIconSet(
         size12: .minimize12,
         size16: .minimize16,
         size20: .minimize20,
@@ -3700,7 +3678,7 @@ public extension IconSet {
         size32: .minimize32
     )
 
-    static let mobilePhone = IconSet(
+    static let mobilePhone = FrostedIconSet(
         size12: .mobilePhone12,
         size16: .mobilePhone16,
         size20: .mobilePhone20,
@@ -3708,7 +3686,7 @@ public extension IconSet {
         size32: .mobilePhone32
     )
 
-    static let mobilePhoneSize = IconSet(
+    static let mobilePhoneSize = FrostedIconSet(
         size12: .mobilePhoneSize12,
         size16: .mobilePhoneSize16,
         size20: .mobilePhoneSize20,
@@ -3716,7 +3694,7 @@ public extension IconSet {
         size32: .mobilePhoneSize32
     )
 
-    static let monitor = IconSet(
+    static let monitor = FrostedIconSet(
         size12: .monitor12,
         size16: .monitor16,
         size20: .monitor20,
@@ -3724,7 +3702,7 @@ public extension IconSet {
         size32: .monitor32
     )
 
-    static let monitorSize = IconSet(
+    static let monitorSize = FrostedIconSet(
         size12: .monitorSize12,
         size16: .monitorSize16,
         size20: .monitorSize20,
@@ -3732,7 +3710,7 @@ public extension IconSet {
         size32: .monitorSize32
     )
 
-    static let moon = IconSet(
+    static let moon = FrostedIconSet(
         size12: .moon12,
         size16: .moon16,
         size20: .moon20,
@@ -3740,7 +3718,7 @@ public extension IconSet {
         size32: .moon32
     )
 
-    static let moonFilled = IconSet(
+    static let moonFilled = FrostedIconSet(
         size12: .moonFilled12,
         size16: .moonFilled16,
         size20: .moonFilled20,
@@ -3748,7 +3726,7 @@ public extension IconSet {
         size32: .moonFilled32
     )
 
-    static let moonSize = IconSet(
+    static let moonSize = FrostedIconSet(
         size12: .moonSize12,
         size16: .moonSize16,
         size20: .moonSize20,
@@ -3756,7 +3734,7 @@ public extension IconSet {
         size32: .moonSize32
     )
 
-    static let notificationBellCrossed = IconSet(
+    static let notificationBellCrossed = FrostedIconSet(
         size12: .notificationBellCrossed12,
         size16: .notificationBellCrossed16,
         size20: .notificationBellCrossed20,
@@ -3764,7 +3742,7 @@ public extension IconSet {
         size32: .notificationBellCrossed32
     )
 
-    static let palette = IconSet(
+    static let palette = FrostedIconSet(
         size12: .palette12,
         size16: .palette16,
         size20: .palette20,
@@ -3772,7 +3750,7 @@ public extension IconSet {
         size32: .palette32
     )
 
-    static let paperAirplaneFilled = IconSet(
+    static let paperAirplaneFilled = FrostedIconSet(
         size12: .paperAirplaneFilled12,
         size16: .paperAirplaneFilled16,
         size20: .paperAirplaneFilled20,
@@ -3780,7 +3758,7 @@ public extension IconSet {
         size32: .paperAirplaneFilled32
     )
 
-    static let paperAirplaneFilledUp = IconSet(
+    static let paperAirplaneFilledUp = FrostedIconSet(
         size12: .paperAirplaneFilledUp12,
         size16: .paperAirplaneFilledUp16,
         size20: .paperAirplaneFilledUp20,
@@ -3788,7 +3766,7 @@ public extension IconSet {
         size32: .paperAirplaneFilledUp32
     )
 
-    static let paperAirplaneUpFilled = IconSet(
+    static let paperAirplaneUpFilled = FrostedIconSet(
         size12: .paperAirplaneUpFilled12,
         size16: .paperAirplaneUpFilled16,
         size20: .paperAirplaneUpFilled20,
@@ -3796,7 +3774,7 @@ public extension IconSet {
         size32: .paperAirplaneUpFilled32
     )
 
-    static let parachute = IconSet(
+    static let parachute = FrostedIconSet(
         size12: .parachute12,
         size16: .parachute16,
         size20: .parachute20,
@@ -3804,7 +3782,7 @@ public extension IconSet {
         size32: .parachute32
     )
 
-    static let participants = IconSet(
+    static let participants = FrostedIconSet(
         size12: .participants12,
         size16: .participants16,
         size20: .participants20,
@@ -3812,7 +3790,7 @@ public extension IconSet {
         size32: .participants32
     )
 
-    static let pause = IconSet(
+    static let pause = FrostedIconSet(
         size12: .pause12,
         size16: .pause16,
         size20: .pause20,
@@ -3820,7 +3798,7 @@ public extension IconSet {
         size32: .pause32
     )
 
-    static let pauseCircle = IconSet(
+    static let pauseCircle = FrostedIconSet(
         size12: .pauseCircle12,
         size16: .pauseCircle16,
         size20: .pauseCircle20,
@@ -3828,7 +3806,7 @@ public extension IconSet {
         size32: .pauseCircle32
     )
 
-    static let pauseFilled = IconSet(
+    static let pauseFilled = FrostedIconSet(
         size12: .pauseFilled12,
         size16: .pauseFilled16,
         size20: .pauseFilled20,
@@ -3836,7 +3814,7 @@ public extension IconSet {
         size32: .pauseFilled32
     )
 
-    static let paypal = IconSet(
+    static let paypal = FrostedIconSet(
         size12: .paypal12,
         size16: .paypal16,
         size20: .paypal20,
@@ -3844,7 +3822,7 @@ public extension IconSet {
         size32: .paypal32
     )
 
-    static let pencil = IconSet(
+    static let pencil = FrostedIconSet(
         size12: .pencil12,
         size16: .pencil16,
         size20: .pencil20,
@@ -3852,7 +3830,7 @@ public extension IconSet {
         size32: .pencil32
     )
 
-    static let people = IconSet(
+    static let people = FrostedIconSet(
         size12: .people12,
         size16: .people16,
         size20: .people20,
@@ -3860,7 +3838,7 @@ public extension IconSet {
         size32: .people32
     )
 
-    static let people2 = IconSet(
+    static let people2 = FrostedIconSet(
         size12: .people212,
         size16: .people216,
         size20: .people220,
@@ -3868,7 +3846,7 @@ public extension IconSet {
         size32: .people232
     )
 
-    static let peoplePlus = IconSet(
+    static let peoplePlus = FrostedIconSet(
         size12: .peoplePlus12,
         size16: .peoplePlus16,
         size20: .peoplePlus20,
@@ -3876,7 +3854,7 @@ public extension IconSet {
         size32: .peoplePlus32
     )
 
-    static let percentage = IconSet(
+    static let percentage = FrostedIconSet(
         size12: .percentage12,
         size16: .percentage16,
         size20: .percentage20,
@@ -3884,7 +3862,7 @@ public extension IconSet {
         size32: .percentage32
     )
 
-    static let photo = IconSet(
+    static let photo = FrostedIconSet(
         size12: .photo12,
         size16: .photo16,
         size20: .photo20,
@@ -3892,7 +3870,7 @@ public extension IconSet {
         size32: .photo32
     )
 
-    static let photoFilled = IconSet(
+    static let photoFilled = FrostedIconSet(
         size12: .photoFilled12,
         size16: .photoFilled16,
         size20: .photoFilled20,
@@ -3900,7 +3878,7 @@ public extension IconSet {
         size32: .photoFilled32
     )
 
-    static let photos = IconSet(
+    static let photos = FrostedIconSet(
         size12: .photos12,
         size16: .photos16,
         size20: .photos20,
@@ -3908,7 +3886,7 @@ public extension IconSet {
         size32: .photos32
     )
 
-    static let pictureInPicture = IconSet(
+    static let pictureInPicture = FrostedIconSet(
         size12: .pictureInPicture12,
         size16: .pictureInPicture16,
         size20: .pictureInPicture20,
@@ -3916,7 +3894,7 @@ public extension IconSet {
         size32: .pictureInPicture32
     )
 
-    static let pin = IconSet(
+    static let pin = FrostedIconSet(
         size12: .pin12,
         size16: .pin16,
         size20: .pin20,
@@ -3924,7 +3902,7 @@ public extension IconSet {
         size32: .pin32
     )
 
-    static let pinFilled = IconSet(
+    static let pinFilled = FrostedIconSet(
         size12: .pinFilled12,
         size16: .pinFilled16,
         size20: .pinFilled20,
@@ -3932,7 +3910,7 @@ public extension IconSet {
         size32: .pinFilled32
     )
 
-    static let pinTilted = IconSet(
+    static let pinTilted = FrostedIconSet(
         size12: .pinTilted12,
         size16: .pinTilted16,
         size20: .pinTilted20,
@@ -3940,7 +3918,7 @@ public extension IconSet {
         size32: .pinTilted32
     )
 
-    static let pinTiltedFilled = IconSet(
+    static let pinTiltedFilled = FrostedIconSet(
         size12: .pinTiltedFilled12,
         size16: .pinTiltedFilled16,
         size20: .pinTiltedFilled20,
@@ -3948,7 +3926,7 @@ public extension IconSet {
         size32: .pinTiltedFilled32
     )
 
-    static let plane = IconSet(
+    static let plane = FrostedIconSet(
         size12: .plane12,
         size16: .plane16,
         size20: .plane20,
@@ -3956,7 +3934,7 @@ public extension IconSet {
         size32: .plane32
     )
 
-    static let play = IconSet(
+    static let play = FrostedIconSet(
         size12: .play12,
         size16: .play16,
         size20: .play20,
@@ -3964,7 +3942,7 @@ public extension IconSet {
         size32: .play32
     )
 
-    static let playCircle = IconSet(
+    static let playCircle = FrostedIconSet(
         size12: .playCircle12,
         size16: .playCircle16,
         size20: .playCircle20,
@@ -3972,7 +3950,7 @@ public extension IconSet {
         size32: .playCircle32
     )
 
-    static let playFilled = IconSet(
+    static let playFilled = FrostedIconSet(
         size12: .playFilled12,
         size16: .playFilled16,
         size20: .playFilled20,
@@ -3980,7 +3958,7 @@ public extension IconSet {
         size32: .playFilled32
     )
 
-    static let plus = IconSet(
+    static let plus = FrostedIconSet(
         size12: .plus12,
         size16: .plus16,
         size20: .plus20,
@@ -3988,7 +3966,7 @@ public extension IconSet {
         size32: .plus32
     )
 
-    static let plusCircle = IconSet(
+    static let plusCircle = FrostedIconSet(
         size12: .plusCircle12,
         size16: .plusCircle16,
         size20: .plusCircle20,
@@ -3996,7 +3974,7 @@ public extension IconSet {
         size32: .plusCircle32
     )
 
-    static let plusRectangle = IconSet(
+    static let plusRectangle = FrostedIconSet(
         size12: .plusRectangle12,
         size16: .plusRectangle16,
         size20: .plusRectangle20,
@@ -4004,7 +3982,7 @@ public extension IconSet {
         size32: .plusRectangle32
     )
 
-    static let profile = IconSet(
+    static let profile = FrostedIconSet(
         size12: .profile12,
         size16: .profile16,
         size20: .profile20,
@@ -4012,7 +3990,7 @@ public extension IconSet {
         size32: .profile32
     )
 
-    static let profileCircle = IconSet(
+    static let profileCircle = FrostedIconSet(
         size12: .profileCircle12,
         size16: .profileCircle16,
         size20: .profileCircle20,
@@ -4020,7 +3998,7 @@ public extension IconSet {
         size32: .profileCircle32
     )
 
-    static let profileFilled = IconSet(
+    static let profileFilled = FrostedIconSet(
         size12: .profileFilled12,
         size16: .profileFilled16,
         size20: .profileFilled20,
@@ -4028,7 +4006,7 @@ public extension IconSet {
         size32: .profileFilled32
     )
 
-    static let profileX = IconSet(
+    static let profileX = FrostedIconSet(
         size12: .profileX12,
         size16: .profileX16,
         size20: .profileX20,
@@ -4036,7 +4014,7 @@ public extension IconSet {
         size32: .profileX32
     )
 
-    static let questionCircle = IconSet(
+    static let questionCircle = FrostedIconSet(
         size12: .questionCircle12,
         size16: .questionCircle16,
         size20: .questionCircle20,
@@ -4044,7 +4022,7 @@ public extension IconSet {
         size32: .questionCircle32
     )
 
-    static let quoteLeft = IconSet(
+    static let quoteLeft = FrostedIconSet(
         size12: .quoteLeft12,
         size16: .quoteLeft16,
         size20: .quoteLeft20,
@@ -4052,7 +4030,7 @@ public extension IconSet {
         size32: .quoteLeft32
     )
 
-    static let quoteRight = IconSet(
+    static let quoteRight = FrostedIconSet(
         size12: .quoteRight12,
         size16: .quoteRight16,
         size20: .quoteRight20,
@@ -4060,7 +4038,7 @@ public extension IconSet {
         size32: .quoteRight32
     )
 
-    static let raiseHand = IconSet(
+    static let raiseHand = FrostedIconSet(
         size12: .raiseHand12,
         size16: .raiseHand16,
         size20: .raiseHand20,
@@ -4068,7 +4046,7 @@ public extension IconSet {
         size32: .raiseHand32
     )
 
-    static let receipt = IconSet(
+    static let receipt = FrostedIconSet(
         size12: .receipt12,
         size16: .receipt16,
         size20: .receipt20,
@@ -4076,7 +4054,7 @@ public extension IconSet {
         size32: .receipt32
     )
 
-    static let receptionBell = IconSet(
+    static let receptionBell = FrostedIconSet(
         size12: .receptionBell12,
         size16: .receptionBell16,
         size20: .receptionBell20,
@@ -4084,7 +4062,7 @@ public extension IconSet {
         size32: .receptionBell32
     )
 
-    static let receptionBellFilled = IconSet(
+    static let receptionBellFilled = FrostedIconSet(
         size12: .receptionBellFilled12,
         size16: .receptionBellFilled16,
         size20: .receptionBellFilled20,
@@ -4092,7 +4070,7 @@ public extension IconSet {
         size32: .receptionBellFilled32
     )
 
-    static let rectangleStack = IconSet(
+    static let rectangleStack = FrostedIconSet(
         size12: .rectangleStack12,
         size16: .rectangleStack16,
         size20: .rectangleStack20,
@@ -4100,7 +4078,7 @@ public extension IconSet {
         size32: .rectangleStack32
     )
 
-    static let refresh = IconSet(
+    static let refresh = FrostedIconSet(
         size12: .refresh12,
         size16: .refresh16,
         size20: .refresh20,
@@ -4108,7 +4086,7 @@ public extension IconSet {
         size32: .refresh32
     )
 
-    static let refund = IconSet(
+    static let refund = FrostedIconSet(
         size12: .refund12,
         size16: .refund16,
         size20: .refund20,
@@ -4116,7 +4094,7 @@ public extension IconSet {
         size32: .refund32
     )
 
-    static let reply = IconSet(
+    static let reply = FrostedIconSet(
         size12: .reply12,
         size16: .reply16,
         size20: .reply20,
@@ -4124,7 +4102,7 @@ public extension IconSet {
         size32: .reply32
     )
 
-    static let replyFilled = IconSet(
+    static let replyFilled = FrostedIconSet(
         size12: .replyFilled12,
         size16: .replyFilled16,
         size20: .replyFilled20,
@@ -4132,7 +4110,7 @@ public extension IconSet {
         size32: .replyFilled32
     )
 
-    static let rewardDiamond = IconSet(
+    static let rewardDiamond = FrostedIconSet(
         size12: .rewardDiamond12,
         size16: .rewardDiamond16,
         size20: .rewardDiamond20,
@@ -4140,7 +4118,7 @@ public extension IconSet {
         size32: .rewardDiamond32
     )
 
-    static let rocket = IconSet(
+    static let rocket = FrostedIconSet(
         size12: .rocket12,
         size16: .rocket16,
         size20: .rocket20,
@@ -4148,7 +4126,7 @@ public extension IconSet {
         size32: .rocket32
     )
 
-    static let rotate = IconSet(
+    static let rotate = FrostedIconSet(
         size12: .rotate12,
         size16: .rotate16,
         size20: .rotate20,
@@ -4156,7 +4134,7 @@ public extension IconSet {
         size32: .rotate32
     )
 
-    static let rotateCard = IconSet(
+    static let rotateCard = FrostedIconSet(
         size12: .rotateCard12,
         size16: .rotateCard16,
         size20: .rotateCard20,
@@ -4164,7 +4142,7 @@ public extension IconSet {
         size32: .rotateCard32
     )
 
-    static let rotateLeft = IconSet(
+    static let rotateLeft = FrostedIconSet(
         size12: .rotateLeft12,
         size16: .rotateLeft16,
         size20: .rotateLeft20,
@@ -4172,7 +4150,7 @@ public extension IconSet {
         size32: .rotateLeft32
     )
 
-    static let rotateLeftSize = IconSet(
+    static let rotateLeftSize = FrostedIconSet(
         size12: .rotateLeftSize12,
         size16: .rotateLeftSize16,
         size20: .rotateLeftSize20,
@@ -4180,7 +4158,7 @@ public extension IconSet {
         size32: .rotateLeftSize32
     )
 
-    static let rotateRight = IconSet(
+    static let rotateRight = FrostedIconSet(
         size12: .rotateRight12,
         size16: .rotateRight16,
         size20: .rotateRight20,
@@ -4188,7 +4166,7 @@ public extension IconSet {
         size32: .rotateRight32
     )
 
-    static let rotateRightSize = IconSet(
+    static let rotateRightSize = FrostedIconSet(
         size12: .rotateRightSize12,
         size16: .rotateRightSize16,
         size20: .rotateRightSize20,
@@ -4196,7 +4174,7 @@ public extension IconSet {
         size32: .rotateRightSize32
     )
 
-    static let roundedArrowAngleLeft = IconSet(
+    static let roundedArrowAngleLeft = FrostedIconSet(
         size12: .roundedArrowAngleLeft12,
         size16: .roundedArrowAngleLeft16,
         size20: .roundedArrowAngleLeft20,
@@ -4204,7 +4182,7 @@ public extension IconSet {
         size32: .roundedArrowAngleLeft32
     )
 
-    static let roundedArrowAngleRight = IconSet(
+    static let roundedArrowAngleRight = FrostedIconSet(
         size12: .roundedArrowAngleRight12,
         size16: .roundedArrowAngleRight16,
         size20: .roundedArrowAngleRight20,
@@ -4212,7 +4190,7 @@ public extension IconSet {
         size32: .roundedArrowAngleRight32
     )
 
-    static let sad = IconSet(
+    static let sad = FrostedIconSet(
         size12: .sad12,
         size16: .sad16,
         size20: .sad20,
@@ -4220,7 +4198,7 @@ public extension IconSet {
         size32: .sad32
     )
 
-    static let sadFace = IconSet(
+    static let sadFace = FrostedIconSet(
         size12: .sadFace12,
         size16: .sadFace16,
         size20: .sadFace20,
@@ -4228,7 +4206,7 @@ public extension IconSet {
         size32: .sadFace32
     )
 
-    static let sadFaceFilled = IconSet(
+    static let sadFaceFilled = FrostedIconSet(
         size12: .sadFaceFilled12,
         size16: .sadFaceFilled16,
         size20: .sadFaceFilled20,
@@ -4236,7 +4214,7 @@ public extension IconSet {
         size32: .sadFaceFilled32
     )
 
-    static let sadFilled = IconSet(
+    static let sadFilled = FrostedIconSet(
         size12: .sadFilled12,
         size16: .sadFilled16,
         size20: .sadFilled20,
@@ -4244,7 +4222,7 @@ public extension IconSet {
         size32: .sadFilled32
     )
 
-    static let sealCheckmark = IconSet(
+    static let sealCheckmark = FrostedIconSet(
         size12: .sealCheckmark12,
         size16: .sealCheckmark16,
         size20: .sealCheckmark20,
@@ -4252,7 +4230,7 @@ public extension IconSet {
         size32: .sealCheckmark32
     )
 
-    static let sealCheckmarkFilled = IconSet(
+    static let sealCheckmarkFilled = FrostedIconSet(
         size12: .sealCheckmarkFilled12,
         size16: .sealCheckmarkFilled16,
         size20: .sealCheckmarkFilled20,
@@ -4260,7 +4238,7 @@ public extension IconSet {
         size32: .sealCheckmarkFilled32
     )
 
-    static let sealExclamation = IconSet(
+    static let sealExclamation = FrostedIconSet(
         size12: .sealExclamation12,
         size16: .sealExclamation16,
         size20: .sealExclamation20,
@@ -4268,7 +4246,7 @@ public extension IconSet {
         size32: .sealExclamation32
     )
 
-    static let sealExclamationFilled = IconSet(
+    static let sealExclamationFilled = FrostedIconSet(
         size12: .sealExclamationFilled12,
         size16: .sealExclamationFilled16,
         size20: .sealExclamationFilled20,
@@ -4276,7 +4254,7 @@ public extension IconSet {
         size32: .sealExclamationFilled32
     )
 
-    static let shareNodes = IconSet(
+    static let shareNodes = FrostedIconSet(
         size12: .shareNodes12,
         size16: .shareNodes16,
         size20: .shareNodes20,
@@ -4284,7 +4262,7 @@ public extension IconSet {
         size32: .shareNodes32
     )
 
-    static let shareScreen = IconSet(
+    static let shareScreen = FrostedIconSet(
         size12: .shareScreen12,
         size16: .shareScreen16,
         size20: .shareScreen20,
@@ -4292,7 +4270,7 @@ public extension IconSet {
         size32: .shareScreen32
     )
 
-    static let shieldCheckmark = IconSet(
+    static let shieldCheckmark = FrostedIconSet(
         size12: .shieldCheckmark12,
         size16: .shieldCheckmark16,
         size20: .shieldCheckmark20,
@@ -4300,7 +4278,7 @@ public extension IconSet {
         size32: .shieldCheckmark32
     )
 
-    static let shieldHalf = IconSet(
+    static let shieldHalf = FrostedIconSet(
         size12: .shieldHalf12,
         size16: .shieldHalf16,
         size20: .shieldHalf20,
@@ -4308,7 +4286,7 @@ public extension IconSet {
         size32: .shieldHalf32
     )
 
-    static let shop = IconSet(
+    static let shop = FrostedIconSet(
         size12: .shop12,
         size16: .shop16,
         size20: .shop20,
@@ -4316,7 +4294,7 @@ public extension IconSet {
         size32: .shop32
     )
 
-    static let shoppingBag = IconSet(
+    static let shoppingBag = FrostedIconSet(
         size12: .shoppingBag12,
         size16: .shoppingBag16,
         size20: .shoppingBag20,
@@ -4324,7 +4302,7 @@ public extension IconSet {
         size32: .shoppingBag32
     )
 
-    static let sparkle = IconSet(
+    static let sparkle = FrostedIconSet(
         size12: .sparkle12,
         size16: .sparkle16,
         size20: .sparkle20,
@@ -4332,7 +4310,7 @@ public extension IconSet {
         size32: .sparkle32
     )
 
-    static let sparkleFilled = IconSet(
+    static let sparkleFilled = FrostedIconSet(
         size12: .sparkleFilled12,
         size16: .sparkleFilled16,
         size20: .sparkleFilled20,
@@ -4340,7 +4318,7 @@ public extension IconSet {
         size32: .sparkleFilled32
     )
 
-    static let sparkleMultiple = IconSet(
+    static let sparkleMultiple = FrostedIconSet(
         size12: .sparkleMultiple12,
         size16: .sparkleMultiple16,
         size20: .sparkleMultiple20,
@@ -4348,7 +4326,7 @@ public extension IconSet {
         size32: .sparkleMultiple32
     )
 
-    static let sparkleRectangle = IconSet(
+    static let sparkleRectangle = FrostedIconSet(
         size12: .sparkleRectangle12,
         size16: .sparkleRectangle16,
         size20: .sparkleRectangle20,
@@ -4356,7 +4334,7 @@ public extension IconSet {
         size32: .sparkleRectangle32
     )
 
-    static let sparkles = IconSet(
+    static let sparkles = FrostedIconSet(
         size12: .sparkles12,
         size16: .sparkles16,
         size20: .sparkles20,
@@ -4364,7 +4342,7 @@ public extension IconSet {
         size32: .sparkles32
     )
 
-    static let speaker = IconSet(
+    static let speaker = FrostedIconSet(
         size12: .speaker12,
         size16: .speaker16,
         size20: .speaker20,
@@ -4372,7 +4350,7 @@ public extension IconSet {
         size32: .speaker32
     )
 
-    static let split = IconSet(
+    static let split = FrostedIconSet(
         size12: .split12,
         size16: .split16,
         size20: .split20,
@@ -4380,7 +4358,7 @@ public extension IconSet {
         size32: .split32
     )
 
-    static let squareAdd = IconSet(
+    static let squareAdd = FrostedIconSet(
         size12: .squareAdd12,
         size16: .squareAdd16,
         size20: .squareAdd20,
@@ -4388,7 +4366,7 @@ public extension IconSet {
         size32: .squareAdd32
     )
 
-    static let star = IconSet(
+    static let star = FrostedIconSet(
         size12: .star12,
         size16: .star16,
         size20: .star20,
@@ -4396,7 +4374,7 @@ public extension IconSet {
         size32: .star32
     )
 
-    static let starFilled = IconSet(
+    static let starFilled = FrostedIconSet(
         size12: .starFilled12,
         size16: .starFilled16,
         size20: .starFilled20,
@@ -4404,7 +4382,7 @@ public extension IconSet {
         size32: .starFilled32
     )
 
-    static let starHalf = IconSet(
+    static let starHalf = FrostedIconSet(
         size12: .starHalf12,
         size16: .starHalf16,
         size20: .starHalf20,
@@ -4412,7 +4390,7 @@ public extension IconSet {
         size32: .starHalf32
     )
 
-    static let stats = IconSet(
+    static let stats = FrostedIconSet(
         size12: .stats12,
         size16: .stats16,
         size20: .stats20,
@@ -4420,7 +4398,7 @@ public extension IconSet {
         size32: .stats32
     )
 
-    static let sticker = IconSet(
+    static let sticker = FrostedIconSet(
         size12: .sticker12,
         size16: .sticker16,
         size20: .sticker20,
@@ -4428,7 +4406,7 @@ public extension IconSet {
         size32: .sticker32
     )
 
-    static let stickerFilled = IconSet(
+    static let stickerFilled = FrostedIconSet(
         size12: .stickerFilled12,
         size16: .stickerFilled16,
         size20: .stickerFilled20,
@@ -4436,7 +4414,7 @@ public extension IconSet {
         size32: .stickerFilled32
     )
 
-    static let storefrontItem = IconSet(
+    static let storefrontItem = FrostedIconSet(
         size12: .storefrontItem12,
         size16: .storefrontItem16,
         size20: .storefrontItem20,
@@ -4444,7 +4422,7 @@ public extension IconSet {
         size32: .storefrontItem32
     )
 
-    static let strikethrough = IconSet(
+    static let strikethrough = FrostedIconSet(
         size12: .strikethrough12,
         size16: .strikethrough16,
         size20: .strikethrough20,
@@ -4452,7 +4430,7 @@ public extension IconSet {
         size32: .strikethrough32
     )
 
-    static let subtract = IconSet(
+    static let subtract = FrostedIconSet(
         size12: .subtract12,
         size16: .subtract16,
         size20: .subtract20,
@@ -4460,7 +4438,7 @@ public extension IconSet {
         size32: .subtract32
     )
 
-    static let sun = IconSet(
+    static let sun = FrostedIconSet(
         size12: .sun12,
         size16: .sun16,
         size20: .sun20,
@@ -4468,7 +4446,7 @@ public extension IconSet {
         size32: .sun32
     )
 
-    static let sunSize = IconSet(
+    static let sunSize = FrostedIconSet(
         size12: .sunSize12,
         size16: .sunSize16,
         size20: .sunSize20,
@@ -4476,7 +4454,7 @@ public extension IconSet {
         size32: .sunSize32
     )
 
-    static let swords = IconSet(
+    static let swords = FrostedIconSet(
         size12: .swords12,
         size16: .swords16,
         size20: .swords20,
@@ -4484,7 +4462,7 @@ public extension IconSet {
         size32: .swords32
     )
 
-    static let tShirt = IconSet(
+    static let tShirt = FrostedIconSet(
         size12: .tShirt12,
         size16: .tShirt16,
         size20: .tShirt20,
@@ -4492,7 +4470,7 @@ public extension IconSet {
         size32: .tShirt32
     )
 
-    static let tShirtFilled = IconSet(
+    static let tShirtFilled = FrostedIconSet(
         size12: .tShirtFilled12,
         size16: .tShirtFilled16,
         size20: .tShirtFilled20,
@@ -4500,7 +4478,7 @@ public extension IconSet {
         size32: .tShirtFilled32
     )
 
-    static let table = IconSet(
+    static let table = FrostedIconSet(
         size12: .table12,
         size16: .table16,
         size20: .table20,
@@ -4508,7 +4486,7 @@ public extension IconSet {
         size32: .table32
     )
 
-    static let tag = IconSet(
+    static let tag = FrostedIconSet(
         size12: .tag12,
         size16: .tag16,
         size20: .tag20,
@@ -4516,7 +4494,7 @@ public extension IconSet {
         size32: .tag32
     )
 
-    static let telegram = IconSet(
+    static let telegram = FrostedIconSet(
         size12: .telegram12,
         size16: .telegram16,
         size20: .telegram20,
@@ -4524,7 +4502,7 @@ public extension IconSet {
         size32: .telegram32
     )
 
-    static let telegramFilled = IconSet(
+    static let telegramFilled = FrostedIconSet(
         size12: .telegramFilled12,
         size16: .telegramFilled16,
         size20: .telegramFilled20,
@@ -4532,7 +4510,7 @@ public extension IconSet {
         size32: .telegramFilled32
     )
 
-    static let telegramFilledSize = IconSet(
+    static let telegramFilledSize = FrostedIconSet(
         size12: .telegramFilledSize12,
         size16: .telegramFilledSize16,
         size20: .telegramFilledSize20,
@@ -4540,7 +4518,7 @@ public extension IconSet {
         size32: .telegramFilledSize32
     )
 
-    static let telegramSize = IconSet(
+    static let telegramSize = FrostedIconSet(
         size12: .telegramSize12,
         size16: .telegramSize16,
         size20: .telegramSize20,
@@ -4548,7 +4526,7 @@ public extension IconSet {
         size32: .telegramSize32
     )
 
-    static let telephone = IconSet(
+    static let telephone = FrostedIconSet(
         size12: .telephone12,
         size16: .telephone16,
         size20: .telephone20,
@@ -4556,7 +4534,7 @@ public extension IconSet {
         size32: .telephone32
     )
 
-    static let threeDotsCircle = IconSet(
+    static let threeDotsCircle = FrostedIconSet(
         size12: .threeDotsCircle12,
         size16: .threeDotsCircle16,
         size20: .threeDotsCircle20,
@@ -4564,7 +4542,7 @@ public extension IconSet {
         size32: .threeDotsCircle32
     )
 
-    static let threeDotsCircleSize = IconSet(
+    static let threeDotsCircleSize = FrostedIconSet(
         size12: .threeDotsCircleSize12,
         size16: .threeDotsCircleSize16,
         size20: .threeDotsCircleSize20,
@@ -4572,7 +4550,7 @@ public extension IconSet {
         size32: .threeDotsCircleSize32
     )
 
-    static let threeDotsHorizontal = IconSet(
+    static let threeDotsHorizontal = FrostedIconSet(
         size12: .threeDotsHorizontal12,
         size16: .threeDotsHorizontal16,
         size20: .threeDotsHorizontal20,
@@ -4580,7 +4558,7 @@ public extension IconSet {
         size32: .threeDotsHorizontal32
     )
 
-    static let threeDotsVertical = IconSet(
+    static let threeDotsVertical = FrostedIconSet(
         size12: .threeDotsVertical12,
         size16: .threeDotsVertical16,
         size20: .threeDotsVertical20,
@@ -4588,7 +4566,7 @@ public extension IconSet {
         size32: .threeDotsVertical32
     )
 
-    static let thumbDown = IconSet(
+    static let thumbDown = FrostedIconSet(
         size12: .thumbDown12,
         size16: .thumbDown16,
         size20: .thumbDown20,
@@ -4596,7 +4574,7 @@ public extension IconSet {
         size32: .thumbDown32
     )
 
-    static let thumbDownFilled = IconSet(
+    static let thumbDownFilled = FrostedIconSet(
         size12: .thumbDownFilled12,
         size16: .thumbDownFilled16,
         size20: .thumbDownFilled20,
@@ -4604,7 +4582,7 @@ public extension IconSet {
         size32: .thumbDownFilled32
     )
 
-    static let thumbUp = IconSet(
+    static let thumbUp = FrostedIconSet(
         size12: .thumbUp12,
         size16: .thumbUp16,
         size20: .thumbUp20,
@@ -4612,7 +4590,7 @@ public extension IconSet {
         size32: .thumbUp32
     )
 
-    static let thumbUpFilled = IconSet(
+    static let thumbUpFilled = FrostedIconSet(
         size12: .thumbUpFilled12,
         size16: .thumbUpFilled16,
         size20: .thumbUpFilled20,
@@ -4620,7 +4598,7 @@ public extension IconSet {
         size32: .thumbUpFilled32
     )
 
-    static let tiktokFilledSize = IconSet(
+    static let tiktokFilledSize = FrostedIconSet(
         size12: .tiktokFilledSize12,
         size16: .tiktokFilledSize16,
         size20: .tiktokFilledSize20,
@@ -4628,7 +4606,7 @@ public extension IconSet {
         size32: .tiktokFilledSize32
     )
 
-    static let tiktokSize = IconSet(
+    static let tiktokSize = FrostedIconSet(
         size12: .tiktokSize12,
         size16: .tiktokSize16,
         size20: .tiktokSize20,
@@ -4636,7 +4614,7 @@ public extension IconSet {
         size32: .tiktokSize32
     )
 
-    static let timeSkipLeft = IconSet(
+    static let timeSkipLeft = FrostedIconSet(
         size12: .timeSkipLeft12,
         size16: .timeSkipLeft16,
         size20: .timeSkipLeft20,
@@ -4644,7 +4622,7 @@ public extension IconSet {
         size32: .timeSkipLeft32
     )
 
-    static let timeSkipRight = IconSet(
+    static let timeSkipRight = FrostedIconSet(
         size12: .timeSkipRight12,
         size16: .timeSkipRight16,
         size20: .timeSkipRight20,
@@ -4652,7 +4630,7 @@ public extension IconSet {
         size32: .timeSkipRight32
     )
 
-    static let trash = IconSet(
+    static let trash = FrostedIconSet(
         size12: .trash12,
         size16: .trash16,
         size20: .trash20,
@@ -4660,7 +4638,7 @@ public extension IconSet {
         size32: .trash32
     )
 
-    static let trashFilled = IconSet(
+    static let trashFilled = FrostedIconSet(
         size12: .trashFilled12,
         size16: .trashFilled16,
         size20: .trashFilled20,
@@ -4668,7 +4646,7 @@ public extension IconSet {
         size32: .trashFilled32
     )
 
-    static let trashSolid = IconSet(
+    static let trashSolid = FrostedIconSet(
         size12: .trashSolid12,
         size16: .trashSolid16,
         size20: .trashSolid20,
@@ -4676,7 +4654,7 @@ public extension IconSet {
         size32: .trashSolid32
     )
 
-    static let trophy = IconSet(
+    static let trophy = FrostedIconSet(
         size12: .trophy12,
         size16: .trophy16,
         size20: .trophy20,
@@ -4684,7 +4662,7 @@ public extension IconSet {
         size32: .trophy32
     )
 
-    static let truck = IconSet(
+    static let truck = FrostedIconSet(
         size12: .truck12,
         size16: .truck16,
         size20: .truck20,
@@ -4692,7 +4670,7 @@ public extension IconSet {
         size32: .truck32
     )
 
-    static let twitch = IconSet(
+    static let twitch = FrostedIconSet(
         size12: .twitch12,
         size16: .twitch16,
         size20: .twitch20,
@@ -4700,7 +4678,7 @@ public extension IconSet {
         size32: .twitch32
     )
 
-    static let twitter = IconSet(
+    static let twitter = FrostedIconSet(
         size12: .twitter12,
         size16: .twitter16,
         size20: .twitter20,
@@ -4708,7 +4686,7 @@ public extension IconSet {
         size32: .twitter32
     )
 
-    static let twitterFilled = IconSet(
+    static let twitterFilled = FrostedIconSet(
         size12: .twitterFilled12,
         size16: .twitterFilled16,
         size20: .twitterFilled20,
@@ -4716,7 +4694,7 @@ public extension IconSet {
         size32: .twitterFilled32
     )
 
-    static let twitterFilledSize = IconSet(
+    static let twitterFilledSize = FrostedIconSet(
         size12: .twitterFilledSize12,
         size16: .twitterFilledSize16,
         size20: .twitterFilledSize20,
@@ -4724,7 +4702,7 @@ public extension IconSet {
         size32: .twitterFilledSize32
     )
 
-    static let twitterSize = IconSet(
+    static let twitterSize = FrostedIconSet(
         size12: .twitterSize12,
         size16: .twitterSize16,
         size20: .twitterSize20,
@@ -4732,7 +4710,7 @@ public extension IconSet {
         size32: .twitterSize32
     )
 
-    static let typography = IconSet(
+    static let typography = FrostedIconSet(
         size12: .typography12,
         size16: .typography16,
         size20: .typography20,
@@ -4740,7 +4718,7 @@ public extension IconSet {
         size32: .typography32
     )
 
-    static let underline = IconSet(
+    static let underline = FrostedIconSet(
         size12: .underline12,
         size16: .underline16,
         size20: .underline20,
@@ -4748,7 +4726,7 @@ public extension IconSet {
         size32: .underline32
     )
 
-    static let unpin = IconSet(
+    static let unpin = FrostedIconSet(
         size12: .unpin12,
         size16: .unpin16,
         size20: .unpin20,
@@ -4756,7 +4734,7 @@ public extension IconSet {
         size32: .unpin32
     )
 
-    static let unpinFilled = IconSet(
+    static let unpinFilled = FrostedIconSet(
         size12: .unpinFilled12,
         size16: .unpinFilled16,
         size20: .unpinFilled20,
@@ -4764,7 +4742,7 @@ public extension IconSet {
         size32: .unpinFilled32
     )
 
-    static let upinTilted = IconSet(
+    static let upinTilted = FrostedIconSet(
         size12: .upinTilted12,
         size16: .upinTilted16,
         size20: .upinTilted20,
@@ -4772,7 +4750,7 @@ public extension IconSet {
         size32: .upinTilted32
     )
 
-    static let upinTiltedFilled = IconSet(
+    static let upinTiltedFilled = FrostedIconSet(
         size12: .upinTiltedFilled12,
         size16: .upinTiltedFilled16,
         size20: .upinTiltedFilled20,
@@ -4780,7 +4758,7 @@ public extension IconSet {
         size32: .upinTiltedFilled32
     )
 
-    static let upload = IconSet(
+    static let upload = FrostedIconSet(
         size12: .upload12,
         size16: .upload16,
         size20: .upload20,
@@ -4788,7 +4766,7 @@ public extension IconSet {
         size32: .upload32
     )
 
-    static let usd = IconSet(
+    static let usd = FrostedIconSet(
         size12: .usd12,
         size16: .usd16,
         size20: .usd20,
@@ -4796,7 +4774,7 @@ public extension IconSet {
         size32: .usd32
     )
 
-    static let user = IconSet(
+    static let user = FrostedIconSet(
         size12: .user12,
         size16: .user16,
         size20: .user20,
@@ -4804,7 +4782,7 @@ public extension IconSet {
         size32: .user32
     )
 
-    static let verifiedCheck = IconSet(
+    static let verifiedCheck = FrostedIconSet(
         size12: .verifiedCheck12,
         size16: .verifiedCheck16,
         size20: .verifiedCheck20,
@@ -4812,7 +4790,7 @@ public extension IconSet {
         size32: .verifiedCheck32
     )
 
-    static let videoFilled = IconSet(
+    static let videoFilled = FrostedIconSet(
         size12: .videoFilled12,
         size16: .videoFilled16,
         size20: .videoFilled20,
@@ -4820,7 +4798,7 @@ public extension IconSet {
         size32: .videoFilled32
     )
 
-    static let volumeHigh = IconSet(
+    static let volumeHigh = FrostedIconSet(
         size12: .volumeHigh12,
         size16: .volumeHigh16,
         size20: .volumeHigh20,
@@ -4828,7 +4806,7 @@ public extension IconSet {
         size32: .volumeHigh32
     )
 
-    static let volumeLow = IconSet(
+    static let volumeLow = FrostedIconSet(
         size12: .volumeLow12,
         size16: .volumeLow16,
         size20: .volumeLow20,
@@ -4836,7 +4814,7 @@ public extension IconSet {
         size32: .volumeLow32
     )
 
-    static let volumeOff = IconSet(
+    static let volumeOff = FrostedIconSet(
         size12: .volumeOff12,
         size16: .volumeOff16,
         size20: .volumeOff20,
@@ -4844,7 +4822,7 @@ public extension IconSet {
         size32: .volumeOff32
     )
 
-    static let wallet = IconSet(
+    static let wallet = FrostedIconSet(
         size12: .wallet12,
         size16: .wallet16,
         size20: .wallet20,
@@ -4852,7 +4830,7 @@ public extension IconSet {
         size32: .wallet32
     )
 
-    static let waveform = IconSet(
+    static let waveform = FrostedIconSet(
         size12: .waveform12,
         size16: .waveform16,
         size20: .waveform20,
@@ -4860,7 +4838,7 @@ public extension IconSet {
         size32: .waveform32
     )
 
-    static let webcamOff = IconSet(
+    static let webcamOff = FrostedIconSet(
         size12: .webcamOff12,
         size16: .webcamOff16,
         size20: .webcamOff20,
@@ -4868,7 +4846,7 @@ public extension IconSet {
         size32: .webcamOff32
     )
 
-    static let webcamOn = IconSet(
+    static let webcamOn = FrostedIconSet(
         size12: .webcamOn12,
         size16: .webcamOn16,
         size20: .webcamOn20,
@@ -4876,7 +4854,7 @@ public extension IconSet {
         size32: .webcamOn32
     )
 
-    static let whopLogo = IconSet(
+    static let whopLogo = FrostedIconSet(
         size12: .whopLogo12,
         size16: .whopLogo16,
         size20: .whopLogo20,
@@ -4884,7 +4862,7 @@ public extension IconSet {
         size32: .whopLogo32
     )
 
-    static let xCircle = IconSet(
+    static let xCircle = FrostedIconSet(
         size12: .xCircle12,
         size16: .xCircle16,
         size20: .xCircle20,
@@ -4892,7 +4870,7 @@ public extension IconSet {
         size32: .xCircle32
     )
 
-    static let xCircleFilled = IconSet(
+    static let xCircleFilled = FrostedIconSet(
         size12: .xCircleFilled12,
         size16: .xCircleFilled16,
         size20: .xCircleFilled20,
@@ -4900,7 +4878,7 @@ public extension IconSet {
         size32: .xCircleFilled32
     )
 
-    static let xCircleSize = IconSet(
+    static let xCircleSize = FrostedIconSet(
         size12: .xCircleSize12,
         size16: .xCircleSize16,
         size20: .xCircleSize20,
@@ -4908,7 +4886,7 @@ public extension IconSet {
         size32: .xCircleSize32
     )
 
-    static let xDotCom = IconSet(
+    static let xDotCom = FrostedIconSet(
         size12: .xDotCom12,
         size16: .xDotCom16,
         size20: .xDotCom20,
@@ -4916,7 +4894,7 @@ public extension IconSet {
         size32: .xDotCom32
     )
 
-    static let xDotComSize = IconSet(
+    static let xDotComSize = FrostedIconSet(
         size12: .xDotComSize12,
         size16: .xDotComSize16,
         size20: .xDotComSize20,
@@ -4924,7 +4902,7 @@ public extension IconSet {
         size32: .xDotComSize32
     )
 
-    static let xMark = IconSet(
+    static let xMark = FrostedIconSet(
         size12: .xMark12,
         size16: .xMark16,
         size20: .xMark20,
@@ -4932,7 +4910,7 @@ public extension IconSet {
         size32: .xMark32
     )
 
-    static let youtubeFilledSize = IconSet(
+    static let youtubeFilledSize = FrostedIconSet(
         size12: .youtubeFilledSize12,
         size16: .youtubeFilledSize16,
         size20: .youtubeFilledSize20,
@@ -4940,7 +4918,7 @@ public extension IconSet {
         size32: .youtubeFilledSize32
     )
 
-    static let youtubeSize = IconSet(
+    static let youtubeSize = FrostedIconSet(
         size12: .youtubeSize12,
         size16: .youtubeSize16,
         size20: .youtubeSize20,
