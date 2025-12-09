@@ -727,6 +727,7 @@ public enum FrostedColor: String, CaseIterable, Identifiable {
     case frostedYellowA7
     case frostedYellowA8
     case frostedYellowA9
+    case panelSolid
 }
 
 public extension Color {
