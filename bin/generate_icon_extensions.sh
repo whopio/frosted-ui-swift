@@ -31,33 +31,25 @@ echo "" >> "$OUTPUT_FILE"
 declare -a enum_cases
 declare -a base_names
 
-# Find all SVG files directly under the icons path
-while IFS= read -r line; do
-    filename=$(basename "$line")
-    name="${filename%.svg}"          # e.g. add-user-12
-    size="${name##*-}"               # e.g. 12
-    base="${name%-*}"                # e.g. add-user
+# Find all .imageset folders directly under the icons path
+while IFS= read -r dir; do
+    imageset_name=$(basename "$dir")        # e.g. addUser12.imageset
+    asset_name="${imageset_name%.imageset}" # e.g. addUser12
 
-    # Skip any icons where the trailing segment is not a numeric size
-    if ! [[ "$size" =~ ^[0-9]+$ ]]; then
-        echo "Skipping icon with non-numeric size: $filename"
+    # Extract the size suffix (must be one of 12, 16, 20, 24, 32)
+    if [[ "$asset_name" =~ (12|16|20|24|32)$ ]]; then
+        size="${BASH_REMATCH[1]}"
+    else
+        echo "Skipping imageset without supported size suffix: $imageset_name"
         continue
     fi
 
-    # Convert the base name from kebab-case to lowerCamelCase (e.g., add-user -> addUser)
-    base_camel=$(echo "$base" | awk -F'-' '{ for (i=1;i<=NF;i++) { if (i==1) printf "%s", $i; else printf "%s%s", toupper(substr($i,1,1)), substr($i,2); } }')
+    base="${asset_name%$size}"              # e.g. addUser
 
-    # Ensure the case name starts with a valid character; prefix with "icon" if it starts with a digit
-    first_char=$(printf "%s" "$base_camel" | cut -c1)
-    if [[ "$first_char" =~ [0-9] ]]; then
-        base_camel="icon${base_camel^}"
-    fi
-
-    case_name="${base_camel}${size}" # e.g. addUser12
-
-    enum_cases+=("    case ${case_name} = \"${name}\"")
-    base_names+=("$base_camel")
-done < <(find "$ICONS_PATH" -maxdepth 1 -type f -name "*.svg")
+    # The enum case name is the same as the asset name
+    enum_cases+=("    case ${asset_name} = \"${asset_name}\"")
+    base_names+=("$base")
+done < <(find "$ICONS_PATH" -maxdepth 1 -type d -name "*.imageset")
 
 # Sort the enum cases alphabetically
 IFS=$'\n' enum_cases=($(sort <<<"${enum_cases[*]}"))
@@ -106,19 +98,39 @@ EOT
 IFS=$'\n' bases_sorted=($(printf "%s\n" "${base_names[@]}" | sort -u))
 unset IFS
 
+# Helper to check if a specific FrostedIcon case exists
+has_icon_case() {
+    local needle="$1"
+    local line
+    for line in "${enum_cases[@]}"; do
+        case "$line" in
+            *" case ${needle} = "* ) return 0 ;;
+        esac
+    done
+    return 1
+}
+
 for base in "${bases_sorted[@]}"; do
-    echo "" >> "$OUTPUT_FILE"
-    echo "    static let ${base} = IconSet(" >> "$OUTPUT_FILE"
-    echo "        size12: .${base}12," >> "$OUTPUT_FILE"
-    echo "        size16: .${base}16," >> "$OUTPUT_FILE"
-    echo "        size20: .${base}20," >> "$OUTPUT_FILE"
-    echo "        size24: .${base}24," >> "$OUTPUT_FILE"
-    echo "        size32: .${base}32" >> "$OUTPUT_FILE"
-    echo "    )" >> "$OUTPUT_FILE"
+    has_all="yes"
+    for size in 12 16 20 24 32; do
+        if ! has_icon_case "${base}${size}"; then
+            has_all="no"
+        fi
+    done
+
+    if [ "$has_all" = "yes" ]; then
+        echo "" >> "$OUTPUT_FILE"
+        echo "    static let ${base} = IconSet(" >> "$OUTPUT_FILE"
+        echo "        size12: .${base}12," >> "$OUTPUT_FILE"
+        echo "        size16: .${base}16," >> "$OUTPUT_FILE"
+        echo "        size20: .${base}20," >> "$OUTPUT_FILE"
+        echo "        size24: .${base}24," >> "$OUTPUT_FILE"
+        echo "        size32: .${base}32" >> "$OUTPUT_FILE"
+        echo "    )" >> "$OUTPUT_FILE"
+    fi
 done
 
 echo "}" >> "$OUTPUT_FILE"
 
 echo "Swift icons file successfully generated at $OUTPUT_FILE"
-
 

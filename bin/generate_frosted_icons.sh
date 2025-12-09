@@ -41,13 +41,56 @@ mkdir -p "$DEST_PATH"
 echo "Clearing existing icons in $DEST_PATH (preserving Contents.json if present)..."
 find "$DEST_PATH" -mindepth 1 -maxdepth 1 ! -name "Contents.json" -exec rm -rf {} +
 
-echo "Copying .svg icons into $DEST_PATH..."
-find "$EXTRACT_PATH" -type f -name "*.svg" -exec cp {} "$DEST_PATH" \;
-if [ $? -ne 0 ]; then
-    echo "Failed to copy icons into $DEST_PATH. Exiting."
-    rm -rf "$TMP_DIR"
-    exit 1
-fi
+echo "Processing .svg icons into .imageset folders..."
+find "$EXTRACT_PATH" -type f -name "*.svg" | while read -r svg; do
+    filename=$(basename "$svg")        # e.g. add-user-12.svg
+    name="${filename%.svg}"            # e.g. add-user-12
+    size="${name##*-}"                 # e.g. 12
+    base="${name%-*}"                  # e.g. add-user
+
+    # Require a numeric size suffix
+    if ! [[ "$size" =~ ^[0-9]+$ ]]; then
+        echo "Skipping icon with non-numeric size: $filename"
+        continue
+    fi
+
+    # Convert the base name from kebab-case to lowerCamelCase (e.g., add-user -> addUser)
+    base_camel=$(echo "$base" | awk -F'-' '{ for (i=1;i<=NF;i++) { if (i==1) printf "%s", $i; else printf "%s%s", toupper(substr($i,1,1)), substr($i,2); } }')
+
+    # Ensure the imageset name starts with a valid character; prefix with "icon" if it starts with a digit
+    first_char=$(printf "%s" "$base_camel" | cut -c1)
+    if [[ "$first_char" =~ [0-9] ]]; then
+        base_camel="icon${base_camel^}"
+    fi
+
+    imageset_name="${base_camel}${size}"          # e.g. addUser12
+    imageset_dir="$DEST_PATH/$imageset_name.imageset"
+
+    mkdir -p "$imageset_dir"
+
+    # Copy the SVG into the imageset folder
+    cp "$svg" "$imageset_dir/$filename"
+
+    # Create Contents.json for this imageset
+    cat > "$imageset_dir/Contents.json" <<EOT
+{
+  "images" : [
+    {
+      "filename" : "$filename",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true,
+    "template-rendering-intent" : "template"
+  }
+}
+EOT
+done
 
 echo "Cleaning up temporary files..."
 rm -rf "$TMP_DIR"
