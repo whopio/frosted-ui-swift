@@ -3,7 +3,7 @@ import SwiftUI
 public enum FrostedColor: String, CaseIterable, Identifiable {
     public var id: String { rawValue }
 
-    case background
+    case appBackground
     case frostedAmber1
     case frostedAmber10
     case frostedAmber11
