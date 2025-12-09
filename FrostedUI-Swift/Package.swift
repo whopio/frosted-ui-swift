@@ -4,24 +4,21 @@
 import PackageDescription
 
 let package = Package(
-    name: "FrostedUI-Swift",
+    name: "FrostedUI",
     platforms: [.iOS(.v17)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "FrostedUI-Swift",
-            targets: ["FrostedUI-Swift"]),
+            name: "FrostedUI",
+            targets: ["FrostedUI"]),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "FrostedUI-Swift",
+            name: "FrostedUI",
             dependencies: [],
-            resources: [.process("Assets/Fonts")]
+            resources: [.process("Resources")]
         ),
-        .testTarget(
-            name: "FrostedUI-SwiftTests",
-            dependencies: ["FrostedUI-Swift"]),
     ]
 )
