@@ -8,12 +8,27 @@ struct FrostedButtonStyleViewModifier: ViewModifier {
     let iconOnly: Bool
     let fullWidth: Bool
     let tint: FrostedTint
+    let leading: FrostedIconSet?
+    let trailing: FrostedIconSet?
 
     let pressed: Bool
     let disabled: Bool
     let loading: Bool
 
-    init(variant: FrostedButtonStyle.Variant, size: FrostedButtonStyle.Size, rounded: Bool, highContrast: Bool, iconOnly: Bool, fullWidth: Bool, tint: FrostedTint, pressed: Bool, disabled: Bool, loading: Bool) {
+    init(
+        variant: FrostedButtonStyle.Variant,
+        size: FrostedButtonStyle.Size,
+        rounded: Bool,
+        highContrast: Bool,
+        iconOnly: Bool,
+        fullWidth: Bool,
+        tint: FrostedTint,
+        leading: FrostedIconSet? = nil,
+        trailing: FrostedIconSet? = nil,
+        pressed: Bool,
+        disabled: Bool,
+        loading: Bool
+    ) {
         self.variant = variant
         self.size = size
         self.rounded = rounded
@@ -21,6 +36,8 @@ struct FrostedButtonStyleViewModifier: ViewModifier {
         self.iconOnly = iconOnly
         self.fullWidth = fullWidth
         self.tint = tint
+        self.leading = leading
+        self.trailing = trailing
 
         self.pressed = pressed
         self.disabled = disabled
@@ -119,6 +136,15 @@ struct FrostedButtonStyleViewModifier: ViewModifier {
         }
     }
 
+    func icon(for iconSet: FrostedIconSet) -> FrostedIcon {
+        switch size {
+        case .one: iconSet.size12
+        case .two: iconSet.size16
+        case .three: iconSet.size20
+        case .four: iconSet.size24
+        }
+    }
+
     var cornerRadius: CGFloat {
         if rounded {
             return 100
@@ -152,8 +178,8 @@ struct FrostedButtonStyleViewModifier: ViewModifier {
 
     var loadingScale: CGFloat {
         switch size {
-        case .one: 0.8
-        case .two: 0.9
+        case .one: 0.6
+        case .two: 0.8
         case .three: 1
         case .four: 1.1
         }
@@ -169,7 +195,17 @@ struct FrostedButtonStyleViewModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         HStack(spacing: spacing) {
+            if let leading {
+                Image(icon(for: leading))
+                    .frame(width: iconSize, height: iconSize)
+            }
+
             content
+
+            if let trailing {
+                Image(icon(for: trailing))
+                    .frame(width: iconSize, height: iconSize)
+            }
         }
         .frame(maxWidth: fullWidth ? .infinity : nil)
         .frame(height: iconOnly ? iconSize : nil)
@@ -229,6 +265,8 @@ public struct FrostedButtonStyle: ButtonStyle {
     let iconOnly: Bool
     let fullWidth: Bool
     let tint: FrostedTint
+    let leading: FrostedIconSet?
+    let trailing: FrostedIconSet?
 
     let loading: Bool
 
@@ -245,6 +283,8 @@ public struct FrostedButtonStyle: ButtonStyle {
                     iconOnly: iconOnly,
                     fullWidth: fullWidth,
                     tint: tint,
+                    leading: leading,
+                    trailing: trailing,
 
                     pressed: configuration.isPressed,
                     disabled: !isEnabled,
@@ -262,6 +302,8 @@ public struct SemanticFrostedButtonStyle: ButtonStyle {
     let iconOnly: Bool
     let fullWidth: Bool
     let semantic: FrostedSemantic
+    let leading: FrostedIconSet?
+    let trailing: FrostedIconSet?
 
     let loading: Bool
 
@@ -279,6 +321,9 @@ public struct SemanticFrostedButtonStyle: ButtonStyle {
                     iconOnly: iconOnly,
                     fullWidth: fullWidth,
                     tint: theme.tint(for: semantic),
+                    leading: leading,
+                    trailing: trailing,
+
                     pressed: configuration.isPressed,
                     disabled: !isEnabled,
                     loading: loading
@@ -295,6 +340,8 @@ public extension ButtonStyle where Self == FrostedButtonStyle {
         highContrast: Bool = false,
         fullWidth: Bool = false,
         color: FrostedTint,
+        leading: FrostedIconSet? = nil,
+        trailing: FrostedIconSet? = nil,
         loading: Bool = false
     ) -> Self {
         FrostedButtonStyle(
@@ -305,26 +352,8 @@ public extension ButtonStyle where Self == FrostedButtonStyle {
             iconOnly: false,
             fullWidth: fullWidth,
             tint: color,
-            loading: loading
-        )
-    }
-
-    static func frostedIcon(
-        variant: FrostedButtonStyle.Variant = .solid,
-        size: FrostedButtonStyle.Size,
-        rounded: Bool = false,
-        highContrast: Bool = false,
-        color: FrostedTint,
-        loading: Bool = false
-    ) -> Self {
-        FrostedButtonStyle(
-            variant: variant,
-            size: size,
-            rounded: rounded,
-            highContrast: highContrast,
-            iconOnly: true,
-            fullWidth: false,
-            tint: color,
+            leading: leading,
+            trailing: trailing,
             loading: loading
         )
     }
@@ -337,7 +366,9 @@ public extension ButtonStyle where Self == SemanticFrostedButtonStyle {
         rounded: Bool = false,
         highContrast: Bool = false,
         fullWidth: Bool = false,
-        semanticColor: FrostedSemantic = .accent,
+        semantic: FrostedSemantic = .accent,
+        leading: FrostedIconSet? = nil,
+        trailing: FrostedIconSet? = nil,
         loading: Bool = false
     ) -> Self {
         SemanticFrostedButtonStyle(
@@ -347,27 +378,9 @@ public extension ButtonStyle where Self == SemanticFrostedButtonStyle {
             highContrast: highContrast,
             iconOnly: false,
             fullWidth: fullWidth,
-            semantic: semanticColor,
-            loading: loading
-        )
-    }
-
-    static func frostedIcon(
-        variant: FrostedButtonStyle.Variant = .solid,
-        size: FrostedButtonStyle.Size,
-        rounded: Bool = false,
-        highContrast: Bool = false,
-        semanticColor: FrostedSemantic = .accent,
-        loading: Bool = false
-    ) -> Self {
-        SemanticFrostedButtonStyle(
-            variant: variant,
-            size: size,
-            rounded: rounded,
-            highContrast: highContrast,
-            iconOnly: true,
-            fullWidth: false,
-            semantic: semanticColor,
+            semantic: semantic,
+            leading: leading,
+            trailing: trailing,
             loading: loading
         )
     }
@@ -382,7 +395,7 @@ public extension ButtonStyle where Self == SemanticFrostedButtonStyle {
             HStack(spacing: 8) {
                 ForEach(FrostedButtonStyle.Size.allCases, id: \.self) { size in
                     Button("Hello, World") {}
-                        .buttonStyle(.frosted(variant: variant, size: size, semanticColor: semantic))
+                        .buttonStyle(.frosted(variant: variant, size: size, semantic: semantic))
                 }
             }
             .padding(.horizontal)
@@ -391,7 +404,7 @@ public extension ButtonStyle where Self == SemanticFrostedButtonStyle {
             HStack(spacing: 8) {
                 ForEach(FrostedButtonStyle.Size.allCases, id: \.self) { size in
                     Button("Hello, World") {}
-                        .buttonStyle(.frosted(variant: variant, size: size, highContrast: true, semanticColor: semantic))
+                        .buttonStyle(.frosted(variant: variant, size: size, highContrast: true, semantic: semantic))
                 }
             }
             .padding(.horizontal)
@@ -400,7 +413,7 @@ public extension ButtonStyle where Self == SemanticFrostedButtonStyle {
             HStack(spacing: 8) {
                 ForEach(FrostedButtonStyle.Size.allCases, id: \.self) { size in
                     Button("Hello, World") {}
-                        .buttonStyle(.frosted(variant: variant, size: size, semanticColor: semantic))
+                        .buttonStyle(.frosted(variant: variant, size: size, semantic: semantic))
                 }
             }
             .padding(.horizontal)
@@ -410,7 +423,7 @@ public extension ButtonStyle where Self == SemanticFrostedButtonStyle {
             HStack(spacing: 8) {
                 ForEach(FrostedButtonStyle.Size.allCases, id: \.self) { size in
                     Button("Hello, World") {}
-                        .buttonStyle(.frosted(variant: variant, size: size, rounded: true, semanticColor: semantic))
+                        .buttonStyle(.frosted(variant: variant, size: size, rounded: true, semantic: semantic))
                 }
             }
             .padding(.horizontal)
@@ -419,7 +432,7 @@ public extension ButtonStyle where Self == SemanticFrostedButtonStyle {
             HStack(spacing: 8) {
                 ForEach(FrostedButtonStyle.Size.allCases, id: \.self) { size in
                     Button("Hello, World") {}
-                        .buttonStyle(.frosted(variant: variant, size: size, rounded: true, highContrast: true, semanticColor: semantic))
+                        .buttonStyle(.frosted(variant: variant, size: size, rounded: true, highContrast: true, semantic: semantic))
                 }
             }
             .padding(.horizontal)
@@ -428,7 +441,7 @@ public extension ButtonStyle where Self == SemanticFrostedButtonStyle {
             HStack(spacing: 8) {
                 ForEach(FrostedButtonStyle.Size.allCases, id: \.self) { size in
                     Button("Hello, World") {}
-                        .buttonStyle(.frosted(variant: variant, size: size, rounded: true, semanticColor: semantic))
+                        .buttonStyle(.frosted(variant: variant, size: size, rounded: true, semantic: semantic))
                 }
             }
             .padding(.horizontal)
@@ -513,17 +526,17 @@ public extension ButtonStyle where Self == SemanticFrostedButtonStyle {
     }
 }
 
-#Preview("Icon only") {
-    Button(action: {}) {
-        Image(FrostedIcon.sparkles20)
-    }
-    .buttonStyle(.frostedIcon(variant: .solid, size: .three, color: .pink))
-}
-
 #Preview("Icon with text") {
-    Button(action: {}) {
-        Image(FrostedIcon.sparkles20)
-        Text("Test")
+    VStack {
+        ForEach(FrostedButtonStyle.Size.allCases, id: \.self) { size in
+            HStack {
+                // Preferred way
+                Button("Test") {}
+                    .buttonStyle(.frosted(variant: .solid, size: size, color: .pink, leading: .sparkles))
+                
+                Button("Test") {}
+                    .buttonStyle(.frosted(variant: .solid, size: size, color: .pink, leading: .sparkles, trailing: .arrowDown))
+            }
+        }
     }
-    .buttonStyle(.frosted(variant: .solid, size: .one, color: .pink))
 }
