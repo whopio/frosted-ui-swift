@@ -54,6 +54,12 @@ find "$EXTRACT_PATH" -type f -name "*.svg" | while read -r svg; do
         continue
     fi
 
+    # Only support the 5 standard sizes we care about
+    if ! [[ "$size" =~ ^(12|16|20|24|32)$ ]]; then
+        echo "Skipping icon with unsupported size ($size): $filename"
+        continue
+    fi
+
     # Convert the base name from kebab-case to lowerCamelCase (e.g., add-user -> addUser)
     base_camel=$(echo "$base" | awk -F'-' '{ for (i=1;i<=NF;i++) { if (i==1) printf "%s", $i; else printf "%s%s", toupper(substr($i,1,1)), substr($i,2); } }')
 
@@ -67,6 +73,9 @@ find "$EXTRACT_PATH" -type f -name "*.svg" | while read -r svg; do
     imageset_dir="$DEST_PATH/$imageset_name.imageset"
 
     mkdir -p "$imageset_dir"
+
+    # Ensure there is only a single SVG per imageset to avoid unassigned children
+    rm -f "$imageset_dir"/*.svg
 
     # Copy the SVG into the imageset folder
     cp "$svg" "$imageset_dir/$filename"
