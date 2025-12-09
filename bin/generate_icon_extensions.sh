@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Generate Swift enums and IconSet definitions for all SVG icons
-# located in FrostedUI/Sources/FrostedUI/Resources/Icons.xcassets.
+# located in Sources/FrostedUI/Resources/Icons.xcassets.
 
-ICONS_PATH="FrostedUI/Sources/FrostedUI/Resources/Icons.xcassets"
-OUTPUT_FILE="FrostedUI/Sources/FrostedUI/Icons/Icon+Extensions.swift"
+ICONS_PATH="Sources/FrostedUI/Resources/Icons.xcassets"
+OUTPUT_FILE="Sources/FrostedUI/Icons/Icon+Extensions.swift"
 
 # Check if the icons path exists
 if [ ! -d "$ICONS_PATH" ]; then

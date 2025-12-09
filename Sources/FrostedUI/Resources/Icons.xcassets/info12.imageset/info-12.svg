@@ -1,17 +1,1 @@
-<svg
-  width="12"
-  height="12"
-  viewBox="0 0 12 12"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
-  data-fui-icon="true"
->
-  <circle cx="5.34" cy="3.004" r="1.027" fill="currentColor" />
-  <path
-    d="M6 9.46875V5.59375H4.3125M6 9.46875H4.3125M6 9.46875H7.6875"
-    stroke="currentColor"
-    stroke-width="1.125"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" data-fui-icon="true" viewBox="0 0 12 12"><circle cx="5.34" cy="3.004" r="1.027" fill="currentColor"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.125" d="M6 9.469V5.594H4.313M6 9.469H4.313m1.687 0h1.688"/></svg>

@@ -1,16 +1,1 @@
-<svg
-  width="16"
-  height="16"
-  viewBox="0 0 16 16"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
-  data-fui-icon="true"
->
-  <path
-    d="M4.75 14.25L11.25 8L4.75 1.75"
-    stroke="currentColor"
-    stroke-width="1.5"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" data-fui-icon="true" viewBox="0 0 16 16"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 14.25 11.25 8l-6.5-6.25"/></svg>

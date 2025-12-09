@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Download the frosted UI icons zip and copy all SVGs into
-# FrostedUI/Sources/FrostedUI/Resources/Icons.xcassets, then
+# Sources/FrostedUI/Resources/Icons.xcassets, then
 # generate Swift enums/extensions for them.
 
 ZIP_URL="https://github.com/whopio/frosted-ui/raw/main/packages/frosted-ui-icons/frosted-ui-icons.zip"
@@ -10,7 +10,7 @@ ZIP_URL="https://github.com/whopio/frosted-ui/raw/main/packages/frosted-ui-icons
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-DEST_DIR="FrostedUI/Sources/FrostedUI/Resources/Icons.xcassets"
+DEST_DIR="Sources/FrostedUI/Resources/Icons.xcassets"
 DEST_PATH="$ROOT_DIR/$DEST_DIR"
 
 TMP_DIR="$(mktemp -d)"
@@ -103,6 +103,19 @@ done
 
 echo "Cleaning up temporary files..."
 rm -rf "$TMP_DIR"
+
+# Check if svgo is installed
+if ! command -v svgo &> /dev/null; then
+    echo "svgo could not be found. Installing it using 'npm install -g svgo'."
+    npm install -g svgo 
+    if [ $? -ne 0 ]; then
+        echo "Failed to install svgo. Please install it manually."
+        exit 1
+    fi
+fi
+
+# Run svgo on all SVGs in the destination directory
+svgo -rf "$DEST_PATH"
 
 # Run the generate_icon_extensions.sh script
 ICON_EXT_SCRIPT="$SCRIPT_DIR/generate_icon_extensions.sh"
