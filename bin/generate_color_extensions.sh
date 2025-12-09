@@ -26,8 +26,9 @@ echo "public enum FrostedColor: String, CaseIterable, Identifiable {" >> "$OUTPU
 echo "    public var id: String { rawValue }" >> "$OUTPUT_FILE"
 echo "" >> "$OUTPUT_FILE"
 
-# Create an array to store enum cases
+# Create arrays to store enum cases
 declare -a enum_cases
+declare -a palette_cases  # frosted palettes under the Frosted group
 
 # Use find to list all .colorset directories in the Colors folder
 while IFS= read -r line; do
@@ -41,6 +42,11 @@ while IFS= read -r line; do
     if [ -n "$enum_case" ]; then
         enum_cases+=("    case ${enum_case}")
         echo "Added color: $asset_name as enum case: $enum_case"
+
+        # Track frosted palette colors that live under the Frosted group
+        if [[ "$enum_case" == frosted* && "$line" == *"/Frosted/"* ]]; then
+            palette_cases+=("$enum_case")
+        fi
     else
         echo "Warning: Failed to process color $asset_name"
     fi
@@ -48,6 +54,9 @@ done < <(find "$COLORS_PATH" -name "*.colorset")
 
 # Sort the enum cases alphabetically
 IFS=$'\n' enum_cases=($(sort <<<"${enum_cases[*]}"))
+
+# Sort the palette cases (frosted families) alphabetically for stability
+IFS=$'\n' palette_cases=($(sort <<<"${palette_cases[*]}"))
 unset IFS
 
 # Append sorted enum cases to the Swift file
@@ -123,17 +132,8 @@ EOT
 
     # Discover all unique frosted families (Amber, Blue, etc.) from FrostedColor cases
     frosted_families=""
-    for line in "${enum_cases[@]}"; do
-        case "$line" in
-            "    case frosted"*)
-                name=${line#"    case "}
-                # Strip any trailing whitespace after the case name
-                name=${name%%[[:space:]]*}
-                ;;
-            *)
-                continue
-                ;;
-        esac
+    for name in "${palette_cases[@]}"; do
+        # name is like 'frostedAmber1' or 'frostedAmberA1'
 
         # Drop 9contrast suffix if present
         case "$name" in
@@ -165,14 +165,20 @@ EOT
         esac
     done
 
-    # Helper to check if a specific FrostedColor case exists
+    # Sort frosted families alphabetically so generated tints are stable
+    read -ra families_arr <<< "$frosted_families"
+    IFS=$'\n' families_arr=($(sort <<<"${families_arr[*]}"))
+    unset IFS
+    frosted_families="${families_arr[*]}"
+
+    # Helper to check if a specific FrostedColor case exists in the Frosted palettes
     has_whcolor_case() {
         local needle="$1"
-        local line
-        for line in "${enum_cases[@]}"; do
-            case "$line" in
-                *" $needle") return 0 ;;
-            esac
+        local name
+        for name in "${palette_cases[@]}"; do
+            if [ "$name" = "$needle" ]; then
+                return 0
+            fi
         done
         return 1
     }
