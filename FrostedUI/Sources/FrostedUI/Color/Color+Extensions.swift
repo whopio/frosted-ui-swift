@@ -757,7 +757,6 @@ public extension UIColor {
                         .cornerRadius(4)
 
                     Text(color.rawValue)
-                        .applySystemStyle(.callout, .regular)
 
                     Spacer()
                 }
@@ -777,7 +776,6 @@ public extension UIColor {
                         .cornerRadius(4)
 
                     Text(color.rawValue)
-                        .applySystemStyle(.callout, .regular)
 
                     Spacer()
                 }
