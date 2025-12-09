@@ -515,14 +515,14 @@ public extension ButtonStyle where Self == SemanticFrostedButtonStyle {
 
 #Preview("Icon only") {
     Button(action: {}) {
-        Image(systemName: "sparkles")
+        Image(FrostedIcon.sparkles20)
     }
     .buttonStyle(.frostedIcon(variant: .solid, size: .three, color: .pink))
 }
 
 #Preview("Icon with text") {
     Button(action: {}) {
-        Image(systemName: "sparkles")
+        Image(FrostedIcon.sparkles20)
         Text("Test")
     }
     .buttonStyle(.frosted(variant: .solid, size: .one, color: .pink))
