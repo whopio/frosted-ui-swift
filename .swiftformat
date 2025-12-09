@@ -1,0 +1,6 @@
+# Exclude paths
+--exclude Layers/Foundation/WhopAPI, .build, build, SourcePackages
+
+# Option configuration
+--disable preferKeyPath
+--header strip
