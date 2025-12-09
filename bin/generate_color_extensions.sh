@@ -4,7 +4,7 @@
 COLORS_PATH="FrostedUI/Sources/FrostedUI/Resources/Colors.xcassets"
 
 # Output file where the generated Swift enum will be written
-OUTPUT_FILE="FrostedUI/S/ources/FrostedUI/Color/Color+Extensions.swift"
+OUTPUT_FILE="FrostedUI/Sources/FrostedUI/Color/Color+Extensions.swift"
 
 # Check if the colors path exists
 if [ ! -d "$COLORS_PATH" ]; then
@@ -76,36 +76,45 @@ public extension UIColor {
     }
 }
 
-// swiftlint:disable whop_localized_enums
-public struct FrostedColorsPreviewView: View {
-    public var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                ForEach(FrostedColor.allCases) { color in
-                    HStack(spacing: 8) {
-                        Color(color)
-                            .frame(width: 20, height: 20)
-                            .cornerRadius(4)
+#Preview {
+    ScrollView {
+        VStack(alignment: .leading, spacing: 16) {
+            ForEach(FrostedColor.allCases) { color in
+                HStack(spacing: 8) {
+                    Color(color)
+                        .frame(width: 20, height: 20)
+                        .cornerRadius(4)
 
-                        Text(color.rawValue)
-                            .applySystemStyle(.callout, .regular)
+                    Text(color.rawValue)
+                        .applySystemStyle(.callout, .regular)
 
-                        Spacer()
-                    }
+                    Spacer()
                 }
             }
-            .padding()
         }
+        .padding()
     }
 }
 
 #Preview {
-    FrostedColorsPreviewView()
-}
+    ScrollView {
+        VStack(alignment: .leading, spacing: 16) {
+            ForEach(FrostedColor.allCases) { color in
+                HStack(spacing: 8) {
+                    Color(color)
+                        .frame(width: 20, height: 20)
+                        .cornerRadius(4)
 
-#Preview {
-    FrostedColorsPreviewView()
-        .preferredColorScheme(.dark)
+                    Text(color.rawValue)
+                        .applySystemStyle(.callout, .regular)
+
+                    Spacer()
+                }
+            }
+        }
+        .padding()
+    }
+    .preferredColorScheme(.dark)
 }
 EOT
 
