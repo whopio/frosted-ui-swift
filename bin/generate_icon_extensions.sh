@@ -69,6 +69,12 @@ public extension Image {
     }
 }
 
+public extension UIImage {
+    convenience init?(_ image: FrostedIcon) {
+        self.init(named: image.rawValue, in: .module, compatibleWith: nil)
+    }
+}
+
 public extension FrostedIconSet {
 EOT
 
@@ -111,4 +117,3 @@ done
 echo "}" >> "$OUTPUT_FILE"
 
 echo "Swift icons file successfully generated at $OUTPUT_FILE"
-

@@ -1932,6 +1932,12 @@ public extension Image {
     }
 }
 
+public extension UIImage {
+    convenience init?(_ image: FrostedIcon) {
+        self.init(named: image.rawValue, in: .module, compatibleWith: nil)
+    }
+}
+
 public extension FrostedIconSet {
 
     static let addUser = FrostedIconSet(
