@@ -2,6 +2,7 @@ import SwiftUI
 
 public enum FrostedSemantic: CaseIterable {
     case accent
+    case neutral
     case danger
     case info
     case success
@@ -10,6 +11,7 @@ public enum FrostedSemantic: CaseIterable {
 
 public struct FrostedTheme {
     public let accent: FrostedTint
+    public let neutral: FrostedTint
     public let danger: FrostedTint
     public let info: FrostedTint
     public let success: FrostedTint
@@ -17,6 +19,7 @@ public struct FrostedTheme {
 
     public static let `default` = FrostedTheme(
         accent: .blue,
+        neutral: .gray,
         danger: .red,
         info: .sky,
         success: .green,
@@ -26,6 +29,7 @@ public struct FrostedTheme {
     public func tint(for semantic: FrostedSemantic) -> FrostedTint {
         switch semantic {
         case .accent: accent
+        case .neutral: neutral
         case .danger: danger
         case .info: info
         case .success: success
