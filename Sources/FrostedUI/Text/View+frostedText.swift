@@ -1,6 +1,6 @@
 import SwiftUI
 
-public enum FrostedTextSize {
+public enum FrostedTextSize: CaseIterable {
     case zero
     case one
     case two
@@ -63,7 +63,7 @@ public enum FrostedTextSize {
     }
 }
 
-public enum FrostedTextWeight {
+public enum FrostedTextWeight: CaseIterable {
     case light
     case regular
     case medium
@@ -84,15 +84,104 @@ private extension FrostedTextWeight {
 }
 
 public extension Text {
-    func frostedText(
-        size: FrostedTextSize = .one,
+    private func frostedText(
+        size: FrostedTextSize = .two,
         weight: FrostedTextWeight = .regular,
-        color: FrostedTint = .gray,
+        rawColor: Color,
         trim: Bool = false
     ) -> some View {
         font(.system(size: size.fontSize, weight: weight.fontWeight))
             .tracking(size.letterSpacing)
             .lineSpacing(trim ? 0 : size.lineSpacing)
-            .foregroundColor(color.nine)
+            .foregroundColor(rawColor)
     }
+    
+    func frostedText(
+        size: FrostedTextSize = .two,
+        weight: FrostedTextWeight = .regular,
+        color: FrostedColor,
+        trim: Bool = false
+    ) -> some View {
+        frostedText(
+            size: size,
+            weight: weight,
+            rawColor: Color(color),
+            trim: trim
+        )
+    }
+
+    // I'll leave this here for now, but not sure if we need it. It introduces the name of tint which may
+    // be confusing with the color name.
+    // func frostedText(
+    //     size: FrostedTextSize = .two,
+    //     weight: FrostedTextWeight = .regular,
+    //     tint: FrostedTint,
+    //     trim: Bool = false
+    // ) -> some View {
+    //     frostedText(
+    //         size: size,
+    //         weight: weight,
+    //         color: tint.nine,
+    //         trim: trim
+    //     )
+    // }
+
+    func frostedText(
+        size: FrostedTextSize = .two,
+        weight: FrostedTextWeight = .regular,
+        trim: Bool = false
+    ) -> some View {
+        ThemeProvider { theme in
+            frostedText(
+                size: size,
+                weight: weight,
+                rawColor: theme.neutral.twelve,
+                trim: trim
+            )
+        }
+    }
+
+    func frostedText(
+        size: FrostedTextSize = .two,
+        weight: FrostedTextWeight = .regular,
+        semantic: FrostedSemantic,
+        trim: Bool = false
+    ) -> some View {
+        ThemeProvider { theme in
+            frostedText(
+                size: size,
+                weight: weight,
+                rawColor: theme.tint(for: semantic).nine,
+                trim: trim
+            )
+        }
+    }
+}
+
+#Preview("Size") {
+    ForEach(FrostedTextSize.allCases, id: \.self) { size in
+        Text("The quick brown fox jumps over the lazy dog.")
+            .frostedText(size: size)
+    }
+}
+
+#Preview("Weight") {
+    ForEach(FrostedTextWeight.allCases, id: \.self) { weight in
+        Text("The quick brown fox jumps over the lazy dog.")
+            .frostedText(weight: weight)
+    }
+}
+
+#Preview("Color") {
+    Text("The quick brown fox jumps over the lazy dog.")
+        .frostedText(color: .frostedGreen9)
+    
+    Text("The quick brown fox jumps over the lazy dog.")
+        .frostedText(color: .frostedRed9)
+    
+    Text("The quick brown fox jumps over the lazy dog.")
+        .frostedText(color: .frostedBlue9)
+    
+    Text("The quick brown fox jumps over the lazy dog.")
+        .frostedText(semantic: .danger)
 }
