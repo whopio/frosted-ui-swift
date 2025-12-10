@@ -88,11 +88,11 @@ public extension Text {
         size: FrostedTextSize = .one,
         weight: FrostedTextWeight = .regular,
         color: FrostedTint = .gray,
-        trim _: Bool = false
+        trim: Bool = false
     ) -> some View {
         font(.system(size: size.fontSize, weight: weight.fontWeight))
             .tracking(size.letterSpacing)
-            .lineSpacing(size.lineSpacing)
+            .lineSpacing(trim ? 0 : size.lineSpacing)
             .foregroundColor(color.nine)
     }
 }
