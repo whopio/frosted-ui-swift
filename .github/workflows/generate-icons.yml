@@ -1,0 +1,56 @@
+on:
+  workflow_dispatch:
+
+name: Generate Frosted Icons from Figma
+
+concurrency:
+  group: 'generate-icons'
+  cancel-in-progress: false
+
+jobs:
+  generate-icons:
+    name: Generate icons from Figma and commit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          check-latest: true
+          cache: pnpm
+
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Install generate-icon-lib
+        run: pnpm add -g @whopio/generate-icon-lib
+
+      - name: Generate icons from Figma
+        run: |
+          mkdir -p ./tmp-icons
+          cd ./tmp-icons
+          generate-icon-lib --file=Qz3t7Yi565N2u4l3Ha1w99
+        env:
+          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+
+      - name: Process icons into xcassets
+        run: bash ./bin/process_icons_to_xcassets.sh ./tmp-icons/icons
+
+      - name: Clean up
+        run: rm -rf ./tmp-icons
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update icons from Figma"
+          file_pattern: "Sources/FrostedUI/Resources/Icons.xcassets/**"
