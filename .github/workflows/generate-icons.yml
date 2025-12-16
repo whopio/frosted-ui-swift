@@ -1,5 +1,8 @@
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - pull-icons
 
 name: Generate Frosted Icons from Figma
 
