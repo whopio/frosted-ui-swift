@@ -49,7 +49,8 @@ jobs:
           FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
 
       - name: Process icons into xcassets
-        run: bash ./swift-repo/bin/generate_frosted_icons.sh ./frosted-ui/packages/frosted-ui-icons/frosted-ui-icons.zip
+        run: bash ./bin/generate_frosted_icons.sh $GITHUB_WORKSPACE/frosted-ui/packages/frosted-ui-icons/frosted-ui-icons.zip
+        working-directory: ./swift-repo
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
