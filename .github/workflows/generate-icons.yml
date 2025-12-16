@@ -19,6 +19,14 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
+          path: swift-repo
+
+      - name: Clone frosted-ui repo
+        uses: actions/checkout@v4
+        with:
+          repository: whopio/frosted-ui
+          token: ${{ secrets.GH_PAT }}
+          path: frosted-ui
 
       - uses: pnpm/action-setup@v4
         with:
@@ -30,28 +38,22 @@ jobs:
           node-version: 22.x
           check-latest: true
 
-      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Install dependencies
+        run: pnpm i
+        working-directory: ./frosted-ui
 
-      - name: Install generate-icon-lib
-        run: pnpm add -g @whopio/generate-icon-lib
-
-      - name: Generate icons from Figma and zip
-        run: |
-          generate-icon-lib --file=Qz3t7Yi565N2u4l3Ha1w99
-          cd ./icons && zip -r ../frosted-ui-icons.zip ./
+      - name: Generate icons from Figma
+        run: pnpm generate-src
+        working-directory: ./frosted-ui/packages/frosted-ui-icons
         env:
           FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
 
       - name: Process icons into xcassets
-        run: bash ./bin/generate_frosted_icons.sh ./frosted-ui-icons.zip
-
-      - name: Clean up
-        run: rm -rf ./icons ./frosted-ui-icons.zip
+        run: bash ./swift-repo/bin/generate_frosted_icons.sh ./frosted-ui/packages/frosted-ui-icons/frosted-ui-icons.zip
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: update icons from Figma"
           file_pattern: "Sources/FrostedUI/Resources/Icons.xcassets/** Sources/FrostedUI/Icons/**"
+          repository: ./swift-repo
