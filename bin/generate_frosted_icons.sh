@@ -124,8 +124,10 @@ if ! command -v svgo &> /dev/null; then
     fi
 fi
 
+# TODO: Some SVGs from Figma have malformed content that svgo can't parse.
+# Running with || true to skip errors for now. Fix the source SVGs in Figma.
 # Run svgo on all SVGs in the destination directory
-svgo -rf "$DEST_PATH"
+svgo -rf "$DEST_PATH" || true
 
 # Run the generate_icon_extensions.sh script
 ICON_EXT_SCRIPT="$SCRIPT_DIR/generate_icon_extensions.sh"
