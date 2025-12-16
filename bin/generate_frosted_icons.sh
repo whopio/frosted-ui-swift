@@ -87,8 +87,9 @@ find "$EXTRACT_PATH" -type f -name "*.svg" | while read -r svg; do
     # Ensure there is only a single SVG per imageset to avoid unassigned children
     rm -f "$imageset_dir"/*.svg
 
-    # Copy the SVG into the imageset folder
-    cp "$svg" "$imageset_dir/$filename"
+    # Copy the SVG into the imageset folder, truncating any garbage after </svg>
+    # (workaround for bug in generate-icon-lib that concatenates extra path data)
+    sed -n '1,/<\/svg>/p' "$svg" > "$imageset_dir/$filename"
 
     # Create Contents.json for this imageset
     cat > "$imageset_dir/Contents.json" <<EOT
