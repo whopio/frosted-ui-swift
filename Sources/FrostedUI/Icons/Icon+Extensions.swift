@@ -3,11 +3,26 @@ import SwiftUI
 public enum FrostedIcon: String, CaseIterable, Identifiable {
     public var id: String { rawValue }
 
+    case addPhoto12 = "addPhoto12"
+    case addPhoto16 = "addPhoto16"
+    case addPhoto20 = "addPhoto20"
+    case addPhoto24 = "addPhoto24"
+    case addPhoto32 = "addPhoto32"
+    case addPhotoFilled12 = "addPhotoFilled12"
+    case addPhotoFilled16 = "addPhotoFilled16"
+    case addPhotoFilled20 = "addPhotoFilled20"
+    case addPhotoFilled24 = "addPhotoFilled24"
+    case addPhotoFilled32 = "addPhotoFilled32"
     case addUser12 = "addUser12"
     case addUser16 = "addUser16"
     case addUser20 = "addUser20"
     case addUser24 = "addUser24"
     case addUser32 = "addUser32"
+    case addUserFilled12 = "addUserFilled12"
+    case addUserFilled16 = "addUserFilled16"
+    case addUserFilled20 = "addUserFilled20"
+    case addUserFilled24 = "addUserFilled24"
+    case addUserFilled32 = "addUserFilled32"
     case alignCenter12 = "alignCenter12"
     case alignCenter16 = "alignCenter16"
     case alignCenter20 = "alignCenter20"
@@ -138,6 +153,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case ban20 = "ban20"
     case ban24 = "ban24"
     case ban32 = "ban32"
+    case banFilled12 = "banFilled12"
+    case banFilled16 = "banFilled16"
+    case banFilled20 = "banFilled20"
+    case banFilled24 = "banFilled24"
+    case banFilled32 = "banFilled32"
     case bank12 = "bank12"
     case bank16 = "bank16"
     case bank20 = "bank20"
@@ -183,6 +203,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case bitcoin20 = "bitcoin20"
     case bitcoin24 = "bitcoin24"
     case bitcoin32 = "bitcoin32"
+    case bitcoinFilled12 = "bitcoinFilled12"
+    case bitcoinFilled16 = "bitcoinFilled16"
+    case bitcoinFilled20 = "bitcoinFilled20"
+    case bitcoinFilled24 = "bitcoinFilled24"
+    case bitcoinFilled32 = "bitcoinFilled32"
     case bold12 = "bold12"
     case bold16 = "bold16"
     case bold20 = "bold20"
@@ -198,11 +223,26 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case browser20 = "browser20"
     case browser24 = "browser24"
     case browser32 = "browser32"
+    case brush12 = "brush12"
+    case brush16 = "brush16"
+    case brush20 = "brush20"
+    case brush24 = "brush24"
+    case brush32 = "brush32"
+    case brushFilled12 = "brushFilled12"
+    case brushFilled16 = "brushFilled16"
+    case brushFilled20 = "brushFilled20"
+    case brushFilled24 = "brushFilled24"
+    case brushFilled32 = "brushFilled32"
     case bulb12 = "bulb12"
     case bulb16 = "bulb16"
     case bulb20 = "bulb20"
     case bulb24 = "bulb24"
     case bulb32 = "bulb32"
+    case bulbFilled12 = "bulbFilled12"
+    case bulbFilled16 = "bulbFilled16"
+    case bulbFilled20 = "bulbFilled20"
+    case bulbFilled24 = "bulbFilled24"
+    case bulbFilled32 = "bulbFilled32"
     case burger12 = "burger12"
     case burger16 = "burger16"
     case burger20 = "burger20"
@@ -338,6 +378,16 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case chevronUpSize20 = "chevronUpSize20"
     case chevronUpSize24 = "chevronUpSize24"
     case chevronUpSize32 = "chevronUpSize32"
+    case circle12 = "circle12"
+    case circle16 = "circle16"
+    case circle20 = "circle20"
+    case circle24 = "circle24"
+    case circle32 = "circle32"
+    case circleFilled12 = "circleFilled12"
+    case circleFilled16 = "circleFilled16"
+    case circleFilled20 = "circleFilled20"
+    case circleFilled24 = "circleFilled24"
+    case circleFilled32 = "circleFilled32"
     case clipboard12 = "clipboard12"
     case clipboard16 = "clipboard16"
     case clipboard20 = "clipboard20"
@@ -378,6 +428,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case coinbase20 = "coinbase20"
     case coinbase24 = "coinbase24"
     case coinbase32 = "coinbase32"
+    case coinbaseFillted12 = "coinbaseFillted12"
+    case coinbaseFillted16 = "coinbaseFillted16"
+    case coinbaseFillted20 = "coinbaseFillted20"
+    case coinbaseFillted24 = "coinbaseFillted24"
+    case coinbaseFillted32 = "coinbaseFillted32"
     case collapseSidebar12 = "collapseSidebar12"
     case collapseSidebar16 = "collapseSidebar16"
     case collapseSidebar20 = "collapseSidebar20"
@@ -413,6 +468,16 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case compress20 = "compress20"
     case compress24 = "compress24"
     case compress32 = "compress32"
+    case controls12 = "controls12"
+    case controls16 = "controls16"
+    case controls20 = "controls20"
+    case controls24 = "controls24"
+    case controls32 = "controls32"
+    case controlsFilled12 = "controlsFilled12"
+    case controlsFilled16 = "controlsFilled16"
+    case controlsFilled20 = "controlsFilled20"
+    case controlsFilled24 = "controlsFilled24"
+    case controlsFilled32 = "controlsFilled32"
     case converge12 = "converge12"
     case converge16 = "converge16"
     case converge20 = "converge20"
@@ -558,6 +623,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case dollarSignSlashed20 = "dollarSignSlashed20"
     case dollarSignSlashed24 = "dollarSignSlashed24"
     case dollarSignSlashed32 = "dollarSignSlashed32"
+    case doubleChevron12 = "doubleChevron12"
+    case doubleChevron16 = "doubleChevron16"
+    case doubleChevron20 = "doubleChevron20"
+    case doubleChevron24 = "doubleChevron24"
+    case doubleChevron32 = "doubleChevron32"
     case download12 = "download12"
     case download16 = "download16"
     case download20 = "download20"
@@ -618,6 +688,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case exclamationCircle20 = "exclamationCircle20"
     case exclamationCircle24 = "exclamationCircle24"
     case exclamationCircle32 = "exclamationCircle32"
+    case exclamationCircleFilled12 = "exclamationCircleFilled12"
+    case exclamationCircleFilled16 = "exclamationCircleFilled16"
+    case exclamationCircleFilled20 = "exclamationCircleFilled20"
+    case exclamationCircleFilled24 = "exclamationCircleFilled24"
+    case exclamationCircleFilled32 = "exclamationCircleFilled32"
     case exclamationTriangle12 = "exclamationTriangle12"
     case exclamationTriangle16 = "exclamationTriangle16"
     case exclamationTriangle20 = "exclamationTriangle20"
@@ -678,6 +753,16 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case filterDown20 = "filterDown20"
     case filterDown24 = "filterDown24"
     case filterDown32 = "filterDown32"
+    case fire12 = "fire12"
+    case fire16 = "fire16"
+    case fire20 = "fire20"
+    case fire24 = "fire24"
+    case fire32 = "fire32"
+    case fireFilled12 = "fireFilled12"
+    case fireFilled16 = "fireFilled16"
+    case fireFilled20 = "fireFilled20"
+    case fireFilled24 = "fireFilled24"
+    case fireFilled32 = "fireFilled32"
     case flag12 = "flag12"
     case flag16 = "flag16"
     case flag20 = "flag20"
@@ -713,6 +798,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case gear20 = "gear20"
     case gear24 = "gear24"
     case gear32 = "gear32"
+    case gearFilled12 = "gearFilled12"
+    case gearFilled16 = "gearFilled16"
+    case gearFilled20 = "gearFilled20"
+    case gearFilled24 = "gearFilled24"
+    case gearFilled32 = "gearFilled32"
     case gif12 = "gif12"
     case gif16 = "gif16"
     case gif20 = "gif20"
@@ -733,6 +823,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case globe20 = "globe20"
     case globe24 = "globe24"
     case globe32 = "globe32"
+    case globeFilled12 = "globeFilled12"
+    case globeFilled16 = "globeFilled16"
+    case globeFilled20 = "globeFilled20"
+    case globeFilled24 = "globeFilled24"
+    case globeFilled32 = "globeFilled32"
     case globeInSquare12 = "globeInSquare12"
     case globeInSquare16 = "globeInSquare16"
     case globeInSquare20 = "globeInSquare20"
@@ -748,6 +843,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case gridAdd20 = "gridAdd20"
     case gridAdd24 = "gridAdd24"
     case gridAdd32 = "gridAdd32"
+    case gridFilled12 = "gridFilled12"
+    case gridFilled16 = "gridFilled16"
+    case gridFilled20 = "gridFilled20"
+    case gridFilled24 = "gridFilled24"
+    case gridFilled32 = "gridFilled32"
     case handWave12 = "handWave12"
     case handWave16 = "handWave16"
     case handWave20 = "handWave20"
@@ -778,6 +878,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case happyPlus20 = "happyPlus20"
     case happyPlus24 = "happyPlus24"
     case happyPlus32 = "happyPlus32"
+    case happyPlusFilled12 = "happyPlusFilled12"
+    case happyPlusFilled16 = "happyPlusFilled16"
+    case happyPlusFilled20 = "happyPlusFilled20"
+    case happyPlusFilled24 = "happyPlusFilled24"
+    case happyPlusFilled32 = "happyPlusFilled32"
     case hashtag12 = "hashtag12"
     case hashtag16 = "hashtag16"
     case hashtag20 = "hashtag20"
@@ -868,6 +973,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case infoSquare20 = "infoSquare20"
     case infoSquare24 = "infoSquare24"
     case infoSquare32 = "infoSquare32"
+    case infoSquareFilled12 = "infoSquareFilled12"
+    case infoSquareFilled16 = "infoSquareFilled16"
+    case infoSquareFilled20 = "infoSquareFilled20"
+    case infoSquareFilled24 = "infoSquareFilled24"
+    case infoSquareFilled32 = "infoSquareFilled32"
     case information12 = "information12"
     case information16 = "information16"
     case information20 = "information20"
@@ -897,6 +1007,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case k20 = "k20"
     case k24 = "k24"
     case k32 = "k32"
+    case language12 = "language12"
+    case language16 = "language16"
+    case language20 = "language20"
+    case language24 = "language24"
+    case language32 = "language32"
     case leaf12 = "leaf12"
     case leaf16 = "leaf16"
     case leaf20 = "leaf20"
@@ -917,11 +1032,21 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case lightsOff20 = "lightsOff20"
     case lightsOff24 = "lightsOff24"
     case lightsOff32 = "lightsOff32"
+    case lightsOffFilled12 = "lightsOffFilled12"
+    case lightsOffFilled16 = "lightsOffFilled16"
+    case lightsOffFilled20 = "lightsOffFilled20"
+    case lightsOffFilled24 = "lightsOffFilled24"
+    case lightsOffFilled32 = "lightsOffFilled32"
     case lightsOn12 = "lightsOn12"
     case lightsOn16 = "lightsOn16"
     case lightsOn20 = "lightsOn20"
     case lightsOn24 = "lightsOn24"
     case lightsOn32 = "lightsOn32"
+    case lightsOnFilled12 = "lightsOnFilled12"
+    case lightsOnFilled16 = "lightsOnFilled16"
+    case lightsOnFilled20 = "lightsOnFilled20"
+    case lightsOnFilled24 = "lightsOnFilled24"
+    case lightsOnFilled32 = "lightsOnFilled32"
     case lilstNumber12 = "lilstNumber12"
     case lilstNumber16 = "lilstNumber16"
     case lilstNumber20 = "lilstNumber20"
@@ -1042,6 +1167,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case megaphone20 = "megaphone20"
     case megaphone24 = "megaphone24"
     case megaphone32 = "megaphone32"
+    case mention12 = "mention12"
+    case mention16 = "mention16"
+    case mention20 = "mention20"
+    case mention24 = "mention24"
+    case mention32 = "mention32"
     case mentionFilled12 = "mentionFilled12"
     case mentionFilled16 = "mentionFilled16"
     case mentionFilled20 = "mentionFilled20"
@@ -1162,6 +1292,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case palette20 = "palette20"
     case palette24 = "palette24"
     case palette32 = "palette32"
+    case paperAirplane12 = "paperAirplane12"
+    case paperAirplane16 = "paperAirplane16"
+    case paperAirplane20 = "paperAirplane20"
+    case paperAirplane24 = "paperAirplane24"
+    case paperAirplane32 = "paperAirplane32"
     case paperAirplaneFilled12 = "paperAirplaneFilled12"
     case paperAirplaneFilled16 = "paperAirplaneFilled16"
     case paperAirplaneFilled20 = "paperAirplaneFilled20"
@@ -1172,6 +1307,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case paperAirplaneFilledUp20 = "paperAirplaneFilledUp20"
     case paperAirplaneFilledUp24 = "paperAirplaneFilledUp24"
     case paperAirplaneFilledUp32 = "paperAirplaneFilledUp32"
+    case paperAirplaneUp12 = "paperAirplaneUp12"
+    case paperAirplaneUp16 = "paperAirplaneUp16"
+    case paperAirplaneUp20 = "paperAirplaneUp20"
+    case paperAirplaneUp24 = "paperAirplaneUp24"
+    case paperAirplaneUp32 = "paperAirplaneUp32"
     case paperAirplaneUpFilled12 = "paperAirplaneUpFilled12"
     case paperAirplaneUpFilled16 = "paperAirplaneUpFilled16"
     case paperAirplaneUpFilled20 = "paperAirplaneUpFilled20"
@@ -1197,6 +1337,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case pauseCircle20 = "pauseCircle20"
     case pauseCircle24 = "pauseCircle24"
     case pauseCircle32 = "pauseCircle32"
+    case pauseCircleFilled12 = "pauseCircleFilled12"
+    case pauseCircleFilled16 = "pauseCircleFilled16"
+    case pauseCircleFilled20 = "pauseCircleFilled20"
+    case pauseCircleFilled24 = "pauseCircleFilled24"
+    case pauseCircleFilled32 = "pauseCircleFilled32"
     case pauseFilled12 = "pauseFilled12"
     case pauseFilled16 = "pauseFilled16"
     case pauseFilled20 = "pauseFilled20"
@@ -1287,6 +1432,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case playCircle20 = "playCircle20"
     case playCircle24 = "playCircle24"
     case playCircle32 = "playCircle32"
+    case playCircleFilled12 = "playCircleFilled12"
+    case playCircleFilled16 = "playCircleFilled16"
+    case playCircleFilled20 = "playCircleFilled20"
+    case playCircleFilled24 = "playCircleFilled24"
+    case playCircleFilled32 = "playCircleFilled32"
     case playFilled12 = "playFilled12"
     case playFilled16 = "playFilled16"
     case playFilled20 = "playFilled20"
@@ -1302,6 +1452,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case plusCircle20 = "plusCircle20"
     case plusCircle24 = "plusCircle24"
     case plusCircle32 = "plusCircle32"
+    case plusCircleFilled12 = "plusCircleFilled12"
+    case plusCircleFilled16 = "plusCircleFilled16"
+    case plusCircleFilled20 = "plusCircleFilled20"
+    case plusCircleFilled24 = "plusCircleFilled24"
+    case plusCircleFilled32 = "plusCircleFilled32"
     case plusRectangle12 = "plusRectangle12"
     case plusRectangle16 = "plusRectangle16"
     case plusRectangle20 = "plusRectangle20"
@@ -1317,6 +1472,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case profileCircle20 = "profileCircle20"
     case profileCircle24 = "profileCircle24"
     case profileCircle32 = "profileCircle32"
+    case profileCircleFilled12 = "profileCircleFilled12"
+    case profileCircleFilled16 = "profileCircleFilled16"
+    case profileCircleFilled20 = "profileCircleFilled20"
+    case profileCircleFilled24 = "profileCircleFilled24"
+    case profileCircleFilled32 = "profileCircleFilled32"
     case profileFilled12 = "profileFilled12"
     case profileFilled16 = "profileFilled16"
     case profileFilled20 = "profileFilled20"
@@ -1332,6 +1492,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case questionCircle20 = "questionCircle20"
     case questionCircle24 = "questionCircle24"
     case questionCircle32 = "questionCircle32"
+    case questionCircleFilled12 = "questionCircleFilled12"
+    case questionCircleFilled16 = "questionCircleFilled16"
+    case questionCircleFilled20 = "questionCircleFilled20"
+    case questionCircleFilled24 = "questionCircleFilled24"
+    case questionCircleFilled32 = "questionCircleFilled32"
     case quoteLeft12 = "quoteLeft12"
     case quoteLeft16 = "quoteLeft16"
     case quoteLeft20 = "quoteLeft20"
@@ -1387,6 +1552,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case replyFilled20 = "replyFilled20"
     case replyFilled24 = "replyFilled24"
     case replyFilled32 = "replyFilled32"
+    case reviewBubble12 = "reviewBubble12"
+    case reviewBubble16 = "reviewBubble16"
+    case reviewBubble20 = "reviewBubble20"
+    case reviewBubble24 = "reviewBubble24"
+    case reviewBubble32 = "reviewBubble32"
     case rewardDiamond12 = "rewardDiamond12"
     case rewardDiamond16 = "rewardDiamond16"
     case rewardDiamond20 = "rewardDiamond20"
@@ -1577,6 +1747,16 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case stickerFilled20 = "stickerFilled20"
     case stickerFilled24 = "stickerFilled24"
     case stickerFilled32 = "stickerFilled32"
+    case stop12 = "stop12"
+    case stop16 = "stop16"
+    case stop20 = "stop20"
+    case stop24 = "stop24"
+    case stop32 = "stop32"
+    case stopFilled12 = "stopFilled12"
+    case stopFilled16 = "stopFilled16"
+    case stopFilled20 = "stopFilled20"
+    case stopFilled24 = "stopFilled24"
+    case stopFilled32 = "stopFilled32"
     case store16 = "store16"
     case store20 = "store20"
     case storefrontItem12 = "storefrontItem12"
@@ -1604,6 +1784,16 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case sunSize20 = "sunSize20"
     case sunSize24 = "sunSize24"
     case sunSize32 = "sunSize32"
+    case sword12 = "sword12"
+    case sword16 = "sword16"
+    case sword20 = "sword20"
+    case sword24 = "sword24"
+    case sword32 = "sword32"
+    case swordFilled12 = "swordFilled12"
+    case swordFilled16 = "swordFilled16"
+    case swordFilled20 = "swordFilled20"
+    case swordFilled24 = "swordFilled24"
+    case swordFilled32 = "swordFilled32"
     case swords12 = "swords12"
     case swords16 = "swords16"
     case swords20 = "swords20"
@@ -1629,6 +1819,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case tag20 = "tag20"
     case tag24 = "tag24"
     case tag32 = "tag32"
+    case tagFilled12 = "tagFilled12"
+    case tagFilled16 = "tagFilled16"
+    case tagFilled20 = "tagFilled20"
+    case tagFilled24 = "tagFilled24"
+    case tagFilled32 = "tagFilled32"
     case telegram12 = "telegram12"
     case telegram16 = "telegram16"
     case telegram20 = "telegram20"
@@ -1659,6 +1854,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case threeDotsCircle20 = "threeDotsCircle20"
     case threeDotsCircle24 = "threeDotsCircle24"
     case threeDotsCircle32 = "threeDotsCircle32"
+    case threeDotsCircleFilled12 = "threeDotsCircleFilled12"
+    case threeDotsCircleFilled16 = "threeDotsCircleFilled16"
+    case threeDotsCircleFilled20 = "threeDotsCircleFilled20"
+    case threeDotsCircleFilled24 = "threeDotsCircleFilled24"
+    case threeDotsCircleFilled32 = "threeDotsCircleFilled32"
     case threeDotsCircleSize12 = "threeDotsCircleSize12"
     case threeDotsCircleSize16 = "threeDotsCircleSize16"
     case threeDotsCircleSize20 = "threeDotsCircleSize20"
@@ -1696,14 +1896,24 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case thumbUpFilled32 = "thumbUpFilled32"
     case tikTok12 = "tikTok12"
     case tikTok16 = "tikTok16"
+    case tikTok20 = "tikTok20"
+    case tikTok24 = "tikTok24"
+    case tikTok32 = "tikTok32"
     case tikTokFilled12 = "tikTokFilled12"
+    case tikTokFilled16 = "tikTokFilled16"
+    case tikTokFilled20 = "tikTokFilled20"
     case tikTokFilled24 = "tikTokFilled24"
     case tikTokFilled32 = "tikTokFilled32"
+    case tiktok12 = "tiktok12"
+    case tiktok16 = "tiktok16"
     case tiktok20 = "tiktok20"
     case tiktok24 = "tiktok24"
     case tiktok32 = "tiktok32"
+    case tiktokFilled12 = "tiktokFilled12"
     case tiktokFilled16 = "tiktokFilled16"
     case tiktokFilled20 = "tiktokFilled20"
+    case tiktokFilled24 = "tiktokFilled24"
+    case tiktokFilled32 = "tiktokFilled32"
     case tiktokFilledSize12 = "tiktokFilledSize12"
     case tiktokFilledSize16 = "tiktokFilledSize16"
     case tiktokFilledSize20 = "tiktokFilledSize20"
@@ -1724,11 +1934,16 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case timeSkipRight20 = "timeSkipRight20"
     case timeSkipRight24 = "timeSkipRight24"
     case timeSkipRight32 = "timeSkipRight32"
+    case tradingView12 = "tradingView12"
+    case tradingView16 = "tradingView16"
     case tradingView20 = "tradingView20"
     case tradingView24 = "tradingView24"
     case tradingView32 = "tradingView32"
     case tradingview12 = "tradingview12"
     case tradingview16 = "tradingview16"
+    case tradingview20 = "tradingview20"
+    case tradingview24 = "tradingview24"
+    case tradingview32 = "tradingview32"
     case trash12 = "trash12"
     case trash16 = "trash16"
     case trash20 = "trash20"
@@ -1824,6 +2039,16 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case user20 = "user20"
     case user24 = "user24"
     case user32 = "user32"
+    case userFilled12 = "userFilled12"
+    case userFilled16 = "userFilled16"
+    case userFilled20 = "userFilled20"
+    case userFilled24 = "userFilled24"
+    case userFilled32 = "userFilled32"
+    case userSettings12 = "userSettings12"
+    case userSettings16 = "userSettings16"
+    case userSettings20 = "userSettings20"
+    case userSettings24 = "userSettings24"
+    case userSettings32 = "userSettings32"
     case verifiedCheck12 = "verifiedCheck12"
     case verifiedCheck16 = "verifiedCheck16"
     case verifiedCheck20 = "verifiedCheck20"
@@ -1906,11 +2131,21 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case xMark32 = "xMark32"
     case youTube12 = "youTube12"
     case youTube16 = "youTube16"
+    case youTube20 = "youTube20"
+    case youTube24 = "youTube24"
+    case youTube32 = "youTube32"
     case youTubeFilled12 = "youTubeFilled12"
     case youTubeFilled16 = "youTubeFilled16"
+    case youTubeFilled20 = "youTubeFilled20"
+    case youTubeFilled24 = "youTubeFilled24"
+    case youTubeFilled32 = "youTubeFilled32"
+    case youtube12 = "youtube12"
+    case youtube16 = "youtube16"
     case youtube20 = "youtube20"
     case youtube24 = "youtube24"
     case youtube32 = "youtube32"
+    case youtubeFilled12 = "youtubeFilled12"
+    case youtubeFilled16 = "youtubeFilled16"
     case youtubeFilled20 = "youtubeFilled20"
     case youtubeFilled24 = "youtubeFilled24"
     case youtubeFilled32 = "youtubeFilled32"
@@ -1940,12 +2175,36 @@ public extension UIImage {
 
 public extension FrostedIconSet {
 
+    static let addPhoto = FrostedIconSet(
+        size12: .addPhoto12,
+        size16: .addPhoto16,
+        size20: .addPhoto20,
+        size24: .addPhoto24,
+        size32: .addPhoto32
+    )
+
+    static let addPhotoFilled = FrostedIconSet(
+        size12: .addPhotoFilled12,
+        size16: .addPhotoFilled16,
+        size20: .addPhotoFilled20,
+        size24: .addPhotoFilled24,
+        size32: .addPhotoFilled32
+    )
+
     static let addUser = FrostedIconSet(
         size12: .addUser12,
         size16: .addUser16,
         size20: .addUser20,
         size24: .addUser24,
         size32: .addUser32
+    )
+
+    static let addUserFilled = FrostedIconSet(
+        size12: .addUserFilled12,
+        size16: .addUserFilled16,
+        size20: .addUserFilled20,
+        size24: .addUserFilled24,
+        size32: .addUserFilled32
     )
 
     static let alignCenter = FrostedIconSet(
@@ -2156,6 +2415,14 @@ public extension FrostedIconSet {
         size32: .ban32
     )
 
+    static let banFilled = FrostedIconSet(
+        size12: .banFilled12,
+        size16: .banFilled16,
+        size20: .banFilled20,
+        size24: .banFilled24,
+        size32: .banFilled32
+    )
+
     static let bank = FrostedIconSet(
         size12: .bank12,
         size16: .bank16,
@@ -2228,6 +2495,14 @@ public extension FrostedIconSet {
         size32: .bitcoin32
     )
 
+    static let bitcoinFilled = FrostedIconSet(
+        size12: .bitcoinFilled12,
+        size16: .bitcoinFilled16,
+        size20: .bitcoinFilled20,
+        size24: .bitcoinFilled24,
+        size32: .bitcoinFilled32
+    )
+
     static let bold = FrostedIconSet(
         size12: .bold12,
         size16: .bold16,
@@ -2252,12 +2527,36 @@ public extension FrostedIconSet {
         size32: .browser32
     )
 
+    static let brush = FrostedIconSet(
+        size12: .brush12,
+        size16: .brush16,
+        size20: .brush20,
+        size24: .brush24,
+        size32: .brush32
+    )
+
+    static let brushFilled = FrostedIconSet(
+        size12: .brushFilled12,
+        size16: .brushFilled16,
+        size20: .brushFilled20,
+        size24: .brushFilled24,
+        size32: .brushFilled32
+    )
+
     static let bulb = FrostedIconSet(
         size12: .bulb12,
         size16: .bulb16,
         size20: .bulb20,
         size24: .bulb24,
         size32: .bulb32
+    )
+
+    static let bulbFilled = FrostedIconSet(
+        size12: .bulbFilled12,
+        size16: .bulbFilled16,
+        size20: .bulbFilled20,
+        size24: .bulbFilled24,
+        size32: .bulbFilled32
     )
 
     static let burger = FrostedIconSet(
@@ -2444,6 +2743,22 @@ public extension FrostedIconSet {
         size32: .chevronUp32
     )
 
+    static let circle = FrostedIconSet(
+        size12: .circle12,
+        size16: .circle16,
+        size20: .circle20,
+        size24: .circle24,
+        size32: .circle32
+    )
+
+    static let circleFilled = FrostedIconSet(
+        size12: .circleFilled12,
+        size16: .circleFilled16,
+        size20: .circleFilled20,
+        size24: .circleFilled24,
+        size32: .circleFilled32
+    )
+
     static let clipboard = FrostedIconSet(
         size12: .clipboard12,
         size16: .clipboard16,
@@ -2508,6 +2823,14 @@ public extension FrostedIconSet {
         size32: .coinbase32
     )
 
+    static let coinbaseFillted = FrostedIconSet(
+        size12: .coinbaseFillted12,
+        size16: .coinbaseFillted16,
+        size20: .coinbaseFillted20,
+        size24: .coinbaseFillted24,
+        size32: .coinbaseFillted32
+    )
+
     static let collapseSidebar = FrostedIconSet(
         size12: .collapseSidebar12,
         size16: .collapseSidebar16,
@@ -2562,6 +2885,22 @@ public extension FrostedIconSet {
         size20: .compress20,
         size24: .compress24,
         size32: .compress32
+    )
+
+    static let controls = FrostedIconSet(
+        size12: .controls12,
+        size16: .controls16,
+        size20: .controls20,
+        size24: .controls24,
+        size32: .controls32
+    )
+
+    static let controlsFilled = FrostedIconSet(
+        size12: .controlsFilled12,
+        size16: .controlsFilled16,
+        size20: .controlsFilled20,
+        size24: .controlsFilled24,
+        size32: .controlsFilled32
     )
 
     static let converge = FrostedIconSet(
@@ -2796,6 +3135,14 @@ public extension FrostedIconSet {
         size32: .dollarSignSlashed32
     )
 
+    static let doubleChevron = FrostedIconSet(
+        size12: .doubleChevron12,
+        size16: .doubleChevron16,
+        size20: .doubleChevron20,
+        size24: .doubleChevron24,
+        size32: .doubleChevron32
+    )
+
     static let download = FrostedIconSet(
         size12: .download12,
         size16: .download16,
@@ -2890,6 +3237,14 @@ public extension FrostedIconSet {
         size20: .exclamationCircle20,
         size24: .exclamationCircle24,
         size32: .exclamationCircle32
+    )
+
+    static let exclamationCircleFilled = FrostedIconSet(
+        size12: .exclamationCircleFilled12,
+        size16: .exclamationCircleFilled16,
+        size20: .exclamationCircleFilled20,
+        size24: .exclamationCircleFilled24,
+        size32: .exclamationCircleFilled32
     )
 
     static let exclamationTriangle = FrostedIconSet(
@@ -2988,6 +3343,22 @@ public extension FrostedIconSet {
         size32: .filterDown32
     )
 
+    static let fire = FrostedIconSet(
+        size12: .fire12,
+        size16: .fire16,
+        size20: .fire20,
+        size24: .fire24,
+        size32: .fire32
+    )
+
+    static let fireFilled = FrostedIconSet(
+        size12: .fireFilled12,
+        size16: .fireFilled16,
+        size20: .fireFilled20,
+        size24: .fireFilled24,
+        size32: .fireFilled32
+    )
+
     static let flag = FrostedIconSet(
         size12: .flag12,
         size16: .flag16,
@@ -3044,6 +3415,14 @@ public extension FrostedIconSet {
         size32: .gear32
     )
 
+    static let gearFilled = FrostedIconSet(
+        size12: .gearFilled12,
+        size16: .gearFilled16,
+        size20: .gearFilled20,
+        size24: .gearFilled24,
+        size32: .gearFilled32
+    )
+
     static let gif = FrostedIconSet(
         size12: .gif12,
         size16: .gif16,
@@ -3076,6 +3455,14 @@ public extension FrostedIconSet {
         size32: .globe32
     )
 
+    static let globeFilled = FrostedIconSet(
+        size12: .globeFilled12,
+        size16: .globeFilled16,
+        size20: .globeFilled20,
+        size24: .globeFilled24,
+        size32: .globeFilled32
+    )
+
     static let globeInSquare = FrostedIconSet(
         size12: .globeInSquare12,
         size16: .globeInSquare16,
@@ -3098,6 +3485,14 @@ public extension FrostedIconSet {
         size20: .gridAdd20,
         size24: .gridAdd24,
         size32: .gridAdd32
+    )
+
+    static let gridFilled = FrostedIconSet(
+        size12: .gridFilled12,
+        size16: .gridFilled16,
+        size20: .gridFilled20,
+        size24: .gridFilled24,
+        size32: .gridFilled32
     )
 
     static let handWave = FrostedIconSet(
@@ -3146,6 +3541,14 @@ public extension FrostedIconSet {
         size20: .happyPlus20,
         size24: .happyPlus24,
         size32: .happyPlus32
+    )
+
+    static let happyPlusFilled = FrostedIconSet(
+        size12: .happyPlusFilled12,
+        size16: .happyPlusFilled16,
+        size20: .happyPlusFilled20,
+        size24: .happyPlusFilled24,
+        size32: .happyPlusFilled32
     )
 
     static let hashtag = FrostedIconSet(
@@ -3292,6 +3695,14 @@ public extension FrostedIconSet {
         size32: .infoSquare32
     )
 
+    static let infoSquareFilled = FrostedIconSet(
+        size12: .infoSquareFilled12,
+        size16: .infoSquareFilled16,
+        size20: .infoSquareFilled20,
+        size24: .infoSquareFilled24,
+        size32: .infoSquareFilled32
+    )
+
     static let information = FrostedIconSet(
         size12: .information12,
         size16: .information16,
@@ -3332,6 +3743,14 @@ public extension FrostedIconSet {
         size32: .k32
     )
 
+    static let language = FrostedIconSet(
+        size12: .language12,
+        size16: .language16,
+        size20: .language20,
+        size24: .language24,
+        size32: .language32
+    )
+
     static let leaf = FrostedIconSet(
         size12: .leaf12,
         size16: .leaf16,
@@ -3364,12 +3783,28 @@ public extension FrostedIconSet {
         size32: .lightsOff32
     )
 
+    static let lightsOffFilled = FrostedIconSet(
+        size12: .lightsOffFilled12,
+        size16: .lightsOffFilled16,
+        size20: .lightsOffFilled20,
+        size24: .lightsOffFilled24,
+        size32: .lightsOffFilled32
+    )
+
     static let lightsOn = FrostedIconSet(
         size12: .lightsOn12,
         size16: .lightsOn16,
         size20: .lightsOn20,
         size24: .lightsOn24,
         size32: .lightsOn32
+    )
+
+    static let lightsOnFilled = FrostedIconSet(
+        size12: .lightsOnFilled12,
+        size16: .lightsOnFilled16,
+        size20: .lightsOnFilled20,
+        size24: .lightsOnFilled24,
+        size32: .lightsOnFilled32
     )
 
     static let lilstNumber = FrostedIconSet(
@@ -3564,6 +3999,14 @@ public extension FrostedIconSet {
         size32: .megaphone32
     )
 
+    static let mention = FrostedIconSet(
+        size12: .mention12,
+        size16: .mention16,
+        size20: .mention20,
+        size24: .mention24,
+        size32: .mention32
+    )
+
     static let mentionFilled = FrostedIconSet(
         size12: .mentionFilled12,
         size16: .mentionFilled16,
@@ -3756,6 +4199,14 @@ public extension FrostedIconSet {
         size32: .palette32
     )
 
+    static let paperAirplane = FrostedIconSet(
+        size12: .paperAirplane12,
+        size16: .paperAirplane16,
+        size20: .paperAirplane20,
+        size24: .paperAirplane24,
+        size32: .paperAirplane32
+    )
+
     static let paperAirplaneFilled = FrostedIconSet(
         size12: .paperAirplaneFilled12,
         size16: .paperAirplaneFilled16,
@@ -3770,6 +4221,14 @@ public extension FrostedIconSet {
         size20: .paperAirplaneFilledUp20,
         size24: .paperAirplaneFilledUp24,
         size32: .paperAirplaneFilledUp32
+    )
+
+    static let paperAirplaneUp = FrostedIconSet(
+        size12: .paperAirplaneUp12,
+        size16: .paperAirplaneUp16,
+        size20: .paperAirplaneUp20,
+        size24: .paperAirplaneUp24,
+        size32: .paperAirplaneUp32
     )
 
     static let paperAirplaneUpFilled = FrostedIconSet(
@@ -3810,6 +4269,14 @@ public extension FrostedIconSet {
         size20: .pauseCircle20,
         size24: .pauseCircle24,
         size32: .pauseCircle32
+    )
+
+    static let pauseCircleFilled = FrostedIconSet(
+        size12: .pauseCircleFilled12,
+        size16: .pauseCircleFilled16,
+        size20: .pauseCircleFilled20,
+        size24: .pauseCircleFilled24,
+        size32: .pauseCircleFilled32
     )
 
     static let pauseFilled = FrostedIconSet(
@@ -3956,6 +4423,14 @@ public extension FrostedIconSet {
         size32: .playCircle32
     )
 
+    static let playCircleFilled = FrostedIconSet(
+        size12: .playCircleFilled12,
+        size16: .playCircleFilled16,
+        size20: .playCircleFilled20,
+        size24: .playCircleFilled24,
+        size32: .playCircleFilled32
+    )
+
     static let playFilled = FrostedIconSet(
         size12: .playFilled12,
         size16: .playFilled16,
@@ -3978,6 +4453,14 @@ public extension FrostedIconSet {
         size20: .plusCircle20,
         size24: .plusCircle24,
         size32: .plusCircle32
+    )
+
+    static let plusCircleFilled = FrostedIconSet(
+        size12: .plusCircleFilled12,
+        size16: .plusCircleFilled16,
+        size20: .plusCircleFilled20,
+        size24: .plusCircleFilled24,
+        size32: .plusCircleFilled32
     )
 
     static let plusRectangle = FrostedIconSet(
@@ -4004,6 +4487,14 @@ public extension FrostedIconSet {
         size32: .profileCircle32
     )
 
+    static let profileCircleFilled = FrostedIconSet(
+        size12: .profileCircleFilled12,
+        size16: .profileCircleFilled16,
+        size20: .profileCircleFilled20,
+        size24: .profileCircleFilled24,
+        size32: .profileCircleFilled32
+    )
+
     static let profileFilled = FrostedIconSet(
         size12: .profileFilled12,
         size16: .profileFilled16,
@@ -4026,6 +4517,14 @@ public extension FrostedIconSet {
         size20: .questionCircle20,
         size24: .questionCircle24,
         size32: .questionCircle32
+    )
+
+    static let questionCircleFilled = FrostedIconSet(
+        size12: .questionCircleFilled12,
+        size16: .questionCircleFilled16,
+        size20: .questionCircleFilled20,
+        size24: .questionCircleFilled24,
+        size32: .questionCircleFilled32
     )
 
     static let quoteLeft = FrostedIconSet(
@@ -4114,6 +4613,14 @@ public extension FrostedIconSet {
         size20: .replyFilled20,
         size24: .replyFilled24,
         size32: .replyFilled32
+    )
+
+    static let reviewBubble = FrostedIconSet(
+        size12: .reviewBubble12,
+        size16: .reviewBubble16,
+        size20: .reviewBubble20,
+        size24: .reviewBubble24,
+        size32: .reviewBubble32
     )
 
     static let rewardDiamond = FrostedIconSet(
@@ -4420,6 +4927,22 @@ public extension FrostedIconSet {
         size32: .stickerFilled32
     )
 
+    static let stop = FrostedIconSet(
+        size12: .stop12,
+        size16: .stop16,
+        size20: .stop20,
+        size24: .stop24,
+        size32: .stop32
+    )
+
+    static let stopFilled = FrostedIconSet(
+        size12: .stopFilled12,
+        size16: .stopFilled16,
+        size20: .stopFilled20,
+        size24: .stopFilled24,
+        size32: .stopFilled32
+    )
+
     static let storefrontItem = FrostedIconSet(
         size12: .storefrontItem12,
         size16: .storefrontItem16,
@@ -4460,6 +4983,22 @@ public extension FrostedIconSet {
         size32: .sunSize32
     )
 
+    static let sword = FrostedIconSet(
+        size12: .sword12,
+        size16: .sword16,
+        size20: .sword20,
+        size24: .sword24,
+        size32: .sword32
+    )
+
+    static let swordFilled = FrostedIconSet(
+        size12: .swordFilled12,
+        size16: .swordFilled16,
+        size20: .swordFilled20,
+        size24: .swordFilled24,
+        size32: .swordFilled32
+    )
+
     static let swords = FrostedIconSet(
         size12: .swords12,
         size16: .swords16,
@@ -4498,6 +5037,14 @@ public extension FrostedIconSet {
         size20: .tag20,
         size24: .tag24,
         size32: .tag32
+    )
+
+    static let tagFilled = FrostedIconSet(
+        size12: .tagFilled12,
+        size16: .tagFilled16,
+        size20: .tagFilled20,
+        size24: .tagFilled24,
+        size32: .tagFilled32
     )
 
     static let telegram = FrostedIconSet(
@@ -4546,6 +5093,14 @@ public extension FrostedIconSet {
         size20: .threeDotsCircle20,
         size24: .threeDotsCircle24,
         size32: .threeDotsCircle32
+    )
+
+    static let threeDotsCircleFilled = FrostedIconSet(
+        size12: .threeDotsCircleFilled12,
+        size16: .threeDotsCircleFilled16,
+        size20: .threeDotsCircleFilled20,
+        size24: .threeDotsCircleFilled24,
+        size32: .threeDotsCircleFilled32
     )
 
     static let threeDotsCircleSize = FrostedIconSet(
@@ -4604,6 +5159,38 @@ public extension FrostedIconSet {
         size32: .thumbUpFilled32
     )
 
+    static let tikTok = FrostedIconSet(
+        size12: .tikTok12,
+        size16: .tikTok16,
+        size20: .tikTok20,
+        size24: .tikTok24,
+        size32: .tikTok32
+    )
+
+    static let tikTokFilled = FrostedIconSet(
+        size12: .tikTokFilled12,
+        size16: .tikTokFilled16,
+        size20: .tikTokFilled20,
+        size24: .tikTokFilled24,
+        size32: .tikTokFilled32
+    )
+
+    static let tiktok = FrostedIconSet(
+        size12: .tiktok12,
+        size16: .tiktok16,
+        size20: .tiktok20,
+        size24: .tiktok24,
+        size32: .tiktok32
+    )
+
+    static let tiktokFilled = FrostedIconSet(
+        size12: .tiktokFilled12,
+        size16: .tiktokFilled16,
+        size20: .tiktokFilled20,
+        size24: .tiktokFilled24,
+        size32: .tiktokFilled32
+    )
+
     static let tiktokFilledSize = FrostedIconSet(
         size12: .tiktokFilledSize12,
         size16: .tiktokFilledSize16,
@@ -4634,6 +5221,22 @@ public extension FrostedIconSet {
         size20: .timeSkipRight20,
         size24: .timeSkipRight24,
         size32: .timeSkipRight32
+    )
+
+    static let tradingView = FrostedIconSet(
+        size12: .tradingView12,
+        size16: .tradingView16,
+        size20: .tradingView20,
+        size24: .tradingView24,
+        size32: .tradingView32
+    )
+
+    static let tradingview = FrostedIconSet(
+        size12: .tradingview12,
+        size16: .tradingview16,
+        size20: .tradingview20,
+        size24: .tradingview24,
+        size32: .tradingview32
     )
 
     static let trash = FrostedIconSet(
@@ -4788,6 +5391,22 @@ public extension FrostedIconSet {
         size32: .user32
     )
 
+    static let userFilled = FrostedIconSet(
+        size12: .userFilled12,
+        size16: .userFilled16,
+        size20: .userFilled20,
+        size24: .userFilled24,
+        size32: .userFilled32
+    )
+
+    static let userSettings = FrostedIconSet(
+        size12: .userSettings12,
+        size16: .userSettings16,
+        size20: .userSettings20,
+        size24: .userSettings24,
+        size32: .userSettings32
+    )
+
     static let verifiedCheck = FrostedIconSet(
         size12: .verifiedCheck12,
         size16: .verifiedCheck16,
@@ -4914,6 +5533,38 @@ public extension FrostedIconSet {
         size20: .xMark20,
         size24: .xMark24,
         size32: .xMark32
+    )
+
+    static let youTube = FrostedIconSet(
+        size12: .youTube12,
+        size16: .youTube16,
+        size20: .youTube20,
+        size24: .youTube24,
+        size32: .youTube32
+    )
+
+    static let youTubeFilled = FrostedIconSet(
+        size12: .youTubeFilled12,
+        size16: .youTubeFilled16,
+        size20: .youTubeFilled20,
+        size24: .youTubeFilled24,
+        size32: .youTubeFilled32
+    )
+
+    static let youtube = FrostedIconSet(
+        size12: .youtube12,
+        size16: .youtube16,
+        size20: .youtube20,
+        size24: .youtube24,
+        size32: .youtube32
+    )
+
+    static let youtubeFilled = FrostedIconSet(
+        size12: .youtubeFilled12,
+        size16: .youtubeFilled16,
+        size20: .youtubeFilled20,
+        size24: .youtubeFilled24,
+        size32: .youtubeFilled32
     )
 
     static let youtubeFilledSize = FrostedIconSet(
