@@ -29,7 +29,6 @@ jobs:
         with:
           node-version: 22.x
           check-latest: true
-          cache: pnpm
 
       - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
         env:
@@ -38,22 +37,21 @@ jobs:
       - name: Install generate-icon-lib
         run: pnpm add -g @whopio/generate-icon-lib
 
-      - name: Generate icons from Figma
+      - name: Generate icons from Figma and zip
         run: |
-          mkdir -p ./tmp-icons
-          cd ./tmp-icons
           generate-icon-lib --file=Qz3t7Yi565N2u4l3Ha1w99
+          cd ./icons && zip -r ../frosted-ui-icons.zip ./
         env:
           FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
 
       - name: Process icons into xcassets
-        run: bash ./bin/process_icons_to_xcassets.sh ./tmp-icons/icons
+        run: bash ./bin/generate_frosted_icons.sh ./frosted-ui-icons.zip
 
       - name: Clean up
-        run: rm -rf ./tmp-icons
+        run: rm -rf ./icons ./frosted-ui-icons.zip
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: update icons from Figma"
-          file_pattern: "Sources/FrostedUI/Resources/Icons.xcassets/**"
+          file_pattern: "Sources/FrostedUI/Resources/Icons.xcassets/** Sources/FrostedUI/Icons/**"
