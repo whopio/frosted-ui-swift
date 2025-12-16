@@ -10,6 +10,9 @@ concurrency:
   group: 'generate-icons'
   cancel-in-progress: false
 
+permissions:
+  contents: write
+
 jobs:
   generate-icons:
     name: Generate icons from Figma and commit
