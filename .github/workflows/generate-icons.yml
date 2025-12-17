@@ -109,14 +109,26 @@ jobs:
           done
           
           # === 2. Remove *-size-* suffix duplicates ===
-          # e.g., arrow-down-to-line-size-12.svg is duplicate of arrow-down-to-line-12.svg
+          # e.g., tiktok-size-12.svg should be removed if tik-tok-12.svg exists
+          # (they produce different imageset names but are semantically duplicates)
+          # Check by computing what the non-size imageset key would be
           for svg in *-size-*.svg; do
             [ -f "$svg" ] || continue
-            base_svg=$(echo "$svg" | sed 's/-size-/-/')
-            if [ -f "$base_svg" ]; then
-              echo "Removing Size suffix duplicate: $svg (base version $base_svg exists)"
-              rm -f "$svg"
-            fi
+            # Compute the imageset key for the base version (without -size-)
+            base_name=$(echo "$svg" | sed 's/-size-/-/')
+            base_key=$(get_imageset_key "$base_name")
+            
+            # Check if any remaining file produces this base key
+            for other in *.svg; do
+              [ "$other" = "$svg" ] && continue
+              [ -f "$other" ] || continue
+              other_key=$(get_imageset_key "$other")
+              if [ "$other_key" = "$base_key" ]; then
+                echo "Removing Size suffix duplicate: $svg (base key '$base_key' exists via $other)"
+                rm -f "$svg"
+                break
+              fi
+            done
           done
           
           echo "Re-creating zip..."
