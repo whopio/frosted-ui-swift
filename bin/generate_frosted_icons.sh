@@ -3,6 +3,10 @@
 # Download the frosted UI icons zip and copy all SVGs into
 # Sources/FrostedUI/Resources/Icons.xcassets, then
 # generate Swift enums/extensions for them.
+#
+# Usage:
+#   ./generate_frosted_icons.sh                    # Downloads from GitHub
+#   ./generate_frosted_icons.sh /path/to/icons.zip # Uses local zip file
 
 ZIP_URL="https://github.com/whopio/frosted-ui/raw/main/packages/frosted-ui-icons/frosted-ui-icons.zip"
 
@@ -17,12 +21,18 @@ TMP_DIR="$(mktemp -d)"
 ZIP_PATH="$TMP_DIR/frosted-ui-icons.zip"
 EXTRACT_PATH="$TMP_DIR/extracted"
 
-echo "Downloading frosted-ui-icons.zip from $ZIP_URL..."
-curl -L "$ZIP_URL" -o "$ZIP_PATH"
-if [ $? -ne 0 ]; then
-    echo "Failed to download frosted-ui-icons.zip. Exiting."
-    rm -rf "$TMP_DIR"
-    exit 1
+# Check if a local zip file was provided
+if [ -n "$1" ] && [ -f "$1" ]; then
+    echo "Using local zip file: $1"
+    cp "$1" "$ZIP_PATH"
+else
+    echo "Downloading frosted-ui-icons.zip from $ZIP_URL..."
+    curl -L "$ZIP_URL" -o "$ZIP_PATH"
+    if [ $? -ne 0 ]; then
+        echo "Failed to download frosted-ui-icons.zip. Exiting."
+        rm -rf "$TMP_DIR"
+        exit 1
+    fi
 fi
 
 echo "Extracting icons..."
@@ -77,8 +87,9 @@ find "$EXTRACT_PATH" -type f -name "*.svg" | while read -r svg; do
     # Ensure there is only a single SVG per imageset to avoid unassigned children
     rm -f "$imageset_dir"/*.svg
 
-    # Copy the SVG into the imageset folder
-    cp "$svg" "$imageset_dir/$filename"
+    # Copy the SVG into the imageset folder, truncating any garbage after </svg>
+    # (workaround for bug in generate-icon-lib that concatenates extra path data)
+    sed -n '1,/<\/svg>/p' "$svg" > "$imageset_dir/$filename"
 
     # Create Contents.json for this imageset
     cat > "$imageset_dir/Contents.json" <<EOT
@@ -114,8 +125,10 @@ if ! command -v svgo &> /dev/null; then
     fi
 fi
 
+# TODO: Some SVGs from Figma have malformed content that svgo can't parse.
+# Running with || true to skip errors for now. Fix the source SVGs in Figma.
 # Run svgo on all SVGs in the destination directory
-svgo -rf "$DEST_PATH"
+svgo -rf "$DEST_PATH" || true
 
 # Run the generate_icon_extensions.sh script
 ICON_EXT_SCRIPT="$SCRIPT_DIR/generate_icon_extensions.sh"
@@ -133,5 +146,3 @@ else
 fi
 
 echo "Done."
-
-
