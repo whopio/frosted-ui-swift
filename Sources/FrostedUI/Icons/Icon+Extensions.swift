@@ -1768,16 +1768,6 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case tikTokFilled20 = "tikTokFilled20"
     case tikTokFilled24 = "tikTokFilled24"
     case tikTokFilled32 = "tikTokFilled32"
-    case tiktokFilledSize12 = "tiktokFilledSize12"
-    case tiktokFilledSize16 = "tiktokFilledSize16"
-    case tiktokFilledSize20 = "tiktokFilledSize20"
-    case tiktokFilledSize24 = "tiktokFilledSize24"
-    case tiktokFilledSize32 = "tiktokFilledSize32"
-    case tiktokSize12 = "tiktokSize12"
-    case tiktokSize16 = "tiktokSize16"
-    case tiktokSize20 = "tiktokSize20"
-    case tiktokSize24 = "tiktokSize24"
-    case tiktokSize32 = "tiktokSize32"
     case timeSkipLeft12 = "timeSkipLeft12"
     case timeSkipLeft16 = "timeSkipLeft16"
     case timeSkipLeft20 = "timeSkipLeft20"
@@ -1968,16 +1958,6 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case youTubeFilled20 = "youTubeFilled20"
     case youTubeFilled24 = "youTubeFilled24"
     case youTubeFilled32 = "youTubeFilled32"
-    case youtubeFilledSize12 = "youtubeFilledSize12"
-    case youtubeFilledSize16 = "youtubeFilledSize16"
-    case youtubeFilledSize20 = "youtubeFilledSize20"
-    case youtubeFilledSize24 = "youtubeFilledSize24"
-    case youtubeFilledSize32 = "youtubeFilledSize32"
-    case youtubeSize12 = "youtubeSize12"
-    case youtubeSize16 = "youtubeSize16"
-    case youtubeSize20 = "youtubeSize20"
-    case youtubeSize24 = "youtubeSize24"
-    case youtubeSize32 = "youtubeSize32"
 }
 
 public extension Image {
@@ -4802,22 +4782,6 @@ public extension FrostedIconSet {
         size32: .tikTokFilled32
     )
 
-    static let tiktokFilledSize = FrostedIconSet(
-        size12: .tiktokFilledSize12,
-        size16: .tiktokFilledSize16,
-        size20: .tiktokFilledSize20,
-        size24: .tiktokFilledSize24,
-        size32: .tiktokFilledSize32
-    )
-
-    static let tiktokSize = FrostedIconSet(
-        size12: .tiktokSize12,
-        size16: .tiktokSize16,
-        size20: .tiktokSize20,
-        size24: .tiktokSize24,
-        size32: .tiktokSize32
-    )
-
     static let timeSkipLeft = FrostedIconSet(
         size12: .timeSkipLeft12,
         size16: .timeSkipLeft16,
@@ -5120,21 +5084,5 @@ public extension FrostedIconSet {
         size20: .youTubeFilled20,
         size24: .youTubeFilled24,
         size32: .youTubeFilled32
-    )
-
-    static let youtubeFilledSize = FrostedIconSet(
-        size12: .youtubeFilledSize12,
-        size16: .youtubeFilledSize16,
-        size20: .youtubeFilledSize20,
-        size24: .youtubeFilledSize24,
-        size32: .youtubeFilledSize32
-    )
-
-    static let youtubeSize = FrostedIconSet(
-        size12: .youtubeSize12,
-        size16: .youtubeSize16,
-        size20: .youtubeSize20,
-        size24: .youtubeSize24,
-        size32: .youtubeSize32
     )
 }
