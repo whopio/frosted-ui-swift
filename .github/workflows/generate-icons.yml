@@ -51,6 +51,70 @@ jobs:
         env:
           FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
 
+      - name: Deduplicate source SVGs in zip
+        run: |
+          set -euo pipefail
+          ZIP_PATH="frosted-ui/packages/frosted-ui-icons/frosted-ui-icons.zip"
+          TEMP_DIR=$(mktemp -d)
+          
+          echo "Extracting zip..."
+          unzip -q "$ZIP_PATH" -d "$TEMP_DIR"
+          
+          cd "$TEMP_DIR"
+          
+          # === 1. Remove case-insensitive duplicates ===
+          # e.g., tik-tok-12.svg vs tiktok-12.svg -> keep the hyphenated one (more chars)
+          declare -A seen
+          declare -A to_keep
+          
+          for svg in *.svg; do
+            [ -f "$svg" ] || continue
+            lower=$(echo "$svg" | tr '[:upper:]' '[:lower:]')
+            
+            if [ -z "${seen[$lower]:-}" ]; then
+              seen[$lower]="$svg"
+              to_keep[$lower]="$svg"
+            else
+              existing="${to_keep[$lower]}"
+              # Keep the longer filename (hyphenated version has more chars)
+              if [ ${#svg} -gt ${#existing} ]; then
+                to_keep[$lower]="$svg"
+              fi
+              seen[$lower]="${seen[$lower]}:$svg"
+            fi
+          done
+          
+          for lower in "${!seen[@]}"; do
+            IFS=':' read -ra files <<< "${seen[$lower]}"
+            keep="${to_keep[$lower]}"
+            for f in "${files[@]}"; do
+              if [ "$f" != "$keep" ] && [ -f "$f" ]; then
+                echo "Removing case-variant duplicate: $f (keeping $keep)"
+                rm -f "$f"
+              fi
+            done
+          done
+          
+          # === 2. Remove *-size-* suffix duplicates ===
+          # e.g., arrow-down-to-line-size-12.svg is duplicate of arrow-down-to-line-12.svg
+          for svg in *-size-*.svg; do
+            [ -f "$svg" ] || continue
+            # Remove "-size" from the name to get the base version
+            base_svg=$(echo "$svg" | sed 's/-size-/-/')
+            if [ -f "$base_svg" ]; then
+              echo "Removing Size suffix duplicate: $svg (base version $base_svg exists)"
+              rm -f "$svg"
+            fi
+          done
+          
+          echo "Re-creating zip..."
+          cd "$TEMP_DIR"
+          rm -f "$GITHUB_WORKSPACE/$ZIP_PATH"
+          zip -q "$GITHUB_WORKSPACE/$ZIP_PATH" *.svg
+          
+          rm -rf "$TEMP_DIR"
+          echo "Deduplication complete."
+
       - name: Clear existing generated icons
         run: |
           set -euo pipefail
@@ -67,58 +131,6 @@ jobs:
 
       - name: Process icons into xcassets
         run: bash ./bin/generate_frosted_icons.sh $GITHUB_WORKSPACE/frosted-ui/packages/frosted-ui-icons/frosted-ui-icons.zip
-        working-directory: ./swift-repo
-
-      - name: Remove case-insensitive duplicate imagesets
-        run: |
-          set -euo pipefail
-          cd "Sources/FrostedUI/Resources/Icons.xcassets"
-
-          # On Linux (case-sensitive), both tikTok12.imageset and tiktok12.imageset can exist.
-          # On macOS (case-insensitive), they collide and cause Git conflicts.
-          # Detect duplicates by grouping imagesets by their lowercase name.
-          # Keep the one with more uppercase chars (camelCase), remove the rest.
-
-          declare -A seen
-          declare -A to_keep
-
-          for dir in *.imageset; do
-            [ -d "$dir" ] || continue
-            lower=$(echo "$dir" | tr '[:upper:]' '[:lower:]')
-            
-            if [ -z "${seen[$lower]:-}" ]; then
-              seen[$lower]="$dir"
-              to_keep[$lower]="$dir"
-            else
-              # Collision detected - compare uppercase char counts
-              existing="${to_keep[$lower]}"
-              existing_upper=$(echo "$existing" | tr -cd '[:upper:]' | wc -c)
-              current_upper=$(echo "$dir" | tr -cd '[:upper:]' | wc -c)
-              
-              if [ "$current_upper" -gt "$existing_upper" ]; then
-                # Current has more uppercase, keep it, mark existing for removal
-                to_keep[$lower]="$dir"
-                seen[$lower]="${seen[$lower]}:$dir"
-              else
-                # Existing has more (or equal), keep existing
-                seen[$lower]="${seen[$lower]}:$dir"
-              fi
-            fi
-          done
-
-          # Remove duplicates (all entries in seen that aren't in to_keep)
-          for lower in "${!seen[@]}"; do
-            IFS=':' read -ra dirs <<< "${seen[$lower]}"
-            keep="${to_keep[$lower]}"
-            for dir in "${dirs[@]}"; do
-              if [ "$dir" != "$keep" ] && [ -d "$dir" ]; then
-                echo "Removing case-variant duplicate: $dir (keeping $keep)"
-                rm -rf "$dir"
-              fi
-            done
-          done
-
-          echo "Case-insensitive deduplication complete."
         working-directory: ./swift-repo
 
       - name: Commit changes
