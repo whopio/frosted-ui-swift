@@ -51,6 +51,20 @@ jobs:
         env:
           FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
 
+      - name: Clear existing generated icons
+        run: |
+          set -euo pipefail
+
+          # Clear generated asset contents (preserve the asset catalog root Contents.json if present)
+          if [ -d "Sources/FrostedUI/Resources/Icons.xcassets" ]; then
+            find "Sources/FrostedUI/Resources/Icons.xcassets" -mindepth 1 -maxdepth 1 ! -name "Contents.json" -exec rm -rf {} +
+          fi
+
+          # Clear generated Swift icon files
+          rm -rf "Sources/FrostedUI/Icons"
+          mkdir -p "Sources/FrostedUI/Icons"
+        working-directory: ./swift-repo
+
       - name: Process icons into xcassets
         run: bash ./bin/generate_frosted_icons.sh $GITHUB_WORKSPACE/frosted-ui/packages/frosted-ui-icons/frosted-ui-icons.zip
         working-directory: ./swift-repo
