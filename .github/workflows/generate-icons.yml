@@ -69,6 +69,58 @@ jobs:
         run: bash ./bin/generate_frosted_icons.sh $GITHUB_WORKSPACE/frosted-ui/packages/frosted-ui-icons/frosted-ui-icons.zip
         working-directory: ./swift-repo
 
+      - name: Remove case-insensitive duplicate imagesets
+        run: |
+          set -euo pipefail
+          cd "Sources/FrostedUI/Resources/Icons.xcassets"
+
+          # On Linux (case-sensitive), both tikTok12.imageset and tiktok12.imageset can exist.
+          # On macOS (case-insensitive), they collide and cause Git conflicts.
+          # Detect duplicates by grouping imagesets by their lowercase name.
+          # Keep the one with more uppercase chars (camelCase), remove the rest.
+
+          declare -A seen
+          declare -A to_keep
+
+          for dir in *.imageset; do
+            [ -d "$dir" ] || continue
+            lower=$(echo "$dir" | tr '[:upper:]' '[:lower:]')
+            
+            if [ -z "${seen[$lower]:-}" ]; then
+              seen[$lower]="$dir"
+              to_keep[$lower]="$dir"
+            else
+              # Collision detected - compare uppercase char counts
+              existing="${to_keep[$lower]}"
+              existing_upper=$(echo "$existing" | tr -cd '[:upper:]' | wc -c)
+              current_upper=$(echo "$dir" | tr -cd '[:upper:]' | wc -c)
+              
+              if [ "$current_upper" -gt "$existing_upper" ]; then
+                # Current has more uppercase, keep it, mark existing for removal
+                to_keep[$lower]="$dir"
+                seen[$lower]="${seen[$lower]}:$dir"
+              else
+                # Existing has more (or equal), keep existing
+                seen[$lower]="${seen[$lower]}:$dir"
+              fi
+            fi
+          done
+
+          # Remove duplicates (all entries in seen that aren't in to_keep)
+          for lower in "${!seen[@]}"; do
+            IFS=':' read -ra dirs <<< "${seen[$lower]}"
+            keep="${to_keep[$lower]}"
+            for dir in "${dirs[@]}"; do
+              if [ "$dir" != "$keep" ] && [ -d "$dir" ]; then
+                echo "Removing case-variant duplicate: $dir (keeping $keep)"
+                rm -rf "$dir"
+              fi
+            done
+          done
+
+          echo "Case-insensitive deduplication complete."
+        working-directory: ./swift-repo
+
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
