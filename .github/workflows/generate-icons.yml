@@ -62,34 +62,47 @@ jobs:
           
           cd "$TEMP_DIR"
           
-          # === 1. Remove case-insensitive duplicates ===
-          # e.g., tik-tok-12.svg vs tiktok-12.svg -> keep the hyphenated one (more chars)
+          # Function to compute imageset name from SVG filename
+          # e.g., tik-tok-12.svg -> tiktok12 (lowercase for comparison)
+          get_imageset_key() {
+            local svg="$1"
+            local name="${svg%.svg}"           # remove .svg
+            local size="${name##*-}"           # extract size (last segment after -)
+            local base="${name%-*}"            # remove size suffix
+            # Convert kebab-case to camelCase, then lowercase for comparison
+            local camel=$(echo "$base" | awk -F'-' '{ for (i=1;i<=NF;i++) { if (i==1) printf "%s", $i; else printf "%s%s", toupper(substr($i,1,1)), substr($i,2); } }')
+            echo "${camel}${size}" | tr '[:upper:]' '[:lower:]'
+          }
+          
+          # === 1. Remove duplicates that produce same imageset name ===
+          # e.g., tik-tok-12.svg -> tikTok12, tiktok-12.svg -> tiktok12
+          # Both lowercase to tiktok12, so they're duplicates on case-insensitive FS
           declare -A seen
           declare -A to_keep
           
           for svg in *.svg; do
             [ -f "$svg" ] || continue
-            lower=$(echo "$svg" | tr '[:upper:]' '[:lower:]')
+            key=$(get_imageset_key "$svg")
             
-            if [ -z "${seen[$lower]:-}" ]; then
-              seen[$lower]="$svg"
-              to_keep[$lower]="$svg"
+            if [ -z "${seen[$key]:-}" ]; then
+              seen[$key]="$svg"
+              to_keep[$key]="$svg"
             else
-              existing="${to_keep[$lower]}"
-              # Keep the longer filename (hyphenated version has more chars)
+              existing="${to_keep[$key]}"
+              # Keep the longer filename (more hyphens = more specific naming)
               if [ ${#svg} -gt ${#existing} ]; then
-                to_keep[$lower]="$svg"
+                to_keep[$key]="$svg"
               fi
-              seen[$lower]="${seen[$lower]}:$svg"
+              seen[$key]="${seen[$key]}:$svg"
             fi
           done
           
-          for lower in "${!seen[@]}"; do
-            IFS=':' read -ra files <<< "${seen[$lower]}"
-            keep="${to_keep[$lower]}"
+          for key in "${!seen[@]}"; do
+            IFS=':' read -ra files <<< "${seen[$key]}"
+            keep="${to_keep[$key]}"
             for f in "${files[@]}"; do
               if [ "$f" != "$keep" ] && [ -f "$f" ]; then
-                echo "Removing case-variant duplicate: $f (keeping $keep)"
+                echo "Removing duplicate: $f (keeping $keep, both map to imageset '$key')"
                 rm -f "$f"
               fi
             done
@@ -99,7 +112,6 @@ jobs:
           # e.g., arrow-down-to-line-size-12.svg is duplicate of arrow-down-to-line-12.svg
           for svg in *-size-*.svg; do
             [ -f "$svg" ] || continue
-            # Remove "-size" from the name to get the base version
             base_svg=$(echo "$svg" | sed 's/-size-/-/')
             if [ -f "$base_svg" ]; then
               echo "Removing Size suffix duplicate: $svg (base version $base_svg exists)"
@@ -108,7 +120,6 @@ jobs:
           done
           
           echo "Re-creating zip..."
-          cd "$TEMP_DIR"
           rm -f "$GITHUB_WORKSPACE/$ZIP_PATH"
           zip -q "$GITHUB_WORKSPACE/$ZIP_PATH" *.svg
           
