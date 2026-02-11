@@ -16,6 +16,22 @@ public struct FrostedTheme {
     public let info: FrostedTint
     public let success: FrostedTint
     public let warning: FrostedTint
+    
+    public init(
+        accent: FrostedTint = .blue,
+        neutral: FrostedTint = .gray,
+        danger: FrostedTint = .red,
+        info: FrostedTint = .sky,
+        success: FrostedTint = .green,
+        warning: FrostedTint = .amber
+    ) {
+        self.accent = accent
+        self.neutral = neutral
+        self.danger = danger
+        self.info = info
+        self.success = success
+        self.warning = warning
+    }
 
     public static let `default` = FrostedTheme(
         accent: .blue,
