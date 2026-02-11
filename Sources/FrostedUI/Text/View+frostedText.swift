@@ -84,7 +84,7 @@ private extension FrostedTextWeight {
 }
 
 public extension Text {
-    private func frostedText(
+    func frostedText(
         size: FrostedTextSize = .two,
         weight: FrostedTextWeight = .regular,
         rawColor: Color,
