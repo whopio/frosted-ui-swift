@@ -22,8 +22,8 @@ public enum FrostedTextSize: CaseIterable {
         case .five: 20
         case .six: 24
         case .seven: 28
-        case .eight: 35
-        case .nine: 60
+        case .eight: 32
+        case .nine: 40
         }
     }
 
