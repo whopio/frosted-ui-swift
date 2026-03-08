@@ -22,8 +22,8 @@ public enum FrostedTextSize: CaseIterable {
         case .five: 20
         case .six: 24
         case .seven: 28
-        case .eight: 35
-        case .nine: 60
+        case .eight: 32
+        case .nine: 40
         }
     }
 
@@ -63,6 +63,48 @@ public enum FrostedTextSize: CaseIterable {
     }
 }
 
+public enum FrostedHeadingSize: CaseIterable {
+    case one
+    case two
+    case three
+    case four
+    case five
+
+    var fontSize: CGFloat {
+        switch self {
+        case .one: 24
+        case .two: 32
+        case .three: 40
+        case .four: 48
+        case .five: 64
+        }
+    }
+
+    var letterSpacing: CGFloat {
+        switch self {
+        case .one: fontSize * -0.00625
+        case .two: fontSize * -0.01
+        case .three: fontSize * -0.025
+        case .four: fontSize * -0.03
+        case .five: fontSize * -0.035
+        }
+    }
+
+    var lineHeight: CGFloat {
+        switch self {
+        case .one: 30
+        case .two: 40
+        case .three: 48
+        case .four: 56
+        case .five: 72
+        }
+    }
+
+    var lineSpacing: CGFloat {
+        max(0, lineHeight - fontSize)
+    }
+}
+
 public enum FrostedTextWeight: CaseIterable {
     case light
     case regular
@@ -71,7 +113,7 @@ public enum FrostedTextWeight: CaseIterable {
     case bold
 }
 
-private extension FrostedTextWeight {
+extension FrostedTextWeight {
     var fontWeight: Font.Weight {
         switch self {
         case .light: .light
@@ -155,6 +197,72 @@ public extension Text {
                 trim: trim
             )
         }
+    }
+}
+
+public extension Text {
+    func frostedHeading(
+        size: FrostedHeadingSize = .one,
+        weight: FrostedTextWeight = .bold,
+        rawColor: Color,
+        trim: Bool = false
+    ) -> some View {
+        font(.system(size: size.fontSize, weight: weight.fontWeight))
+            .tracking(size.letterSpacing)
+            .lineSpacing(trim ? 0 : size.lineSpacing)
+            .foregroundColor(rawColor)
+    }
+
+    func frostedHeading(
+        size: FrostedHeadingSize = .one,
+        weight: FrostedTextWeight = .bold,
+        color: FrostedColor,
+        trim: Bool = false
+    ) -> some View {
+        frostedHeading(
+            size: size,
+            weight: weight,
+            rawColor: Color(color),
+            trim: trim
+        )
+    }
+
+    func frostedHeading(
+        size: FrostedHeadingSize = .one,
+        weight: FrostedTextWeight = .bold,
+        trim: Bool = false
+    ) -> some View {
+        ThemeProvider { theme in
+            frostedHeading(
+                size: size,
+                weight: weight,
+                rawColor: theme.neutral.twelve,
+                trim: trim
+            )
+        }
+    }
+
+    func frostedHeading(
+        size: FrostedHeadingSize = .one,
+        weight: FrostedTextWeight = .bold,
+        semantic: FrostedSemantic,
+        trim: Bool = false
+    ) -> some View {
+        ThemeProvider { theme in
+            frostedHeading(
+                size: size,
+                weight: weight,
+                rawColor: theme.tint(for: semantic).nine,
+                trim: trim
+            )
+        }
+    }
+}
+
+#Preview("Heading") {
+    ForEach(FrostedHeadingSize.allCases, id: \.self) { size in
+        Text("Heading")
+            .frostedHeading(size: size)
     }
 }
 
