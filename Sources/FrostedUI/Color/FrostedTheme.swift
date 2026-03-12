@@ -9,7 +9,7 @@ public enum FrostedSemantic: CaseIterable {
     case warning
 }
 
-public struct FrostedTheme {
+public struct FrostedTheme: Equatable {
     public let accent: FrostedTint
     public let neutral: FrostedTint
     public let danger: FrostedTint

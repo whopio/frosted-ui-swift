@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct FrostedTint {
+public struct FrostedTint: Equatable {
     public let one: Color
     public let two: Color
     public let three: Color
