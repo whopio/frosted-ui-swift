@@ -16,8 +16,6 @@ public struct AIBallView: View {
     public var body: some View {
         ZStack {
             purpleCore
-                .rotationEffect(.degrees(phase3 ? 6 : -6))
-                .scaleEffect(phase1 ? 1.04 : 0.96)
 
             Group {
                 glowingShape1
@@ -26,23 +24,23 @@ public struct AIBallView: View {
 
                 glowingShape4
             }
-            .rotationEffect(.degrees(phase1 ? 8 : -8))
-            .scaleEffect(phase2 ? 1.05 : 0.95)
+            .rotationEffect(.degrees(animated ? (phase1 ? 8 : -8) : 0))
+            .scaleEffect(animated ? (phase2 ? 1.05 : 0.95) : 1)
 
             glowingShape2
-                .rotationEffect(.degrees(phase2 ? -10 : 10))
-                .scaleEffect(phase1 ? 0.95 : 1.05)
+                .rotationEffect(.degrees(animated ? (phase2 ? -10 : 10) : 0))
+                .scaleEffect(animated ? (phase1 ? 0.95 : 1.05) : 1)
 
             topRightLight
                 .offset(
-                    x: (phase2 ? 3 : 1) * size / 16,
-                    y: (phase3 ? -3 : -5) * size / 16
+                    x: (animated ? (phase2 ? 3 : 1) : 2) * size / 16,
+                    y: (animated ? (phase3 ? -3 : -5) : -4) * size / 16
                 )
-                .scaleEffect(phase1 ? 1.1 : 0.9)
+                .scaleEffect(animated ? (phase1 ? 1.1 : 0.9) : 1)
 
             centerLight
-                .scaleEffect(phase3 ? 1.08 : 0.92)
-                .opacity(phase2 ? 0.9 : 0.7)
+                .scaleEffect(animated ? (phase3 ? 1.08 : 0.92) : 1)
+                .opacity(animated ? (phase2 ? 0.9 : 0.7) : 0.8)
         }
         .onAppear {
             guard animated else { return }
