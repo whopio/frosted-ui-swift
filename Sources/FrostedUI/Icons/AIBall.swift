@@ -2,26 +2,59 @@ import SwiftUI
 
 public struct AIBallView: View {
     let size: CGFloat
+    let animated: Bool
 
-    public init(size: CGFloat) {
+    @State private var phase1 = false
+    @State private var phase2 = false
+    @State private var phase3 = false
+
+    public init(size: CGFloat, animated: Bool = false) {
         self.size = size
+        self.animated = animated
     }
 
     public var body: some View {
         ZStack {
             purpleCore
+                .rotationEffect(.degrees(phase3 ? 6 : -6))
+                .scaleEffect(phase1 ? 1.04 : 0.96)
 
-            glowingShape1
+            Group {
+                glowingShape1
+
+                glowingShape3
+
+                glowingShape4
+            }
+            .rotationEffect(.degrees(phase1 ? 8 : -8))
+            .scaleEffect(phase2 ? 1.05 : 0.95)
 
             glowingShape2
-
-            glowingShape3
-
-            glowingShape4
+                .rotationEffect(.degrees(phase2 ? -10 : 10))
+                .scaleEffect(phase1 ? 0.95 : 1.05)
 
             topRightLight
+                .offset(
+                    x: (phase2 ? 3 : 1) * size / 16,
+                    y: (phase3 ? -3 : -5) * size / 16
+                )
+                .scaleEffect(phase1 ? 1.1 : 0.9)
 
             centerLight
+                .scaleEffect(phase3 ? 1.08 : 0.92)
+                .opacity(phase2 ? 0.9 : 0.7)
+        }
+        .onAppear {
+            guard animated else { return }
+            withAnimation(.easeInOut(duration: 3.0).repeatForever(autoreverses: true)) {
+                phase1 = true
+            }
+            withAnimation(.easeInOut(duration: 3.7).repeatForever(autoreverses: true)) {
+                phase2 = true
+            }
+            withAnimation(.easeInOut(duration: 4.3).repeatForever(autoreverses: true)) {
+                phase3 = true
+            }
         }
         .clipShape(.circle)
         // inner shadow
@@ -206,11 +239,9 @@ struct Blob3: Shape {
     }
 }
 
-#Preview {
+#Preview("Static") {
     HStack(spacing: 0) {
         VStack(spacing: 40) {
-            AIBallView(size: 200)
-
             AIBallView(size: 100)
 
             AIBallView(size: 50)
@@ -221,13 +252,35 @@ struct Blob3: Shape {
         .background(.white)
 
         VStack(spacing: 40) {
-            AIBallView(size: 200)
-
             AIBallView(size: 100)
 
             AIBallView(size: 50)
 
             AIBallView(size: 16)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.black)
+    }
+}
+
+#Preview("Animated") {
+    HStack(spacing: 0) {
+        VStack(spacing: 40) {
+            AIBallView(size: 100, animated: true)
+
+            AIBallView(size: 50, animated: true)
+
+            AIBallView(size: 16, animated: true)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.white)
+
+        VStack(spacing: 40) {
+            AIBallView(size: 100, animated: true)
+
+            AIBallView(size: 50, animated: true)
+
+            AIBallView(size: 16, animated: true)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.black)
