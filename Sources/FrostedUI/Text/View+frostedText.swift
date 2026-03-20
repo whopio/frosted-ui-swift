@@ -1,5 +1,5 @@
-import UIKit
 import SwiftUI
+import UIKit
 
 public enum FrostedTextSize: CaseIterable {
     case zero
@@ -45,7 +45,7 @@ public enum FrostedTextSize: CaseIterable {
 
     var lineHeight: CGFloat {
         switch self {
-        case .zero: 14
+        case .zero: 12
         case .one: 16
         case .two: 20
         case .three: 24
@@ -294,7 +294,11 @@ public extension Text {
             Text("The quick brown fox jumps over the lazy dog.")
                 .frostedText(size: size)
                 .frame(width: 200, alignment: .leading)
-                .border(.red)
+                .lineLimit(2)
+                .overlay {
+                    Rectangle()
+                        .stroke(.red)
+                }
         }
     }
 }
