@@ -58,18 +58,36 @@ public enum FrostedTextSize: CaseIterable {
         }
     }
 
-    /// The font's actual intrinsic line height (ascender + descender + leading).
+    private static let fontLineHeight0 = UIFont.systemFont(ofSize: 10).lineHeight
+    private static let fontLineHeight1 = UIFont.systemFont(ofSize: 12).lineHeight
+    private static let fontLineHeight2 = UIFont.systemFont(ofSize: 14).lineHeight
+    private static let fontLineHeight3 = UIFont.systemFont(ofSize: 16).lineHeight
+    private static let fontLineHeight4 = UIFont.systemFont(ofSize: 18).lineHeight
+    private static let fontLineHeight5 = UIFont.systemFont(ofSize: 20).lineHeight
+    private static let fontLineHeight6 = UIFont.systemFont(ofSize: 24).lineHeight
+    private static let fontLineHeight7 = UIFont.systemFont(ofSize: 28).lineHeight
+    private static let fontLineHeight8 = UIFont.systemFont(ofSize: 35).lineHeight
+    private static let fontLineHeight9 = UIFont.systemFont(ofSize: 60).lineHeight
+
     var fontLineHeight: CGFloat {
-        UIFont.systemFont(ofSize: fontSize).lineHeight
+        switch self {
+        case .zero: Self.fontLineHeight0
+        case .one: Self.fontLineHeight1
+        case .two: Self.fontLineHeight2
+        case .three: Self.fontLineHeight3
+        case .four: Self.fontLineHeight4
+        case .five: Self.fontLineHeight5
+        case .six: Self.fontLineHeight6
+        case .seven: Self.fontLineHeight7
+        case .eight: Self.fontLineHeight8
+        case .nine: Self.fontLineHeight9
+        }
     }
 
-    /// Extra spacing between lines to match the target line height.
     var lineSpacing: CGFloat {
         lineHeight - fontLineHeight
     }
 
-    /// Vertical padding to match CSS line-height box model.
-    /// CSS distributes extra space as half-leading above and below; SwiftUI does not.
     var verticalPadding: CGFloat {
         (lineHeight - fontLineHeight) / 2
     }
@@ -112,8 +130,20 @@ public enum FrostedHeadingSize: CaseIterable {
         }
     }
 
+    private static let fontLineHeight1 = UIFont.systemFont(ofSize: 24).lineHeight
+    private static let fontLineHeight2 = UIFont.systemFont(ofSize: 32).lineHeight
+    private static let fontLineHeight3 = UIFont.systemFont(ofSize: 40).lineHeight
+    private static let fontLineHeight4 = UIFont.systemFont(ofSize: 48).lineHeight
+    private static let fontLineHeight5 = UIFont.systemFont(ofSize: 64).lineHeight
+
     var fontLineHeight: CGFloat {
-        UIFont.systemFont(ofSize: fontSize).lineHeight
+        switch self {
+        case .one: Self.fontLineHeight1
+        case .two: Self.fontLineHeight2
+        case .three: Self.fontLineHeight3
+        case .four: Self.fontLineHeight4
+        case .five: Self.fontLineHeight5
+        }
     }
 
     var lineSpacing: CGFloat {
