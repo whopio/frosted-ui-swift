@@ -1,3 +1,4 @@
+import UIKit
 import SwiftUI
 
 public enum FrostedTextSize: CaseIterable {
@@ -22,8 +23,8 @@ public enum FrostedTextSize: CaseIterable {
         case .five: 20
         case .six: 24
         case .seven: 28
-        case .eight: 32
-        case .nine: 40
+        case .eight: 35
+        case .nine: 60
         }
     }
 
@@ -57,9 +58,20 @@ public enum FrostedTextSize: CaseIterable {
         }
     }
 
-    /// Extra spacing to reach the desired line height (lineHeight - fontSize).
+    /// The font's actual intrinsic line height (ascender + descender + leading).
+    var fontLineHeight: CGFloat {
+        UIFont.systemFont(ofSize: fontSize).lineHeight
+    }
+
+    /// Extra spacing between lines to match the target line height.
     var lineSpacing: CGFloat {
-        max(0, lineHeight - fontSize)
+        lineHeight - fontLineHeight
+    }
+
+    /// Vertical padding to match CSS line-height box model.
+    /// CSS distributes extra space as half-leading above and below; SwiftUI does not.
+    var verticalPadding: CGFloat {
+        (lineHeight - fontLineHeight) / 2
     }
 }
 
@@ -100,8 +112,16 @@ public enum FrostedHeadingSize: CaseIterable {
         }
     }
 
+    var fontLineHeight: CGFloat {
+        UIFont.systemFont(ofSize: fontSize).lineHeight
+    }
+
     var lineSpacing: CGFloat {
-        max(0, lineHeight - fontSize)
+        lineHeight - fontLineHeight
+    }
+
+    var verticalPadding: CGFloat {
+        (lineHeight - fontLineHeight) / 2
     }
 }
 
@@ -135,9 +155,10 @@ public extension Text {
         font(.system(size: size.fontSize, weight: weight.fontWeight))
             .tracking(size.letterSpacing)
             .lineSpacing(trim ? 0 : size.lineSpacing)
+            .padding(.vertical, trim ? 0 : size.verticalPadding)
             .foregroundColor(rawColor)
     }
-    
+
     func frostedText(
         size: FrostedTextSize = .two,
         weight: FrostedTextWeight = .regular,
@@ -210,6 +231,7 @@ public extension Text {
         font(.system(size: size.fontSize, weight: weight.fontWeight))
             .tracking(size.letterSpacing)
             .lineSpacing(trim ? 0 : size.lineSpacing)
+            .padding(.vertical, trim ? 0 : size.verticalPadding)
             .foregroundColor(rawColor)
     }
 
@@ -267,9 +289,13 @@ public extension Text {
 }
 
 #Preview("Size") {
-    ForEach(FrostedTextSize.allCases, id: \.self) { size in
-        Text("The quick brown fox jumps over the lazy dog.")
-            .frostedText(size: size)
+    VStack(spacing: 12) {
+        ForEach(FrostedTextSize.allCases, id: \.self) { size in
+            Text("The quick brown fox jumps over the lazy dog.")
+                .frostedText(size: size)
+                .frame(width: 200, alignment: .leading)
+                .border(.red)
+        }
     }
 }
 
@@ -283,13 +309,13 @@ public extension Text {
 #Preview("Color") {
     Text("The quick brown fox jumps over the lazy dog.")
         .frostedText(color: .frostedGreen9)
-    
+
     Text("The quick brown fox jumps over the lazy dog.")
         .frostedText(color: .frostedRed9)
-    
+
     Text("The quick brown fox jumps over the lazy dog.")
         .frostedText(color: .frostedBlue9)
-    
+
     Text("The quick brown fox jumps over the lazy dog.")
         .frostedText(semantic: .danger)
 }
