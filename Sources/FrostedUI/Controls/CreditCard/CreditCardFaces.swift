@@ -215,7 +215,7 @@ private struct CopyableField: View {
 
             HStack(spacing: 8) {
                 Text(value)
-                    .font(.system(size: 16, weight: .medium))
+                    .font(.system(size: 16, weight: .medium, design: .monospaced))
                     .tracking(-0.18)
                     .foregroundStyle(primary)
                     .lineLimit(1)
