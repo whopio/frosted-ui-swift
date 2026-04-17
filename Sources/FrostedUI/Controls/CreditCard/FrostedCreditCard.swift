@@ -117,6 +117,8 @@ public struct FrostedCreditCard<Logo: View, Provider: View>: View {
         return String(digits.suffix(4))
     }
 
+    private var flipAngle: Double { isFlipped ? 180 : 0 }
+
     public var body: some View {
         ZStack {
             FrostedCreditCardFront(
@@ -128,9 +130,7 @@ public struct FrostedCreditCard<Logo: View, Provider: View>: View {
                 logo: logo,
                 provider: provider
             )
-            .opacity(isFlipped ? 0 : 1)
-            .allowsHitTesting(!isFlipped)
-            .animation(.linear(duration: 0.01).delay(0.3), value: isFlipped)
+            .modifier(FlipFaceVisibility(angle: flipAngle, showWhenFacing: true))
 
             FrostedCreditCardBack(
                 cardNumber: cardNumber,
@@ -141,9 +141,7 @@ public struct FrostedCreditCard<Logo: View, Provider: View>: View {
                 stripe: stripeGradient
             )
             .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
-            .opacity(isFlipped ? 1 : 0)
-            .allowsHitTesting(isFlipped)
-            .animation(.linear(duration: 0.01).delay(0.3), value: isFlipped)
+            .modifier(FlipFaceVisibility(angle: flipAngle, showWhenFacing: false))
         }
         .aspectRatio(361.0 / 227.0, contentMode: .fit)
         .background(backgroundColor)
@@ -153,7 +151,7 @@ public struct FrostedCreditCard<Logo: View, Provider: View>: View {
         )
         .clipShape(.rect(cornerRadius: cornerRadius))
         .rotation3DEffect(
-            .degrees(isFlipped ? 180 : 0),
+            .degrees(flipAngle),
             axis: (x: 0, y: 1, z: 0),
             perspective: 0.5
         )

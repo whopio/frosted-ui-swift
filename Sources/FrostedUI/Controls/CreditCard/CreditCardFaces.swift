@@ -1,6 +1,28 @@
 import SwiftUI
 import UIKit
 
+/// Resolves face opacity from the interpolated rotation angle so that each face
+/// snaps in/out exactly when not visible
+struct FlipFaceVisibility: ViewModifier, Animatable {
+    var angle: Double
+    let showWhenFacing: Bool
+
+    var animatableData: Double {
+        get { angle }
+        set { angle = newValue }
+    }
+
+    func body(content: Content) -> some View {
+        let normalized = (angle.truncatingRemainder(dividingBy: 360) + 360)
+            .truncatingRemainder(dividingBy: 360)
+        let facing = normalized < 90 || normalized > 270
+        let visible = facing == showWhenFacing
+        return content
+            .opacity(visible ? 1 : 0)
+            .allowsHitTesting(visible)
+    }
+}
+
 struct FrostedCreditCardFront<Logo: View, Provider: View>: View {
     let title: String
     let lastFour: String
