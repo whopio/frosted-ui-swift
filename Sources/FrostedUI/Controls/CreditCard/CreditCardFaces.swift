@@ -224,26 +224,26 @@ private struct CopyableField: View {
                 Image(didCopy ? FrostedIcon.checkmark16 : FrostedIcon.copy16)
                     .renderingMode(.template)
                     .foregroundStyle(primary)
-                    .transition(.opacity)
+                    .id(didCopy)
+                    .transition(.scale(0.6).combined(with: .blurReplace))
             }
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
             .frame(height: 32)
-            .contentShape(.rect(cornerRadius: 8))
-        }
-        .contentShape(.rect)
-        .onTapGesture {
-            copy()
+            .contentShape(.rect)
+            .onTapGesture {
+                copy()
+            }
         }
     }
 
     private func copy() {
         UIPasteboard.general.string = value
         HapticManager.shared.fireHaptic(.impact(.light))
-        withAnimation(.snappy(duration: 0.2)) { didCopy = true }
+        withAnimation(.snappy(duration: 0.25)) { didCopy = true }
         Task {
             try? await Task.sleep(for: .seconds(1.2))
-            withAnimation(.easeOut(duration: 0.2)) { didCopy = false }
+            withAnimation(.smooth(duration: 0.3)) { didCopy = false }
         }
     }
 }
