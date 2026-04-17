@@ -17,9 +17,88 @@ public enum FrostedCreditCardState {
     case canceled
 }
 
+public enum FrostedCreditCardSize {
+    /// Full 361×227 card with title, last-four, back face, and flip. Adapts to the parent width.
+    case large
+    /// 64×40 chip. Logo + provider only. State icon centers for locked/canceled.
+    case medium
+    /// 40×25 chip. Same contents as medium at a smaller scale.
+    case small
+
+    var fixedSize: CGSize? {
+        switch self {
+        case .large: nil
+        case .medium: CGSize(width: 64, height: 40)
+        case .small: CGSize(width: 40, height: 25)
+        }
+    }
+
+    var aspectRatio: CGFloat {
+        switch self {
+        case .large: 361.0 / 227.0
+        case .medium: 64.0 / 40.0
+        case .small: 40.0 / 25.0
+        }
+    }
+
+    var cornerRadius: CGFloat {
+        switch self {
+        case .large: 12
+        case .medium: 4
+        case .small: 3
+        }
+    }
+
+    var borderWidth: CGFloat {
+        switch self {
+        case .large: 1
+        case .medium, .small: 0.5
+        }
+    }
+
+    var padding: CGFloat {
+        switch self {
+        case .large: 16
+        case .medium: 4
+        case .small: 3
+        }
+    }
+
+    var logoSize: CGSize {
+        switch self {
+        case .large: CGSize(width: 56, height: 30)
+        case .medium: CGSize(width: 14, height: 7)
+        case .small: CGSize(width: 9, height: 4.5)
+        }
+    }
+
+    var providerSize: CGSize {
+        switch self {
+        case .large: CGSize(width: 84, height: 42)
+        case .medium: CGSize(width: 20, height: 6)
+        case .small: CGSize(width: 12, height: 4)
+        }
+    }
+
+    var stateIconSize: CGFloat {
+        switch self {
+        case .large: 16
+        case .medium: 16
+        case .small: 12
+        }
+    }
+
+    var showsText: Bool { self == .large }
+
+    var allowsFlip: Bool { self == .large }
+
+    var allowsTilt: Bool { self == .large }
+}
+
 public struct FrostedCreditCard<Logo: View, Provider: View>: View {
     public typealias Style = FrostedCreditCardStyle
     public typealias State = FrostedCreditCardState
+    public typealias Size = FrostedCreditCardSize
 
     private let title: String
     private let cardNumber: String
@@ -28,6 +107,7 @@ public struct FrostedCreditCard<Logo: View, Provider: View>: View {
     private let tint: FrostedTint
     private let style: Style
     private let state: State
+    private let size: Size
     private let tilt: Bool
     private let allowsFlipping: Bool
     private let logo: () -> Logo
@@ -43,6 +123,7 @@ public struct FrostedCreditCard<Logo: View, Provider: View>: View {
         tint: FrostedTint = .gray,
         style: Style = .subtle,
         state: State = .default,
+        size: Size = .large,
         tilt: Bool = true,
         allowsFlipping: Bool = true,
         @ViewBuilder logo: @escaping () -> Logo,
@@ -55,6 +136,7 @@ public struct FrostedCreditCard<Logo: View, Provider: View>: View {
         self.tint = tint
         self.style = style
         self.state = state
+        self.size = size
         self.tilt = tilt
         self.allowsFlipping = allowsFlipping
         self.logo = logo
@@ -110,8 +192,6 @@ public struct FrostedCreditCard<Logo: View, Provider: View>: View {
         primaryForeground.opacity(0.19)
     }
 
-    private let cornerRadius: CGFloat = 12
-
     private var lastFour: String {
         let digits = cardNumber.filter(\.isNumber)
         return String(digits.suffix(4))
@@ -119,12 +199,17 @@ public struct FrostedCreditCard<Logo: View, Provider: View>: View {
 
     private var flipAngle: Double { isFlipped ? 180 : 0 }
 
+    private var canFlip: Bool {
+        allowsFlipping && size.allowsFlip && state == .default
+    }
+
     public var body: some View {
         ZStack {
             FrostedCreditCardFront(
                 title: title,
                 lastFour: lastFour,
                 state: state,
+                size: size,
                 primary: primaryForeground,
                 secondary: secondaryForeground,
                 logo: logo,
@@ -132,43 +217,56 @@ public struct FrostedCreditCard<Logo: View, Provider: View>: View {
             )
             .modifier(FlipFaceVisibility(angle: flipAngle, showWhenFacing: true))
 
-            FrostedCreditCardBack(
-                cardNumber: cardNumber,
-                expiration: expiration,
-                cvv: cvv,
-                primary: primaryForeground,
-                label: labelForeground,
-                stripe: stripeGradient
-            )
-            .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
-            .modifier(FlipFaceVisibility(angle: flipAngle, showWhenFacing: false))
+            if size.allowsFlip {
+                FrostedCreditCardBack(
+                    cardNumber: cardNumber,
+                    expiration: expiration,
+                    cvv: cvv,
+                    primary: primaryForeground,
+                    label: labelForeground,
+                    stripe: stripeGradient
+                )
+                .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+                .modifier(FlipFaceVisibility(angle: flipAngle, showWhenFacing: false))
+            }
         }
-        .aspectRatio(361.0 / 227.0, contentMode: .fit)
+        .applyCardSize(size)
         .background(backgroundColor)
         .overlay(
-            RoundedRectangle(cornerRadius: cornerRadius)
-                .strokeBorder(borderColor, lineWidth: 1)
+            RoundedRectangle(cornerRadius: size.cornerRadius)
+                .strokeBorder(borderColor, lineWidth: size.borderWidth)
         )
-        .clipShape(.rect(cornerRadius: cornerRadius))
+        .clipShape(.rect(cornerRadius: size.cornerRadius))
         .rotation3DEffect(
             .degrees(flipAngle),
             axis: (x: 0, y: 1, z: 0),
             perspective: 0.5
         )
         .animation(.spring(duration: 0.6, bounce: 0.12), value: isFlipped)
-        .contentShape(.rect(cornerRadius: cornerRadius))
+        .contentShape(.rect(cornerRadius: size.cornerRadius))
         .onTapGesture {
-            guard allowsFlipping, state == .default else { return }
+            guard canFlip else { return }
             HapticManager.shared.fireHaptic(.impact(.soft))
             isFlipped.toggle()
         }
         .gyroscopeTilt3D(
-            cornerRadius: cornerRadius,
+            cornerRadius: size.cornerRadius,
             maxRotation: 10,
             shadowColor: style == .solid ? backgroundColor : Color(red: 0, green: 0, blue: 0.24),
-            shadowIntensity: 0.5,
-            isActive: tilt
+            shadowIntensity: size == .large ? 0.5 : 0,
+            isActive: tilt && size.allowsTilt
         )
+    }
+}
+
+private extension View {
+    @ViewBuilder
+    func applyCardSize(_ size: FrostedCreditCardSize) -> some View {
+        if let fixed = size.fixedSize {
+            frame(width: fixed.width, height: fixed.height)
+        } else {
+            aspectRatio(size.aspectRatio, contentMode: .fit)
+        }
     }
 }
 
@@ -181,6 +279,7 @@ public extension FrostedCreditCard where Provider == EmptyView {
         tint: FrostedTint = .gray,
         style: Style = .subtle,
         state: State = .default,
+        size: Size = .large,
         tilt: Bool = true,
         allowsFlipping: Bool = true,
         @ViewBuilder logo: @escaping () -> Logo
@@ -193,6 +292,7 @@ public extension FrostedCreditCard where Provider == EmptyView {
             tint: tint,
             style: style,
             state: state,
+            size: size,
             tilt: tilt,
             allowsFlipping: allowsFlipping,
             logo: logo,
@@ -210,6 +310,7 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
         tint: FrostedTint = .gray,
         style: Style = .subtle,
         state: State = .default,
+        size: Size = .large,
         tilt: Bool = true,
         allowsFlipping: Bool = true
     ) {
@@ -221,6 +322,7 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
             tint: tint,
             style: style,
             state: state,
+            size: size,
             tilt: tilt,
             allowsFlipping: allowsFlipping,
             logo: { EmptyView() },
@@ -403,5 +505,58 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
         }
         .padding(20)
     }
+    .background(Color(FrostedColor.frostedGray2))
+}
+
+#Preview("Sizes (Figma)") {
+    let states: [FrostedCreditCardState] = [.default, .locked, .canceled]
+    let logo: some View = Image(FrostedIcon.whopLogo12)
+        .renderingMode(.template)
+        .resizable()
+        .scaledToFit()
+    let provider: some View = Text("VISA")
+        .font(.system(size: 20, weight: .black))
+        .italic()
+        .minimumScaleFactor(0.1)
+        .lineLimit(1)
+
+    return VStack(spacing: 40) {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Medium (64×40)").font(.caption).foregroundStyle(.secondary)
+            HStack(spacing: 12) {
+                ForEach(Array(states.enumerated()), id: \.offset) { _, state in
+                    FrostedCreditCard(
+                        title: "Claude credits",
+                        cardNumber: "1838 0008 7261 2332",
+                        expiration: "11/27",
+                        cvv: "8177",
+                        state: state,
+                        size: .medium,
+                        logo: { logo },
+                        provider: { provider }
+                    )
+                }
+            }
+        }
+
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Small (40×25)").font(.caption).foregroundStyle(.secondary)
+            HStack(spacing: 12) {
+                ForEach(Array(states.enumerated()), id: \.offset) { _, state in
+                    FrostedCreditCard(
+                        title: "Claude credits",
+                        cardNumber: "1838 0008 7261 2332",
+                        expiration: "11/27",
+                        cvv: "8177",
+                        state: state,
+                        size: .small,
+                        logo: { logo },
+                        provider: { provider }
+                    )
+                }
+            }
+        }
+    }
+    .padding(32)
     .background(Color(FrostedColor.frostedGray2))
 }

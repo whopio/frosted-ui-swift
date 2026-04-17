@@ -27,6 +27,7 @@ struct FrostedCreditCardFront<Logo: View, Provider: View>: View {
     let title: String
     let lastFour: String
     let state: FrostedCreditCardState
+    let size: FrostedCreditCardSize
     let primary: Color
     let secondary: Color
     let logo: () -> Logo
@@ -45,40 +46,51 @@ struct FrostedCreditCardFront<Logo: View, Provider: View>: View {
             VStack(spacing: 0) {
                 HStack(alignment: .top) {
                     logo()
+                        .frame(maxWidth: size.logoSize.width, maxHeight: size.logoSize.height, alignment: .topLeading)
                         .foregroundStyle(primary)
                         .opacity(contentOpacity)
 
-                    Spacer(minLength: 8)
+                    Spacer(minLength: 0)
 
-                    provider()
-                        .foregroundStyle(primary)
-                        .opacity(contentOpacity)
+                    if size == .large {
+                        provider()
+                            .frame(maxWidth: size.providerSize.width, maxHeight: size.providerSize.height, alignment: .topTrailing)
+                            .foregroundStyle(primary)
+                            .opacity(contentOpacity)
+                    }
                 }
-                .padding(.horizontal, 16)
-                .padding(.top, 16)
 
                 Spacer(minLength: 0)
 
-                HStack(alignment: .firstTextBaseline) {
-                    Text(title)
-                        .font(.system(size: 16, weight: .regular))
-                        .tracking(-0.18)
-                        .foregroundStyle(secondary)
+                if size.showsText {
+                    HStack(alignment: .firstTextBaseline) {
+                        Text(title)
+                            .font(.system(size: 16, weight: .regular))
+                            .tracking(-0.18)
+                            .foregroundStyle(secondary)
 
-                    Spacer(minLength: 8)
+                        Spacer(minLength: 8)
 
-                    Text("•••• \(lastFour)")
-                        .font(.system(size: 16, weight: .regular))
-                        .tracking(-0.18)
-                        .foregroundStyle(secondary)
-                        .opacity(lastFourOpacity)
+                        Text("•••• \(lastFour)")
+                            .font(.system(size: 16, weight: .regular))
+                            .tracking(-0.18)
+                            .foregroundStyle(secondary)
+                            .opacity(lastFourOpacity)
+                    }
+                } else {
+                    HStack {
+                        Spacer(minLength: 0)
+                        provider()
+                            .frame(maxWidth: size.providerSize.width, maxHeight: size.providerSize.height, alignment: .bottomTrailing)
+                            .foregroundStyle(primary)
+                            .opacity(contentOpacity)
+                    }
                 }
-                .padding(.horizontal, 16)
-                .padding(.bottom, 16)
             }
+            .padding(size.padding)
 
             if state != .default {
-                StateBadge(state: state, primary: primary)
+                StateBadge(state: state, primary: primary, iconSize: size.stateIconSize, showsLabel: size == .large)
             }
         }
     }
@@ -87,13 +99,21 @@ struct FrostedCreditCardFront<Logo: View, Provider: View>: View {
 private struct StateBadge: View {
     let state: FrostedCreditCardState
     let primary: Color
+    let iconSize: CGFloat
+    let showsLabel: Bool
 
-    private var icon: FrostedIconSet {
+    private var iconSet: FrostedIconSet {
         switch state {
         case .locked: .lockFilled
         case .canceled: .ban
         case .default: .lockFilled
         }
+    }
+
+    private var iconName: FrostedIcon {
+        if iconSize <= 12 { return iconSet.size12 }
+        if iconSize <= 16 { return iconSet.size16 }
+        return iconSet.size20
     }
 
     private var label: String {
@@ -114,14 +134,17 @@ private struct StateBadge: View {
 
     var body: some View {
         HStack(spacing: 4) {
-            Image(icon.size16)
+            Image(iconName)
                 .renderingMode(.template)
                 .foregroundStyle(color)
+                .frame(width: iconSize, height: iconSize)
 
-            Text(label)
-                .font(.system(size: 14, weight: .medium))
-                .tracking(-0.09)
-                .foregroundStyle(color)
+            if showsLabel {
+                Text(label)
+                    .font(.system(size: 14, weight: .medium))
+                    .tracking(-0.09)
+                    .foregroundStyle(color)
+            }
         }
     }
 }
