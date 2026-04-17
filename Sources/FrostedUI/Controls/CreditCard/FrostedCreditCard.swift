@@ -67,16 +67,16 @@ public enum FrostedCreditCardSize {
     var logoSize: CGSize {
         switch self {
         case .large: CGSize(width: 56, height: 30)
-        case .medium: CGSize(width: 14, height: 7)
-        case .small: CGSize(width: 9, height: 4.5)
+        case .medium: CGSize(width: 13.66, height: 7)
+        case .small: CGSize(width: 8.781, height: 4.5)
         }
     }
 
     var providerSize: CGSize {
         switch self {
         case .large: CGSize(width: 84, height: 42)
-        case .medium: CGSize(width: 20, height: 6)
-        case .small: CGSize(width: 12, height: 4)
+        case .medium: CGSize(width: 19.2, height: 6.184)
+        case .small: CGSize(width: 12, height: 3.865)
         }
     }
 
@@ -237,6 +237,13 @@ public struct FrostedCreditCard<Logo: View, Provider: View>: View {
                 .strokeBorder(borderColor, lineWidth: size.borderWidth)
         )
         .clipShape(.rect(cornerRadius: size.cornerRadius))
+        .gyroscopeTilt3D(
+            cornerRadius: size.cornerRadius,
+            maxRotation: 10,
+            shadowColor: style == .solid ? backgroundColor : Color(red: 0, green: 0, blue: 0.24),
+            shadowIntensity: size == .large ? 0.5 : 0,
+            isActive: tilt && size.allowsTilt
+        )
         .rotation3DEffect(
             .degrees(flipAngle),
             axis: (x: 0, y: 1, z: 0),
@@ -249,13 +256,6 @@ public struct FrostedCreditCard<Logo: View, Provider: View>: View {
             HapticManager.shared.fireHaptic(.impact(.soft))
             isFlipped.toggle()
         }
-        .gyroscopeTilt3D(
-            cornerRadius: size.cornerRadius,
-            maxRotation: 10,
-            shadowColor: style == .solid ? backgroundColor : Color(red: 0, green: 0, blue: 0.24),
-            shadowIntensity: size == .large ? 0.5 : 0,
-            isActive: tilt && size.allowsTilt
-        )
     }
 }
 
@@ -346,11 +346,15 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
                 logo: {
                     Image(FrostedIcon.whopLogo24)
                         .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
                 },
                 provider: {
                     Text("VISA")
-                        .font(.system(size: 18, weight: .heavy))
+                        .font(.system(size: 40, weight: .heavy))
                         .italic()
+                        .minimumScaleFactor(0.1)
+                        .lineLimit(1)
                 }
             )
 
@@ -366,11 +370,15 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
                 logo: {
                     Image(FrostedIcon.whopLogo24)
                         .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
                 },
                 provider: {
                     Text("VISA")
-                        .font(.system(size: 18, weight: .heavy))
+                        .font(.system(size: 40, weight: .heavy))
                         .italic()
+                        .minimumScaleFactor(0.1)
+                        .lineLimit(1)
                 }
             )
 
@@ -386,11 +394,15 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
                 logo: {
                     Image(FrostedIcon.whopLogo24)
                         .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
                 },
                 provider: {
                     Text("VISA")
-                        .font(.system(size: 18, weight: .heavy))
+                        .font(.system(size: 40, weight: .heavy))
                         .italic()
+                        .minimumScaleFactor(0.1)
+                        .lineLimit(1)
                 }
             )
         }
@@ -413,11 +425,15 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
                 logo: {
                     Image(FrostedIcon.whopLogo24)
                         .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
                 },
                 provider: {
                     Text("VISA")
-                        .font(.system(size: 18, weight: .heavy))
+                        .font(.system(size: 40, weight: .heavy))
                         .italic()
+                        .minimumScaleFactor(0.1)
+                        .lineLimit(1)
                 }
             )
 
@@ -432,11 +448,15 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
                 logo: {
                     Image(FrostedIcon.whopLogo24)
                         .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
                 },
                 provider: {
                     Text("VISA")
-                        .font(.system(size: 18, weight: .heavy))
+                        .font(.system(size: 40, weight: .heavy))
                         .italic()
+                        .minimumScaleFactor(0.1)
+                        .lineLimit(1)
                 }
             )
         }
@@ -456,11 +476,15 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
         logo: {
             Image(FrostedIcon.whopLogo24)
                 .renderingMode(.template)
+                .resizable()
+                .scaledToFit()
         },
         provider: {
             Text("VISA")
-                .font(.system(size: 18, weight: .heavy))
+                .font(.system(size: 40, weight: .heavy))
                 .italic()
+                .minimumScaleFactor(0.1)
+                .lineLimit(1)
         }
     )
     .padding(32)
@@ -494,11 +518,15 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
                     logo: {
                         Image(FrostedIcon.whopLogo24)
                             .renderingMode(.template)
+                            .resizable()
+                            .scaledToFit()
                     },
                     provider: {
                         Text("VISA")
-                            .font(.system(size: 18, weight: .heavy))
+                            .font(.system(size: 40, weight: .heavy))
                             .italic()
+                            .minimumScaleFactor(0.1)
+                            .lineLimit(1)
                     }
                 )
             }
@@ -513,7 +541,7 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
     let logo: some View = Image(FrostedIcon.whopLogo12)
         .renderingMode(.template)
         .resizable()
-        .scaledToFit()
+        .aspectRatio(contentMode: .fill)
     let provider: some View = Text("VISA")
         .font(.system(size: 20, weight: .black))
         .italic()

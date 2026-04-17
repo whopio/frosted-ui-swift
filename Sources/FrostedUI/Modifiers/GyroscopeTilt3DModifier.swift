@@ -89,9 +89,9 @@ private struct GyroscopeTilt3DModifier: ViewModifier {
                     )
                     .blendMode(.multiply)
                 }
+                .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
                 .allowsHitTesting(false)
             }
-            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
             .rotation3DEffect(
                 .degrees(animator.pitch * maxRotation),
                 axis: (x: -1, y: 0, z: 0),
