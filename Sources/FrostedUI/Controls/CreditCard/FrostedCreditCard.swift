@@ -29,6 +29,7 @@ public struct FrostedCreditCard<Logo: View, Provider: View>: View {
     private let style: Style
     private let state: State
     private let tilt: Bool
+    private let allowsFlipping: Bool
     private let logo: () -> Logo
     private let provider: () -> Provider
 
@@ -43,6 +44,7 @@ public struct FrostedCreditCard<Logo: View, Provider: View>: View {
         style: Style = .subtle,
         state: State = .default,
         tilt: Bool = true,
+        allowsFlipping: Bool = true,
         @ViewBuilder logo: @escaping () -> Logo,
         @ViewBuilder provider: @escaping () -> Provider
     ) {
@@ -54,6 +56,7 @@ public struct FrostedCreditCard<Logo: View, Provider: View>: View {
         self.style = style
         self.state = state
         self.tilt = tilt
+        self.allowsFlipping = allowsFlipping
         self.logo = logo
         self.provider = provider
     }
@@ -157,7 +160,7 @@ public struct FrostedCreditCard<Logo: View, Provider: View>: View {
         .animation(.spring(duration: 0.6, bounce: 0.12), value: isFlipped)
         .contentShape(.rect(cornerRadius: cornerRadius))
         .onTapGesture {
-            guard state == .default else { return }
+            guard allowsFlipping, state == .default else { return }
             HapticManager.shared.fireHaptic(.impact(.soft))
             isFlipped.toggle()
         }
@@ -181,6 +184,7 @@ public extension FrostedCreditCard where Provider == EmptyView {
         style: Style = .subtle,
         state: State = .default,
         tilt: Bool = true,
+        allowsFlipping: Bool = true,
         @ViewBuilder logo: @escaping () -> Logo
     ) {
         self.init(
@@ -192,6 +196,7 @@ public extension FrostedCreditCard where Provider == EmptyView {
             style: style,
             state: state,
             tilt: tilt,
+            allowsFlipping: allowsFlipping,
             logo: logo,
             provider: { EmptyView() }
         )
@@ -207,7 +212,8 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
         tint: FrostedTint = .gray,
         style: Style = .subtle,
         state: State = .default,
-        tilt: Bool = true
+        tilt: Bool = true,
+        allowsFlipping: Bool = true
     ) {
         self.init(
             title: title,
@@ -218,6 +224,7 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
             style: style,
             state: state,
             tilt: tilt,
+            allowsFlipping: allowsFlipping,
             logo: { EmptyView() },
             provider: { EmptyView() }
         )
