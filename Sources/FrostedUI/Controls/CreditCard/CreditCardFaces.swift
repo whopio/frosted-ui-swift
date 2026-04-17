@@ -1,0 +1,204 @@
+import SwiftUI
+import UIKit
+
+struct FrostedCreditCardFront<Logo: View, Provider: View>: View {
+    let title: String
+    let lastFour: String
+    let state: FrostedCreditCardState
+    let primary: Color
+    let secondary: Color
+    let logo: () -> Logo
+    let provider: () -> Provider
+
+    private var contentOpacity: Double {
+        state == .default ? 1 : 0.35
+    }
+
+    private var lastFourOpacity: Double {
+        state == .default ? 1 : 0.3
+    }
+
+    var body: some View {
+        ZStack {
+            VStack(spacing: 0) {
+                HStack(alignment: .top) {
+                    logo()
+                        .foregroundStyle(primary)
+                        .opacity(contentOpacity)
+
+                    Spacer(minLength: 8)
+
+                    provider()
+                        .foregroundStyle(primary)
+                        .opacity(contentOpacity)
+                }
+                .padding(.horizontal, 16)
+                .padding(.top, 16)
+
+                Spacer(minLength: 0)
+
+                HStack(alignment: .firstTextBaseline) {
+                    Text(title)
+                        .font(.system(size: 16, weight: .regular))
+                        .tracking(-0.18)
+                        .foregroundStyle(secondary)
+
+                    Spacer(minLength: 8)
+
+                    Text("•••• \(lastFour)")
+                        .font(.system(size: 16, weight: .regular))
+                        .tracking(-0.18)
+                        .foregroundStyle(secondary)
+                        .opacity(lastFourOpacity)
+                }
+                .padding(.horizontal, 16)
+                .padding(.bottom, 16)
+            }
+
+            if state != .default {
+                StateBadge(state: state, primary: primary)
+            }
+        }
+    }
+}
+
+private struct StateBadge: View {
+    let state: FrostedCreditCardState
+    let primary: Color
+
+    private var icon: FrostedIconSet {
+        switch state {
+        case .locked: .lockFilled
+        case .canceled: .ban
+        case .default: .lockFilled
+        }
+    }
+
+    private var label: String {
+        switch state {
+        case .locked: "Locked"
+        case .canceled: "Canceled"
+        case .default: ""
+        }
+    }
+
+    private var color: Color {
+        switch state {
+        case .locked: primary
+        case .canceled: Color(FrostedColor.frostedRed10)
+        case .default: primary
+        }
+    }
+
+    var body: some View {
+        HStack(spacing: 4) {
+            Image(icon.size16)
+                .renderingMode(.template)
+                .foregroundStyle(color)
+
+            Text(label)
+                .font(.system(size: 14, weight: .medium))
+                .tracking(-0.09)
+                .foregroundStyle(color)
+        }
+    }
+}
+
+struct FrostedCreditCardBack: View {
+    let cardNumber: String
+    let expiration: String
+    let cvv: String
+    let primary: Color
+    let label: Color
+    let stripe: LinearGradient
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            stripe
+                .frame(height: 48)
+                .padding(.top, 24)
+
+            Spacer(minLength: 0)
+
+            VStack(alignment: .leading, spacing: 0) {
+                CopyableField(
+                    label: "Card number",
+                    value: cardNumber,
+                    primary: primary,
+                    labelColor: label
+                )
+
+                HStack(alignment: .top, spacing: 8) {
+                    CopyableField(
+                        label: "Exp",
+                        value: expiration,
+                        primary: primary,
+                        labelColor: label
+                    )
+                    .frame(width: 80, alignment: .leading)
+
+                    CopyableField(
+                        label: "CVV",
+                        value: cvv,
+                        primary: primary,
+                        labelColor: label
+                    )
+                    .frame(width: 76, alignment: .leading)
+                }
+            }
+            .padding(.leading, 8)
+            .padding(.bottom, 10)
+        }
+    }
+}
+
+private struct CopyableField: View {
+    let label: String
+    let value: String
+    let primary: Color
+    let labelColor: Color
+
+    @SwiftUI.State private var didCopy = false
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(label)
+                .font(.system(size: 14, weight: .regular))
+                .tracking(-0.09)
+                .foregroundStyle(labelColor)
+                .padding(.horizontal, 8)
+
+            HStack(spacing: 8) {
+                Text(value)
+                    .font(.system(size: 16, weight: .medium))
+                    .tracking(-0.18)
+                    .foregroundStyle(primary)
+                    .lineLimit(1)
+                    .fixedSize(horizontal: true, vertical: false)
+
+                Image(didCopy ? FrostedIcon.checkmark16 : FrostedIcon.copy16)
+                    .renderingMode(.template)
+                    .foregroundStyle(primary)
+                    .transition(.opacity)
+            }
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
+            .frame(height: 32)
+            .contentShape(.rect(cornerRadius: 8))
+        }
+        .contentShape(.rect)
+        .onTapGesture {
+            copy()
+        }
+    }
+
+    private func copy() {
+        UIPasteboard.general.string = value
+        HapticManager.shared.fireHaptic(.impact(.light))
+        withAnimation(.snappy(duration: 0.2)) { didCopy = true }
+        Task {
+            try? await Task.sleep(for: .seconds(1.2))
+            withAnimation(.easeOut(duration: 0.2)) { didCopy = false }
+        }
+    }
+}
