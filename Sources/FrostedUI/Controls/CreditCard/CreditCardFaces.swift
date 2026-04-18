@@ -213,27 +213,27 @@ private struct CopyableField: View {
                 .foregroundStyle(labelColor)
                 .padding(.horizontal, 8)
 
-            HStack(spacing: 8) {
-                Text(value)
-                    .font(.system(size: 16, weight: .medium, design: .monospaced))
-                    .tracking(-0.18)
-                    .foregroundStyle(primary)
-                    .lineLimit(1)
-                    .fixedSize(horizontal: true, vertical: false)
+            Button(action: copy) {
+                HStack(spacing: 8) {
+                    Text(value)
+                        .font(.system(size: 16, weight: .medium, design: .monospaced))
+                        .tracking(-0.18)
+                        .foregroundStyle(primary)
+                        .lineLimit(1)
+                        .fixedSize(horizontal: true, vertical: false)
 
-                Image(didCopy ? FrostedIcon.checkmark16 : FrostedIcon.copy16)
-                    .renderingMode(.template)
-                    .foregroundStyle(primary)
-                    .id(didCopy)
-                    .transition(.scale(0.6).combined(with: .blurReplace))
+                    Image(didCopy ? FrostedIcon.checkmark16 : FrostedIcon.copy16)
+                        .renderingMode(.template)
+                        .foregroundStyle(primary)
+                        .id(didCopy)
+                        .transition(.scale(0.6).combined(with: .blurReplace))
+                }
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                // .frame(height: 32)
+                .contentShape(.rect(cornerRadius: 8))
             }
-            .padding(.horizontal, 8)
-            .padding(.vertical, 4)
-            .frame(height: 32)
-            .contentShape(.rect)
-            .onTapGesture {
-                copy()
-            }
+            .buttonStyle(.plain)
         }
     }
 
