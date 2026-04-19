@@ -254,7 +254,7 @@ public struct FrostedCreditCard<Logo: View, Provider: View, Background: View>: V
         // Kept intentionally subtle to match the web's barely-there shadow.
         .shadow(color: Color(red: 0, green: 0, blue: 0.24).opacity(0.04), radius: 8, x: 0, y: 3)
         .shadow(color: .black.opacity(0.04), radius: 4, x: 0, y: 6)
-        .animation(.spring(duration: 0.6, bounce: 0), value: isFlipped)
+        .animation(.smooth(duration: 0.6), value: isFlipped)
         .contentShape(.rect(cornerRadius: size.cornerRadius))
         .onTapGesture {
             guard canFlip else { return }
