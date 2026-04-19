@@ -95,7 +95,7 @@ public enum FrostedCreditCardSize {
     var allowsTilt: Bool { self == .large }
 }
 
-public struct FrostedCreditCard<Logo: View, Provider: View>: View {
+public struct FrostedCreditCard<Logo: View, Provider: View, Background: View>: View {
     public typealias Style = FrostedCreditCardStyle
     public typealias State = FrostedCreditCardState
     public typealias Size = FrostedCreditCardSize
@@ -112,6 +112,7 @@ public struct FrostedCreditCard<Logo: View, Provider: View>: View {
     private let allowsFlipping: Bool
     private let logo: () -> Logo
     private let provider: () -> Provider
+    private let background: () -> Background
 
     @SwiftUI.State private var isFlipped = false
 
@@ -127,7 +128,8 @@ public struct FrostedCreditCard<Logo: View, Provider: View>: View {
         tilt: Bool = true,
         allowsFlipping: Bool = true,
         @ViewBuilder logo: @escaping () -> Logo,
-        @ViewBuilder provider: @escaping () -> Provider
+        @ViewBuilder provider: @escaping () -> Provider,
+        @ViewBuilder background: @escaping () -> Background
     ) {
         self.title = title
         self.cardNumber = cardNumber
@@ -141,6 +143,7 @@ public struct FrostedCreditCard<Logo: View, Provider: View>: View {
         self.allowsFlipping = allowsFlipping
         self.logo = logo
         self.provider = provider
+        self.background = background
     }
 
     private var backgroundColor: Color {
@@ -215,6 +218,10 @@ public struct FrostedCreditCard<Logo: View, Provider: View>: View {
                 logo: logo,
                 provider: provider
             )
+            .background {
+                // Custom background only applies to the front face.
+                background()
+            }
             .modifier(FlipFaceVisibility(angle: flipAngle, showWhenFacing: true))
 
             if size.allowsFlip {
@@ -270,7 +277,40 @@ private extension View {
     }
 }
 
-public extension FrostedCreditCard where Provider == EmptyView {
+public extension FrostedCreditCard where Background == EmptyView {
+    init(
+        title: String,
+        cardNumber: String,
+        expiration: String,
+        cvv: String,
+        tint: FrostedTint = .gray,
+        style: Style = .subtle,
+        state: State = .default,
+        size: Size = .large,
+        tilt: Bool = true,
+        allowsFlipping: Bool = true,
+        @ViewBuilder logo: @escaping () -> Logo,
+        @ViewBuilder provider: @escaping () -> Provider
+    ) {
+        self.init(
+            title: title,
+            cardNumber: cardNumber,
+            expiration: expiration,
+            cvv: cvv,
+            tint: tint,
+            style: style,
+            state: state,
+            size: size,
+            tilt: tilt,
+            allowsFlipping: allowsFlipping,
+            logo: logo,
+            provider: provider,
+            background: { EmptyView() }
+        )
+    }
+}
+
+public extension FrostedCreditCard where Provider == EmptyView, Background == EmptyView {
     init(
         title: String,
         cardNumber: String,
@@ -296,12 +336,13 @@ public extension FrostedCreditCard where Provider == EmptyView {
             tilt: tilt,
             allowsFlipping: allowsFlipping,
             logo: logo,
-            provider: { EmptyView() }
+            provider: { EmptyView() },
+            background: { EmptyView() }
         )
     }
 }
 
-public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyView {
+public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyView, Background == EmptyView {
     init(
         title: String,
         cardNumber: String,
@@ -326,7 +367,8 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
             tilt: tilt,
             allowsFlipping: allowsFlipping,
             logo: { EmptyView() },
-            provider: { EmptyView() }
+            provider: { EmptyView() },
+            background: { EmptyView() }
         )
     }
 }
