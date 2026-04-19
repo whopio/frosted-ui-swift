@@ -125,7 +125,7 @@ public struct FrostedCreditCard<Logo: View, Provider: View, Background: View>: V
         style: Style = .subtle,
         state: State = .default,
         size: Size = .large,
-        tilt: Bool = true,
+        tilt: Bool = false,
         allowsFlipping: Bool = true,
         @ViewBuilder logo: @escaping () -> Logo,
         @ViewBuilder provider: @escaping () -> Provider,
@@ -287,7 +287,7 @@ public extension FrostedCreditCard where Background == EmptyView {
         style: Style = .subtle,
         state: State = .default,
         size: Size = .large,
-        tilt: Bool = true,
+        tilt: Bool = false,
         allowsFlipping: Bool = true,
         @ViewBuilder logo: @escaping () -> Logo,
         @ViewBuilder provider: @escaping () -> Provider
@@ -320,7 +320,7 @@ public extension FrostedCreditCard where Provider == EmptyView, Background == Em
         style: Style = .subtle,
         state: State = .default,
         size: Size = .large,
-        tilt: Bool = true,
+        tilt: Bool = false,
         allowsFlipping: Bool = true,
         @ViewBuilder logo: @escaping () -> Logo
     ) {
@@ -352,7 +352,7 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
         style: Style = .subtle,
         state: State = .default,
         size: Size = .large,
-        tilt: Bool = true,
+        tilt: Bool = false,
         allowsFlipping: Bool = true
     ) {
         self.init(
@@ -629,4 +629,57 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
     }
     .padding(32)
     .background(Color(FrostedColor.frostedGray2))
+}
+
+#Preview("Whop Card preset") {
+    FrostedCreditCard(
+        title: "Claude credits",
+        cardNumber: "1838 0008 7261 2332",
+        expiration: "11/27",
+        cvv: "8177",
+        tint: .gray,
+        style: .subtle,
+        logo: {
+            Image("whopLogoEtch", bundle: .module)
+                .resizable()
+                .scaledToFit()
+        },
+        provider: {
+            Image("visaPlatinumEtch", bundle: .module)
+                .resizable()
+                .scaledToFit()
+        }
+    )
+    .padding(32)
+}
+
+#Preview("Custom Design (waves)") {
+    FrostedCreditCard(
+        title: "Claude credits",
+        cardNumber: "1838 0008 7261 2332",
+        expiration: "11/27",
+        cvv: "8177",
+        tint: .gray,
+        style: .subtle,
+        logo: {
+            Image(FrostedIcon.whopLogo24)
+                .renderingMode(.template)
+                .resizable()
+                .scaledToFit()
+        },
+        provider: {
+            Text("VISA")
+                .font(.system(size: 40, weight: .heavy))
+                .italic()
+                .minimumScaleFactor(0.1)
+                .lineLimit(1)
+        },
+        background: {
+            Image("cardWavesBackground", bundle: .module)
+                .resizable()
+                .scaledToFill()
+                .allowsHitTesting(false)
+        }
+    )
+    .padding(32)
 }
