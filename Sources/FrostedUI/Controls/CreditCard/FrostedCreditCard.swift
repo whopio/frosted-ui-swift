@@ -160,18 +160,20 @@ public struct FrostedCreditCard<Logo: View, Provider: View, Background: View>: V
         }
     }
 
-    private var secondaryForeground: Color {
+    /// Muted text color — matches web CSS `--credit-card-muted`.
+    /// On white/subtle cards: `gray-a10`. On colored/solid cards: 70% of contrast.
+    private var mutedForeground: Color {
         switch style {
-        case .solid: tint.contrastNine.opacity(0.61)
-        case .subtle: tint.twelve.opacity(0.61)
+        case .solid: tint.contrastNine.opacity(0.70)
+        case .subtle: Color(FrostedColor.frostedGrayA10)
         }
     }
 
-    private var labelForeground: Color {
-        switch style {
-        case .solid: tint.contrastNine.opacity(0.5)
-        case .subtle: tint.twelve.opacity(0.5)
-        }
+    /// Subtle 1pt outline — matches the first layer of Figma shadow-4
+    /// (`#00003D` @ 5% spread 1), which renders as a visible hairline on
+    /// the web. A true stroke is cleaner than approximating the spread shadow.
+    private var borderColor: Color {
+        Color(red: 0, green: 0, blue: 0.24).opacity(0.08)
     }
 
     private var stripeGradient: LinearGradient {
@@ -189,10 +191,6 @@ public struct FrostedCreditCard<Logo: View, Provider: View, Background: View>: V
                 endPoint: .trailing
             )
         }
-    }
-
-    private var borderColor: Color {
-        primaryForeground.opacity(0.19)
     }
 
     private var lastFour: String {
@@ -214,7 +212,7 @@ public struct FrostedCreditCard<Logo: View, Provider: View, Background: View>: V
                 state: state,
                 size: size,
                 primary: primaryForeground,
-                secondary: secondaryForeground,
+                muted: mutedForeground,
                 logo: logo,
                 provider: provider
             )
@@ -230,7 +228,7 @@ public struct FrostedCreditCard<Logo: View, Provider: View, Background: View>: V
                     expiration: expiration,
                     cvv: cvv,
                     primary: primaryForeground,
-                    label: labelForeground,
+                    label: mutedForeground,
                     stripe: stripeGradient
                 )
                 .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
@@ -241,22 +239,22 @@ public struct FrostedCreditCard<Logo: View, Provider: View, Background: View>: V
         .background(backgroundColor)
         .overlay(
             RoundedRectangle(cornerRadius: size.cornerRadius)
-                .strokeBorder(borderColor, lineWidth: size.borderWidth)
+                .strokeBorder(borderColor, lineWidth: 1)
         )
         .clipShape(.rect(cornerRadius: size.cornerRadius))
         .gyroscopeTilt3D(
             cornerRadius: size.cornerRadius,
             maxRotation: 10,
-            shadowColor: style == .solid ? backgroundColor : Color(red: 0, green: 0, blue: 0.24),
-            shadowIntensity: size == .large ? 0.5 : 0,
+            shadowColor: .clear,
+            shadowIntensity: 0,
             isActive: tilt && size.allowsTilt
         )
-        .rotation3DEffect(
-            .degrees(flipAngle),
-            axis: (x: 0, y: 1, z: 0),
-            perspective: 0.5
-        )
-        .animation(.spring(duration: 0.6, bounce: 0.12), value: isFlipped)
+        .modifier(CardFlip3D(angle: flipAngle, perspective: 0.5))
+        // Figma shadow-4: a very soft navy haze + a small cast beneath.
+        // Kept intentionally subtle to match the web's barely-there shadow.
+        .shadow(color: Color(red: 0, green: 0, blue: 0.24).opacity(0.04), radius: 8, x: 0, y: 3)
+        .shadow(color: .black.opacity(0.04), radius: 4, x: 0, y: 6)
+        .animation(.spring(duration: 0.6, bounce: 0), value: isFlipped)
         .contentShape(.rect(cornerRadius: size.cornerRadius))
         .onTapGesture {
             guard canFlip else { return }
@@ -384,7 +382,6 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
                 tint: .gray,
                 style: .subtle,
                 state: .default,
-                tilt: false,
                 logo: {
                     Image(FrostedIcon.whopLogo24)
                         .renderingMode(.template)
@@ -408,7 +405,6 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
                 tint: .gray,
                 style: .subtle,
                 state: .locked,
-                tilt: false,
                 logo: {
                     Image(FrostedIcon.whopLogo24)
                         .renderingMode(.template)
@@ -432,7 +428,6 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
                 tint: .gray,
                 style: .subtle,
                 state: .canceled,
-                tilt: false,
                 logo: {
                     Image(FrostedIcon.whopLogo24)
                         .renderingMode(.template)
@@ -463,7 +458,6 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
                 cvv: "8177",
                 tint: .lime,
                 style: .solid,
-                tilt: false,
                 logo: {
                     Image(FrostedIcon.whopLogo24)
                         .renderingMode(.template)
@@ -486,7 +480,6 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
                 cvv: "8177",
                 tint: .blue,
                 style: .solid,
-                tilt: false,
                 logo: {
                     Image(FrostedIcon.whopLogo24)
                         .renderingMode(.template)
@@ -515,6 +508,7 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
         cvv: "8177",
         tint: .gray,
         style: .subtle,
+        tilt: true,
         logo: {
             Image(FrostedIcon.whopLogo24)
                 .renderingMode(.template)
@@ -556,7 +550,6 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
                     cvv: "8177",
                     tint: tint,
                     style: .solid,
-                    tilt: false,
                     logo: {
                         Image(FrostedIcon.whopLogo24)
                             .renderingMode(.template)

@@ -1,6 +1,32 @@
 import SwiftUI
 import UIKit
 
+/// Applies the flip's 3D Y-axis rotation together with a subtle scale-dip that
+/// peaks when the card is edge-on (90° / 270°).
+struct CardFlip3D: ViewModifier, Animatable {
+    var angle: Double
+    let perspective: Double
+
+    var animatableData: Double {
+        get { angle }
+        set { angle = newValue }
+    }
+
+    func body(content: Content) -> some View {
+        let rad = angle * .pi / 180
+        // |sin| is 0 when the card is flat (0°/180°) and 1 when edge-on.
+        let edgeOn = abs(sin(rad))
+        let scale = 1 - edgeOn * 0.08
+        return content
+            .scaleEffect(scale)
+            .rotation3DEffect(
+                .degrees(angle),
+                axis: (x: 0, y: 1, z: 0),
+                perspective: perspective
+            )
+    }
+}
+
 /// Resolves face opacity from the interpolated rotation angle so that each face
 /// snaps in/out exactly when not visible
 struct FlipFaceVisibility: ViewModifier, Animatable {
@@ -29,7 +55,7 @@ struct FrostedCreditCardFront<Logo: View, Provider: View>: View {
     let state: FrostedCreditCardState
     let size: FrostedCreditCardSize
     let primary: Color
-    let secondary: Color
+    let muted: Color
     let logo: () -> Logo
     let provider: () -> Provider
 
@@ -65,16 +91,16 @@ struct FrostedCreditCardFront<Logo: View, Provider: View>: View {
                 if size.showsText {
                     HStack(alignment: .firstTextBaseline) {
                         Text(title)
-                            .font(.system(size: 16, weight: .regular))
+                            .font(.system(size: 16, weight: .medium))
                             .tracking(-0.18)
-                            .foregroundStyle(secondary)
+                            .foregroundStyle(primary)
 
                         Spacer(minLength: 8)
 
                         Text("•••• \(lastFour)")
-                            .font(.system(size: 16, weight: .regular))
-                            .tracking(-0.18)
-                            .foregroundStyle(secondary)
+                            .font(.system(size: 14, weight: .regular))
+                            .tracking(-0.09)
+                            .foregroundStyle(muted)
                             .opacity(lastFourOpacity)
                     }
                 } else {
