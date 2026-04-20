@@ -197,7 +197,7 @@ struct FrostedCreditCardBack: View {
 
             Spacer(minLength: 0)
 
-            VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .leading, spacing: 4) {
                 CopyableField(
                     label: "Card number",
                     value: cardNumber,
@@ -205,14 +205,13 @@ struct FrostedCreditCardBack: View {
                     labelColor: label
                 )
 
-                HStack(alignment: .top, spacing: 8) {
+                HStack(alignment: .top, spacing: 32) {
                     CopyableField(
                         label: "Exp",
                         value: expiration,
                         primary: primary,
                         labelColor: label
                     )
-                    .frame(width: 80, alignment: .leading)
 
                     CopyableField(
                         label: "CVV",
@@ -220,7 +219,6 @@ struct FrostedCreditCardBack: View {
                         primary: primary,
                         labelColor: label
                     )
-                    .frame(width: 76, alignment: .leading)
                 }
             }
             .padding(.leading, 8)
