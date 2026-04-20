@@ -7,20 +7,26 @@ struct CardFlip3D: ViewModifier, Animatable {
     var angle: Double
     let perspective: Double
 
+    // Clamps the rendered rotation so it doesnt have perpendicular keyframes.
+    // Those keyframes made it look really buggy.
+    private let maxTilt: Double = 80
+
     var animatableData: Double {
         get { angle }
         set { angle = newValue }
     }
 
+    private var display: Double {
+        let p = max(0, min(1, angle / 180))
+        return p < 0.5
+            ? p * 2 * maxTilt
+            : (180 - maxTilt) + (p - 0.5) * 2 * maxTilt
+    }
+
     func body(content: Content) -> some View {
-        let rad = angle * .pi / 180
-        // |sin| is 0 when the card is flat (0°/180°) and 1 when edge-on.
-        let edgeOn = abs(sin(rad))
-        let scale = 1 - edgeOn * 0.08
-        return content
-            .scaleEffect(scale)
+        content
             .rotation3DEffect(
-                .degrees(angle),
+                .degrees(display),
                 axis: (x: 0, y: 1, z: 0),
                 perspective: perspective
             )
