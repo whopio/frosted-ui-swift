@@ -197,7 +197,7 @@ struct FrostedCreditCardBack: View {
 
             Spacer(minLength: 0)
 
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 8) {
                 CopyableField(
                     label: "Card number",
                     value: cardNumber,
@@ -236,10 +236,9 @@ private struct CopyableField: View {
     @SwiftUI.State private var didCopy = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: 2) {
             Text(label)
                 .font(.system(size: 14, weight: .regular))
-                .tracking(-0.09)
                 .foregroundStyle(labelColor)
                 .padding(.horizontal, 8)
 
@@ -247,7 +246,6 @@ private struct CopyableField: View {
                 HStack(spacing: 8) {
                     Text(value)
                         .font(.system(size: 16, weight: .medium, design: .monospaced))
-                        .tracking(-0.18)
                         .foregroundStyle(primary)
                         .lineLimit(1)
                         .fixedSize(horizontal: true, vertical: false)
