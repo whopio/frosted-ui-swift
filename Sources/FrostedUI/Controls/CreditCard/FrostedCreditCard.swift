@@ -448,58 +448,6 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
     .background(Color(FrostedColor.frostedGray2))
 }
 
-#Preview("Tinted solid") {
-    ScrollView {
-        VStack(spacing: 24) {
-            FrostedCreditCard(
-                title: "Claude credits",
-                cardNumber: "1838 0008 7261 2332",
-                expiration: "11/27",
-                cvv: "8177",
-                tint: .lime,
-                style: .solid,
-                logo: {
-                    Image(FrostedIcon.whopLogo24)
-                        .renderingMode(.template)
-                        .resizable()
-                        .scaledToFit()
-                },
-                provider: {
-                    Text("VISA")
-                        .font(.system(size: 40, weight: .heavy))
-                        .italic()
-                        .minimumScaleFactor(0.1)
-                        .lineLimit(1)
-                }
-            )
-
-            FrostedCreditCard(
-                title: "Claude credits",
-                cardNumber: "1838 0008 7261 2332",
-                expiration: "11/27",
-                cvv: "8177",
-                tint: .blue,
-                style: .solid,
-                logo: {
-                    Image(FrostedIcon.whopLogo24)
-                        .renderingMode(.template)
-                        .resizable()
-                        .scaledToFit()
-                },
-                provider: {
-                    Text("VISA")
-                        .font(.system(size: 40, weight: .heavy))
-                        .italic()
-                        .minimumScaleFactor(0.1)
-                        .lineLimit(1)
-                }
-            )
-        }
-        .padding(24)
-    }
-    .background(Color(FrostedColor.frostedGray2))
-}
-
 #Preview("Tilt + flip (live)") {
     FrostedCreditCard(
         title: "Claude credits",
@@ -625,54 +573,134 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
 }
 
 #Preview("Whop Card preset") {
-    FrostedCreditCard(
-        title: "Claude credits",
-        cardNumber: "1838 0008 7261 2332",
-        expiration: "11/27",
-        cvv: "8177",
-        tint: .gray,
-        style: .subtle,
-        logo: {
-            Image("whopLogoEtch", bundle: .module)
-                .resizable()
-                .scaledToFit()
-        },
-        provider: {
-            Image("visaPlatinumEtch", bundle: .module)
-                .resizable()
-                .scaledToFit()
+    let states: [(String, FrostedCreditCardState)] = [
+        ("Default", .default), ("Locked", .locked), ("Canceled", .canceled),
+    ]
+
+    @ViewBuilder func whopCard(size: FrostedCreditCardSize, state: FrostedCreditCardState) -> some View {
+        FrostedCreditCard(
+            title: "Claude credits",
+            cardNumber: "1838 0008 7261 2332",
+            expiration: "11/27",
+            cvv: "8177",
+            tint: .gray,
+            style: .subtle,
+            state: state,
+            size: size,
+            logo: {
+                Image("whopLogoEtch", bundle: .module)
+                    .resizable()
+                    .scaledToFit()
+            },
+            provider: {
+                Image("visaPlatinumEtch", bundle: .module)
+                    .resizable()
+                    .scaledToFit()
+            }
+        )
+    }
+
+    return ScrollView {
+        VStack(spacing: 32) {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Large").font(.caption).foregroundStyle(.secondary)
+                VStack(spacing: 16) {
+                    ForEach(states, id: \.0) { _, state in
+                        whopCard(size: .large, state: state)
+                    }
+                }
+            }
+
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Medium (64×40)").font(.caption).foregroundStyle(.secondary)
+                HStack(spacing: 12) {
+                    ForEach(states, id: \.0) { _, state in
+                        whopCard(size: .medium, state: state)
+                    }
+                }
+            }
+
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Small (40×25)").font(.caption).foregroundStyle(.secondary)
+                HStack(spacing: 12) {
+                    ForEach(states, id: \.0) { _, state in
+                        whopCard(size: .small, state: state)
+                    }
+                }
+            }
         }
-    )
-    .padding(32)
+        .padding(32)
+    }
+    .background(Color(FrostedColor.frostedGray2))
 }
 
 #Preview("Custom Design (waves)") {
-    FrostedCreditCard(
-        title: "Claude credits",
-        cardNumber: "1838 0008 7261 2332",
-        expiration: "11/27",
-        cvv: "8177",
-        tint: .gray,
-        style: .subtle,
-        logo: {
-            Image(FrostedIcon.whopLogo24)
-                .renderingMode(.template)
-                .resizable()
-                .scaledToFit()
-        },
-        provider: {
-            Text("VISA")
-                .font(.system(size: 40, weight: .heavy))
-                .italic()
-                .minimumScaleFactor(0.1)
-                .lineLimit(1)
-        },
-        background: {
-            Image("cardWavesBackground", bundle: .module)
-                .resizable()
-                .scaledToFill()
-                .allowsHitTesting(false)
+    let states: [(String, FrostedCreditCardState)] = [
+        ("Default", .default), ("Locked", .locked), ("Canceled", .canceled),
+    ]
+
+    @ViewBuilder func wavesCard(size: FrostedCreditCardSize, state: FrostedCreditCardState) -> some View {
+        FrostedCreditCard(
+            title: "Claude credits",
+            cardNumber: "1838 0008 7261 2332",
+            expiration: "11/27",
+            cvv: "8177",
+            tint: .gray,
+            style: .subtle,
+            state: state,
+            size: size,
+            logo: {
+                Image(size == .large ? FrostedIcon.whopLogo24 : FrostedIcon.whopLogo12)
+                    .renderingMode(.template)
+                    .resizable()
+                    .scaledToFit()
+            },
+            provider: {
+                Text("VISA")
+                    .font(.system(size: size == .large ? 40 : 20, weight: size == .large ? .heavy : .black))
+                    .italic()
+                    .minimumScaleFactor(0.1)
+                    .lineLimit(1)
+            },
+            background: {
+                Image("cardWavesBackground", bundle: .module)
+                    .resizable()
+                    .scaledToFill()
+                    .allowsHitTesting(false)
+            }
+        )
+    }
+
+    return ScrollView {
+        VStack(spacing: 32) {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Large").font(.caption).foregroundStyle(.secondary)
+                VStack(spacing: 16) {
+                    ForEach(states, id: \.0) { _, state in
+                        wavesCard(size: .large, state: state)
+                    }
+                }
+            }
+
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Medium (64×40)").font(.caption).foregroundStyle(.secondary)
+                HStack(spacing: 12) {
+                    ForEach(states, id: \.0) { _, state in
+                        wavesCard(size: .medium, state: state)
+                    }
+                }
+            }
+
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Small (40×25)").font(.caption).foregroundStyle(.secondary)
+                HStack(spacing: 12) {
+                    ForEach(states, id: \.0) { _, state in
+                        wavesCard(size: .small, state: state)
+                    }
+                }
+            }
         }
-    )
-    .padding(32)
+        .padding(32)
+    }
+    .background(Color(FrostedColor.frostedGray2))
 }
