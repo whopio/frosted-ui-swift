@@ -109,12 +109,12 @@ public struct FrostedCreditCard<Logo: View, Provider: View, Background: View>: V
     private let state: State
     private let size: Size
     private let tilt: Bool
-    private let allowsFlipping: Bool
+
     private let logo: () -> Logo
     private let provider: () -> Provider
     private let background: () -> Background
 
-    @SwiftUI.State private var isFlipped = false
+    @Binding private var isFlipped: Bool
 
     public init(
         title: String,
@@ -126,7 +126,7 @@ public struct FrostedCreditCard<Logo: View, Provider: View, Background: View>: V
         state: State = .default,
         size: Size = .large,
         tilt: Bool = false,
-        allowsFlipping: Bool = true,
+        flipped: Binding<Bool> = .constant(false),
         @ViewBuilder logo: @escaping () -> Logo,
         @ViewBuilder provider: @escaping () -> Provider,
         @ViewBuilder background: @escaping () -> Background
@@ -140,10 +140,14 @@ public struct FrostedCreditCard<Logo: View, Provider: View, Background: View>: V
         self.state = state
         self.size = size
         self.tilt = tilt
-        self.allowsFlipping = allowsFlipping
+        self._isFlipped = flipped
         self.logo = logo
         self.provider = provider
         self.background = background
+    }
+
+    private var isActuallyFlipped: Bool {
+        size.allowsFlip && isFlipped
     }
 
     private var backgroundColor: Color {
@@ -198,11 +202,7 @@ public struct FrostedCreditCard<Logo: View, Provider: View, Background: View>: V
         return String(digits.suffix(4))
     }
 
-    private var flipAngle: Double { isFlipped ? 180 : 0 }
-
-    private var canFlip: Bool {
-        allowsFlipping && size.allowsFlip && state == .default
-    }
+    private var flipAngle: Double { isActuallyFlipped ? 180 : 0 }
 
     public var body: some View {
         ZStack {
@@ -254,13 +254,9 @@ public struct FrostedCreditCard<Logo: View, Provider: View, Background: View>: V
         // Kept intentionally subtle to match the web's barely-there shadow.
         .shadow(color: Color(red: 0, green: 0, blue: 0.24).opacity(0.04), radius: 8, x: 0, y: 3)
         .shadow(color: .black.opacity(0.04), radius: 4, x: 0, y: 6)
-        .animation(.smooth(duration: 0.6), value: isFlipped)
+        .animation(.smooth(duration: 0.6), value: isActuallyFlipped)
+        .sensoryFeedback(.selection, trigger: isActuallyFlipped)
         .contentShape(.rect(cornerRadius: size.cornerRadius))
-        .onTapGesture {
-            guard canFlip else { return }
-            HapticManager.shared.fireHaptic(.impact(.soft))
-            isFlipped.toggle()
-        }
     }
 }
 
@@ -286,7 +282,7 @@ public extension FrostedCreditCard where Background == EmptyView {
         state: State = .default,
         size: Size = .large,
         tilt: Bool = false,
-        allowsFlipping: Bool = true,
+        flipped: Binding<Bool> = .constant(false),
         @ViewBuilder logo: @escaping () -> Logo,
         @ViewBuilder provider: @escaping () -> Provider
     ) {
@@ -300,7 +296,7 @@ public extension FrostedCreditCard where Background == EmptyView {
             state: state,
             size: size,
             tilt: tilt,
-            allowsFlipping: allowsFlipping,
+            flipped: flipped,
             logo: logo,
             provider: provider,
             background: { EmptyView() }
@@ -319,7 +315,7 @@ public extension FrostedCreditCard where Provider == EmptyView, Background == Em
         state: State = .default,
         size: Size = .large,
         tilt: Bool = false,
-        allowsFlipping: Bool = true,
+        flipped: Binding<Bool> = .constant(false),
         @ViewBuilder logo: @escaping () -> Logo
     ) {
         self.init(
@@ -332,7 +328,7 @@ public extension FrostedCreditCard where Provider == EmptyView, Background == Em
             state: state,
             size: size,
             tilt: tilt,
-            allowsFlipping: allowsFlipping,
+            flipped: flipped,
             logo: logo,
             provider: { EmptyView() },
             background: { EmptyView() }
@@ -351,7 +347,7 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
         state: State = .default,
         size: Size = .large,
         tilt: Bool = false,
-        allowsFlipping: Bool = true
+        flipped: Binding<Bool> = .constant(false),
     ) {
         self.init(
             title: title,
@@ -363,7 +359,7 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
             state: state,
             size: size,
             tilt: tilt,
-            allowsFlipping: allowsFlipping,
+            flipped: flipped,
             logo: { EmptyView() },
             provider: { EmptyView() },
             background: { EmptyView() }
@@ -371,110 +367,9 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
     }
 }
 
-#Preview("Default (Figma spec)") {
-    ScrollView {
-        VStack(spacing: 24) {
-            FrostedCreditCard(
-                title: "Claude credits",
-                cardNumber: "1838 0008 7261 2332",
-                expiration: "11/27",
-                cvv: "8177",
-                tint: .gray,
-                style: .subtle,
-                state: .default,
-                logo: {
-                    Image(FrostedIcon.whopLogo24)
-                        .renderingMode(.template)
-                        .resizable()
-                        .scaledToFit()
-                },
-                provider: {
-                    Text("VISA")
-                        .font(.system(size: 40, weight: .heavy))
-                        .italic()
-                        .minimumScaleFactor(0.1)
-                        .lineLimit(1)
-                }
-            )
-
-            FrostedCreditCard(
-                title: "Claude credits",
-                cardNumber: "1838 0008 7261 2332",
-                expiration: "11/27",
-                cvv: "8177",
-                tint: .gray,
-                style: .subtle,
-                state: .locked,
-                logo: {
-                    Image(FrostedIcon.whopLogo24)
-                        .renderingMode(.template)
-                        .resizable()
-                        .scaledToFit()
-                },
-                provider: {
-                    Text("VISA")
-                        .font(.system(size: 40, weight: .heavy))
-                        .italic()
-                        .minimumScaleFactor(0.1)
-                        .lineLimit(1)
-                }
-            )
-
-            FrostedCreditCard(
-                title: "Claude credits",
-                cardNumber: "1838 0008 7261 2332",
-                expiration: "11/27",
-                cvv: "8177",
-                tint: .gray,
-                style: .subtle,
-                state: .canceled,
-                logo: {
-                    Image(FrostedIcon.whopLogo24)
-                        .renderingMode(.template)
-                        .resizable()
-                        .scaledToFit()
-                },
-                provider: {
-                    Text("VISA")
-                        .font(.system(size: 40, weight: .heavy))
-                        .italic()
-                        .minimumScaleFactor(0.1)
-                        .lineLimit(1)
-                }
-            )
-        }
-        .padding(24)
-    }
-    .background(Color(FrostedColor.frostedGray2))
-}
-
-#Preview("Tilt + flip (live)") {
-    FrostedCreditCard(
-        title: "Claude credits",
-        cardNumber: "1838 0008 7261 2332",
-        expiration: "11/27",
-        cvv: "8177",
-        tint: .gray,
-        style: .subtle,
-        tilt: true,
-        logo: {
-            Image(FrostedIcon.whopLogo24)
-                .renderingMode(.template)
-                .resizable()
-                .scaledToFit()
-        },
-        provider: {
-            Text("VISA")
-                .font(.system(size: 40, weight: .heavy))
-                .italic()
-                .minimumScaleFactor(0.1)
-                .lineLimit(1)
-        }
-    )
-    .padding(32)
-}
-
 #Preview("All tints") {
+    @Previewable @State var flipped: Bool = false
+
     let tints: [(String, FrostedTint)] = [
         ("amber", .amber), ("blue", .blue), ("bronze", .bronze),
         ("brown", .brown), ("crimson", .crimson), ("cyan", .cyan),
@@ -498,6 +393,7 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
                     cvv: "8177",
                     tint: tint,
                     style: .solid,
+                    flipped: $flipped,
                     logo: {
                         Image(FrostedIcon.whopLogo24)
                             .renderingMode(.template)
@@ -512,11 +408,46 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
                             .lineLimit(1)
                     }
                 )
+                .onTapGesture {
+                    flipped.toggle()
+                }
             }
         }
         .padding(20)
     }
     .background(Color(FrostedColor.frostedGray2))
+}
+
+#Preview("Tilt + flip (live)") {
+    @Previewable @State var flipped: Bool = false
+
+    FrostedCreditCard(
+        title: "Claude credits",
+        cardNumber: "1838 0008 7261 2332",
+        expiration: "11/27",
+        cvv: "8177",
+        tint: .gray,
+        style: .subtle,
+        tilt: true,
+        flipped: $flipped,
+        logo: {
+            Image(FrostedIcon.whopLogo24)
+                .renderingMode(.template)
+                .resizable()
+                .scaledToFit()
+        },
+        provider: {
+            Text("VISA")
+                .font(.system(size: 40, weight: .heavy))
+                .italic()
+                .minimumScaleFactor(0.1)
+                .lineLimit(1)
+        }
+    )
+    .padding(32)
+    .onTapGesture {
+        flipped.toggle()
+    }
 }
 
 #Preview("Sizes (Figma)") {
@@ -573,6 +504,8 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
 }
 
 #Preview("Whop Card preset") {
+    @Previewable @State var flipped: Bool = false
+
     let states: [(String, FrostedCreditCardState)] = [
         ("Default", .default), ("Locked", .locked), ("Canceled", .canceled),
     ]
@@ -587,6 +520,7 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
             style: .subtle,
             state: state,
             size: size,
+            flipped: $flipped,
             logo: {
                 Image("whopLogoEtch", bundle: .module)
                     .resizable()
@@ -598,6 +532,9 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
                     .scaledToFit()
             }
         )
+        .onTapGesture {
+            flipped.toggle()
+        }
     }
 
     return ScrollView {
@@ -635,6 +572,8 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
 }
 
 #Preview("Custom Design (waves)") {
+    @Previewable @State var flipped: Bool = false
+
     let states: [(String, FrostedCreditCardState)] = [
         ("Default", .default), ("Locked", .locked), ("Canceled", .canceled),
     ]
@@ -649,6 +588,7 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
             style: .subtle,
             state: state,
             size: size,
+            flipped: $flipped,
             logo: {
                 Image(size == .large ? FrostedIcon.whopLogo24 : FrostedIcon.whopLogo12)
                     .renderingMode(.template)
@@ -669,6 +609,9 @@ public extension FrostedCreditCard where Logo == EmptyView, Provider == EmptyVie
                     .allowsHitTesting(false)
             }
         )
+        .onTapGesture {
+            flipped.toggle()
+        }
     }
 
     return ScrollView {
