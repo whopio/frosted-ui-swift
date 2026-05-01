@@ -2,12 +2,12 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - pull-icons-create-pr
+      - fix/ci-generation
 
 name: Generate Frosted Icons from Figma
 
 concurrency:
-  group: 'generate-icons'
+  group: "generate-icons"
   cancel-in-progress: false
 
 permissions:
@@ -57,12 +57,12 @@ jobs:
           set -euo pipefail
           ZIP_PATH="frosted-ui/packages/frosted-ui-icons/frosted-ui-icons.zip"
           TEMP_DIR=$(mktemp -d)
-          
+
           echo "Extracting zip..."
           unzip -q "$ZIP_PATH" -d "$TEMP_DIR"
-          
+
           cd "$TEMP_DIR"
-          
+
           # Function to compute imageset name from SVG filename
           # e.g., tik-tok-12.svg -> tiktok12 (lowercase for comparison)
           get_imageset_key() {
@@ -74,17 +74,17 @@ jobs:
             local camel=$(echo "$base" | awk -F'-' '{ for (i=1;i<=NF;i++) { if (i==1) printf "%s", $i; else printf "%s%s", toupper(substr($i,1,1)), substr($i,2); } }')
             echo "${camel}${size}" | tr '[:upper:]' '[:lower:]'
           }
-          
+
           # === 1. Remove duplicates that produce same imageset name ===
           # e.g., tik-tok-12.svg -> tikTok12, tiktok-12.svg -> tiktok12
           # Both lowercase to tiktok12, so they're duplicates on case-insensitive FS
           declare -A seen
           declare -A to_keep
-          
+
           for svg in *.svg; do
             [ -f "$svg" ] || continue
             key=$(get_imageset_key "$svg")
-            
+
             if [ -z "${seen[$key]:-}" ]; then
               seen[$key]="$svg"
               to_keep[$key]="$svg"
@@ -97,7 +97,7 @@ jobs:
               seen[$key]="${seen[$key]}:$svg"
             fi
           done
-          
+
           for key in "${!seen[@]}"; do
             IFS=':' read -ra files <<< "${seen[$key]}"
             keep="${to_keep[$key]}"
@@ -108,18 +108,18 @@ jobs:
               fi
             done
           done
-          
+
           # === 2. Remove all *-size-* icons (they're duplicates we don't need) ===
           for svg in *-size-*.svg; do
             [ -f "$svg" ] || continue
             echo "Removing Size variant: $svg"
             rm -f "$svg"
           done
-          
+
           echo "Re-creating zip..."
           rm -f "$GITHUB_WORKSPACE/$ZIP_PATH"
           zip -q "$GITHUB_WORKSPACE/$ZIP_PATH" *.svg
-          
+
           rm -rf "$TEMP_DIR"
           echo "Deduplication complete."
 
