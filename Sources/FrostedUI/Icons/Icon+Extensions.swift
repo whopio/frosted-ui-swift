@@ -608,6 +608,36 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case bookFilled20 = "bookFilled20"
     case bookFilled24 = "bookFilled24"
     case bookFilled32 = "bookFilled32"
+    case bounties12 = "bounties12"
+    case bounties16 = "bounties16"
+    case bounties20 = "bounties20"
+    case bounties24 = "bounties24"
+    case bounties32 = "bounties32"
+    case bountiesAdd12 = "bountiesAdd12"
+    case bountiesAdd16 = "bountiesAdd16"
+    case bountiesAdd20 = "bountiesAdd20"
+    case bountiesAdd24 = "bountiesAdd24"
+    case bountiesAdd32 = "bountiesAdd32"
+    case bountiesAddBold12 = "bountiesAddBold12"
+    case bountiesAddBold16 = "bountiesAddBold16"
+    case bountiesAddBold20 = "bountiesAddBold20"
+    case bountiesAddBold24 = "bountiesAddBold24"
+    case bountiesAddBold32 = "bountiesAddBold32"
+    case bountiesBold12 = "bountiesBold12"
+    case bountiesBold16 = "bountiesBold16"
+    case bountiesBold20 = "bountiesBold20"
+    case bountiesBold24 = "bountiesBold24"
+    case bountiesBold32 = "bountiesBold32"
+    case bountiesBoldFilled12 = "bountiesBoldFilled12"
+    case bountiesBoldFilled16 = "bountiesBoldFilled16"
+    case bountiesBoldFilled20 = "bountiesBoldFilled20"
+    case bountiesBoldFilled24 = "bountiesBoldFilled24"
+    case bountiesBoldFilled32 = "bountiesBoldFilled32"
+    case bountiesFilled12 = "bountiesFilled12"
+    case bountiesFilled16 = "bountiesFilled16"
+    case bountiesFilled20 = "bountiesFilled20"
+    case bountiesFilled24 = "bountiesFilled24"
+    case bountiesFilled32 = "bountiesFilled32"
     case browser12 = "browser12"
     case browser16 = "browser16"
     case browser20 = "browser20"
@@ -1032,6 +1062,16 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case codeblock20 = "codeblock20"
     case codeblock24 = "codeblock24"
     case codeblock32 = "codeblock32"
+    case codeblockBold12 = "codeblockBold12"
+    case codeblockBold16 = "codeblockBold16"
+    case codeblockBold20 = "codeblockBold20"
+    case codeblockBold24 = "codeblockBold24"
+    case codeblockBold32 = "codeblockBold32"
+    case codeblockBoldFilled12 = "codeblockBoldFilled12"
+    case codeblockBoldFilled16 = "codeblockBoldFilled16"
+    case codeblockBoldFilled20 = "codeblockBoldFilled20"
+    case codeblockBoldFilled24 = "codeblockBoldFilled24"
+    case codeblockBoldFilled32 = "codeblockBoldFilled32"
     case codeblockFilled12 = "codeblockFilled12"
     case codeblockFilled16 = "codeblockFilled16"
     case codeblockFilled20 = "codeblockFilled20"
@@ -3737,6 +3777,20 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case refund20 = "refund20"
     case refund24 = "refund24"
     case refund32 = "refund32"
+    case refundBold12 = "refundBold12"
+    case refundBold16 = "refundBold16"
+    case refundBold20 = "refundBold20"
+    case refundBold24 = "refundBold24"
+    case refundBold32 = "refundBold32"
+    case refundBoldFilled12 = "refundBoldFilled12"
+    case refundBoldFilled16 = "refundBoldFilled16"
+    case refundBoldFilled20 = "refundBoldFilled20"
+    case refundBoldFilled24 = "refundBoldFilled24"
+    case refundBoldFilled32 = "refundBoldFilled32"
+    case refundFilled16 = "refundFilled16"
+    case refundFilled20 = "refundFilled20"
+    case refundFilled24 = "refundFilled24"
+    case refundFilled32 = "refundFilled32"
     case reply12 = "reply12"
     case reply16 = "reply16"
     case reply20 = "reply20"
@@ -3928,6 +3982,16 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case sealCheckmark20 = "sealCheckmark20"
     case sealCheckmark24 = "sealCheckmark24"
     case sealCheckmark32 = "sealCheckmark32"
+    case sealCheckmarkBold12 = "sealCheckmarkBold12"
+    case sealCheckmarkBold16 = "sealCheckmarkBold16"
+    case sealCheckmarkBold20 = "sealCheckmarkBold20"
+    case sealCheckmarkBold24 = "sealCheckmarkBold24"
+    case sealCheckmarkBold32 = "sealCheckmarkBold32"
+    case sealCheckmarkBoldFilled12 = "sealCheckmarkBoldFilled12"
+    case sealCheckmarkBoldFilled16 = "sealCheckmarkBoldFilled16"
+    case sealCheckmarkBoldFilled20 = "sealCheckmarkBoldFilled20"
+    case sealCheckmarkBoldFilled24 = "sealCheckmarkBoldFilled24"
+    case sealCheckmarkBoldFilled32 = "sealCheckmarkBoldFilled32"
     case sealCheckmarkFilled12 = "sealCheckmarkFilled12"
     case sealCheckmarkFilled16 = "sealCheckmarkFilled16"
     case sealCheckmarkFilled20 = "sealCheckmarkFilled20"
@@ -4380,6 +4444,11 @@ public enum FrostedIcon: String, CaseIterable, Identifiable {
     case tag20 = "tag20"
     case tag24 = "tag24"
     case tag32 = "tag32"
+    case tagBold12 = "tagBold12"
+    case tagBold16 = "tagBold16"
+    case tagBold20 = "tagBold20"
+    case tagBold24 = "tagBold24"
+    case tagBold32 = "tagBold32"
     case tagFilled12 = "tagFilled12"
     case tagFilled16 = "tagFilled16"
     case tagFilled20 = "tagFilled20"
@@ -5959,6 +6028,54 @@ public extension FrostedIconSet {
         size32: .bookFilled32
     )
 
+    static let bounties = FrostedIconSet(
+        size12: .bounties12,
+        size16: .bounties16,
+        size20: .bounties20,
+        size24: .bounties24,
+        size32: .bounties32
+    )
+
+    static let bountiesAdd = FrostedIconSet(
+        size12: .bountiesAdd12,
+        size16: .bountiesAdd16,
+        size20: .bountiesAdd20,
+        size24: .bountiesAdd24,
+        size32: .bountiesAdd32
+    )
+
+    static let bountiesAddBold = FrostedIconSet(
+        size12: .bountiesAddBold12,
+        size16: .bountiesAddBold16,
+        size20: .bountiesAddBold20,
+        size24: .bountiesAddBold24,
+        size32: .bountiesAddBold32
+    )
+
+    static let bountiesBold = FrostedIconSet(
+        size12: .bountiesBold12,
+        size16: .bountiesBold16,
+        size20: .bountiesBold20,
+        size24: .bountiesBold24,
+        size32: .bountiesBold32
+    )
+
+    static let bountiesBoldFilled = FrostedIconSet(
+        size12: .bountiesBoldFilled12,
+        size16: .bountiesBoldFilled16,
+        size20: .bountiesBoldFilled20,
+        size24: .bountiesBoldFilled24,
+        size32: .bountiesBoldFilled32
+    )
+
+    static let bountiesFilled = FrostedIconSet(
+        size12: .bountiesFilled12,
+        size16: .bountiesFilled16,
+        size20: .bountiesFilled20,
+        size24: .bountiesFilled24,
+        size32: .bountiesFilled32
+    )
+
     static let browser = FrostedIconSet(
         size12: .browser12,
         size16: .browser16,
@@ -6629,6 +6746,22 @@ public extension FrostedIconSet {
         size20: .codeblock20,
         size24: .codeblock24,
         size32: .codeblock32
+    )
+
+    static let codeblockBold = FrostedIconSet(
+        size12: .codeblockBold12,
+        size16: .codeblockBold16,
+        size20: .codeblockBold20,
+        size24: .codeblockBold24,
+        size32: .codeblockBold32
+    )
+
+    static let codeblockBoldFilled = FrostedIconSet(
+        size12: .codeblockBoldFilled12,
+        size16: .codeblockBoldFilled16,
+        size20: .codeblockBoldFilled20,
+        size24: .codeblockBoldFilled24,
+        size32: .codeblockBoldFilled32
     )
 
     static let codeblockFilled = FrostedIconSet(
@@ -10927,6 +11060,22 @@ public extension FrostedIconSet {
         size32: .refund32
     )
 
+    static let refundBold = FrostedIconSet(
+        size12: .refundBold12,
+        size16: .refundBold16,
+        size20: .refundBold20,
+        size24: .refundBold24,
+        size32: .refundBold32
+    )
+
+    static let refundBoldFilled = FrostedIconSet(
+        size12: .refundBoldFilled12,
+        size16: .refundBoldFilled16,
+        size20: .refundBoldFilled20,
+        size24: .refundBoldFilled24,
+        size32: .refundBoldFilled32
+    )
+
     static let reply = FrostedIconSet(
         size12: .reply12,
         size16: .reply16,
@@ -11205,6 +11354,22 @@ public extension FrostedIconSet {
         size20: .sealCheckmark20,
         size24: .sealCheckmark24,
         size32: .sealCheckmark32
+    )
+
+    static let sealCheckmarkBold = FrostedIconSet(
+        size12: .sealCheckmarkBold12,
+        size16: .sealCheckmarkBold16,
+        size20: .sealCheckmarkBold20,
+        size24: .sealCheckmarkBold24,
+        size32: .sealCheckmarkBold32
+    )
+
+    static let sealCheckmarkBoldFilled = FrostedIconSet(
+        size12: .sealCheckmarkBoldFilled12,
+        size16: .sealCheckmarkBoldFilled16,
+        size20: .sealCheckmarkBoldFilled20,
+        size24: .sealCheckmarkBoldFilled24,
+        size32: .sealCheckmarkBoldFilled32
     )
 
     static let sealCheckmarkFilled = FrostedIconSet(
@@ -11925,6 +12090,14 @@ public extension FrostedIconSet {
         size20: .tag20,
         size24: .tag24,
         size32: .tag32
+    )
+
+    static let tagBold = FrostedIconSet(
+        size12: .tagBold12,
+        size16: .tagBold16,
+        size20: .tagBold20,
+        size24: .tagBold24,
+        size32: .tagBold32
     )
 
     static let tagFilled = FrostedIconSet(
