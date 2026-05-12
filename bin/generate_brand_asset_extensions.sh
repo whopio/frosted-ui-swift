@@ -1,7 +1,12 @@
 #!/bin/bash
 
-# Generate Swift enum and Image / UIImage extensions for all brand asset
-# SVGs located in Sources/FrostedUI/Resources/BrandAssets.xcassets.
+# Generate the Swift FrostedBrandAsset enum and Image / UIImage extensions
+# for every imageset under Sources/FrostedUI/Resources/BrandAssets.xcassets.
+#
+# Each imageset becomes one enum case. Light/dark variants are handled by
+# Xcode at the asset level (one imageset per base, with a dark appearance
+# image inside it). Over-orange variants live in their own imagesets and
+# show up as separate cases like `barcodeOverOrange`.
 
 ASSETS_PATH="Sources/FrostedUI/Resources/BrandAssets.xcassets"
 OUTPUT_FILE="Sources/FrostedUI/BrandAssets/BrandAsset+Extensions.swift"
@@ -11,33 +16,29 @@ if [ ! -d "$ASSETS_PATH" ]; then
     exit 1
 fi
 
-OUTPUT_DIR=$(dirname "$OUTPUT_FILE")
-if [ ! -d "$OUTPUT_DIR" ]; then
-    echo "Creating output directory '$OUTPUT_DIR'"
-    mkdir -p "$OUTPUT_DIR"
-fi
+mkdir -p "$(dirname "$OUTPUT_FILE")"
 
 echo "Generating Swift brand asset enum into $OUTPUT_FILE"
 
-echo "import SwiftUI" > "$OUTPUT_FILE"
-echo "" >> "$OUTPUT_FILE"
-echo "public enum FrostedBrandAsset: String, CaseIterable, Identifiable {" >> "$OUTPUT_FILE"
-echo "    public var id: String { rawValue }" >> "$OUTPUT_FILE"
-echo "" >> "$OUTPUT_FILE"
-
-declare -a enum_cases
-
+declare -a asset_names
 while IFS= read -r dir; do
     imageset_name=$(basename "$dir")
-    asset_name="${imageset_name%.imageset}"
-    enum_cases+=("    case ${asset_name} = \"${asset_name}\"")
+    asset_names+=("${imageset_name%.imageset}")
 done < <(find "$ASSETS_PATH" -maxdepth 1 -type d -name "*.imageset")
 
-IFS=$'\n' enum_cases=($(sort <<<"${enum_cases[*]}"))
+IFS=$'\n' asset_names=($(sort <<<"${asset_names[*]}"))
 unset IFS
 
-for enum_case in "${enum_cases[@]}"; do
-    echo "$enum_case" >> "$OUTPUT_FILE"
+{
+    echo "import SwiftUI"
+    echo ""
+    echo "public enum FrostedBrandAsset: String, CaseIterable, Identifiable {"
+    echo "    public var id: String { rawValue }"
+    echo ""
+} > "$OUTPUT_FILE"
+
+for name in "${asset_names[@]}"; do
+    echo "    case ${name} = \"${name}\"" >> "$OUTPUT_FILE"
 done
 
 cat <<'EOT' >> "$OUTPUT_FILE"
@@ -54,7 +55,6 @@ public extension UIImage {
         self.init(named: asset.rawValue, in: .module, compatibleWith: nil)
     }
 }
-
 
 #Preview {
     ScrollView {
