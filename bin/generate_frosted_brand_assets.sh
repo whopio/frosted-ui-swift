@@ -93,16 +93,53 @@ to_camel() {
 }
 
 echo "Processing .svg brand assets into .imageset folders..."
-declare -a created
+
+# First pass: compute the camelCase name for every SVG so we can detect
+# which "...1" names can be safely stripped to the bare form.
+declare -a svg_paths
+declare -a svg_names
+
 while IFS= read -r -d '' svg; do
     filename=$(basename "$svg")
     base="${filename%.svg}"
-
     name=$(to_camel "$base")
     if [ -z "$name" ]; then
         echo "Skipping unprintable name: $filename"
         continue
     fi
+    svg_paths+=("$svg")
+    svg_names+=("$name")
+done < <(find "$SRC_PATH" -type f -name "*.svg" -print0)
+
+name_is_taken() {
+    local needle="$1"
+    local n
+    for n in "${svg_names[@]}"; do
+        if [ "$n" = "$needle" ]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+# Second pass: for each name ending in a trailing "1" (e.g. "phoneRed1"),
+# drop the "1" if no other asset already claims the bare name.
+for i in "${!svg_names[@]}"; do
+    name="${svg_names[$i]}"
+    if [[ "$name" =~ ^(.+[A-Za-z])1$ ]]; then
+        stripped="${BASH_REMATCH[1]}"
+        if ! name_is_taken "$stripped"; then
+            echo "Renaming '$name' -> '$stripped' (no collision)"
+            svg_names[$i]="$stripped"
+        fi
+    fi
+done
+
+declare -a created
+for i in "${!svg_paths[@]}"; do
+    svg="${svg_paths[$i]}"
+    name="${svg_names[$i]}"
+    filename=$(basename "$svg")
 
     imageset_dir="$DEST_PATH/$name.imageset"
     if [ -d "$imageset_dir" ]; then
@@ -133,7 +170,7 @@ while IFS= read -r -d '' svg; do
 }
 EOT
     created+=("$name")
-done < <(find "$SRC_PATH" -type f -name "*.svg" -print0)
+done
 
 echo "Created ${#created[@]} brand asset imagesets."
 
