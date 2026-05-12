@@ -83,3 +83,17 @@ public extension UIImage {
         self.init(named: asset.rawValue, in: .module, compatibleWith: nil)
     }
 }
+
+
+#Preview {
+    ScrollView {
+        LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 3)) {
+            ForEach(FrostedBrandAsset.allCases) { asset in
+                Image(asset)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            }
+        }
+        .padding()
+    }
+}
