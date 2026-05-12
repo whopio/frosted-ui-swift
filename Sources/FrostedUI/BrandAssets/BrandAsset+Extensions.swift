@@ -10,7 +10,6 @@ public enum FrostedBrandAsset: String, CaseIterable, Identifiable {
     case balloon = "balloon"
     case balloonOverOrange = "balloonOverOrange"
     case barcode = "barcode"
-    case barcodeOverOrange = "barcodeOverOrange"
     case bars = "bars"
     case beakerGreen = "beakerGreen"
     case beakerRed = "beakerRed"
@@ -18,10 +17,8 @@ public enum FrostedBrandAsset: String, CaseIterable, Identifiable {
     case bookOverOrange = "bookOverOrange"
     case box = "box"
     case bridgeBlue = "bridgeBlue"
-    case bridgeBlueOverOrange = "bridgeBlueOverOrange"
     case bridgeRed = "bridgeRed"
     case carGreen = "carGreen"
-    case carGreenOverOrange = "carGreenOverOrange"
     case carRed = "carRed"
     case card = "card"
     case cardOverOrange = "cardOverOrange"
@@ -64,7 +61,6 @@ public enum FrostedBrandAsset: String, CaseIterable, Identifiable {
     case registerBlue = "registerBlue"
     case registerRed = "registerRed"
     case rocket = "rocket"
-    case rocketOverOrange = "rocketOverOrange"
     case satellite = "satellite"
     case server = "server"
     case shieldGreen = "shieldGreen"
@@ -93,7 +89,6 @@ public enum FrostedBrandAsset: String, CaseIterable, Identifiable {
     case usbBlue = "usbBlue"
     case usbRed = "usbRed"
     case wrench = "wrench"
-    case wrenchOverOrange = "wrenchOverOrange"
 }
 
 public extension Image {

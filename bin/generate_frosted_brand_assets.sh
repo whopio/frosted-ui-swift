@@ -14,8 +14,10 @@
 #   * `_over_orange.svg` files become their OWN imagesets, exposed as a
 #     separate enum case (e.g. `barcodeOverOrange`). To avoid bloating the
 #     library with re-exports, the over_orange asset is only shipped when
-#     its content (after stripping decimal noise from re-exported coords)
-#     actually differs from the regular sibling.
+#     its color palette actually differs from the regular sibling. Roughly
+#     half are pure Figma re-exports (same palette, just rounded coords)
+#     and the rest are real recolorings that swap the orange fills out for
+#     a blue/green/etc. so the asset reads on an orange background.
 #
 # Usage:
 #   ./generate_frosted_brand_assets.sh /path/to/folder        # Folder of SVGs
@@ -75,17 +77,15 @@ find "$DEST_PATH" -mindepth 1 -maxdepth 1 ! -name "Contents.json" -exec rm -rf {
 #      regular sibling (and therefore worth shipping).
 #   4. Build a plan that materializes the imagesets directly.
 python3 - "$SRC_PATH" "$DEST_PATH" <<'PY'
-import hashlib
 import json
 import re
-import shutil
 import sys
 from pathlib import Path
 
 src_root = Path(sys.argv[1])
 dest_root = Path(sys.argv[2])
 
-DECIMAL_RE = re.compile(r"(\d+)\.\d+")
+HEX_COLOR_RE = re.compile(r"#[0-9a-fA-F]{6}")
 
 
 def to_camel(raw: str) -> str:
@@ -99,10 +99,17 @@ def to_camel(raw: str) -> str:
     return camel
 
 
-def norm_hash(path: Path) -> str:
+def palette(path: Path) -> frozenset:
+    """Return the set of hex colors used in the SVG, lowercased.
+
+    Figma sometimes re-exports the same artwork with coordinates nudged by a
+    pixel, so a content hash can flag near-identical files as different.
+    Comparing palettes is a tighter signal: a real over_orange variant always
+    swaps the orange fills (#fa4616 etc.) for a different color, while a
+    re-export keeps every color the same.
+    """
     text = path.read_text(encoding="utf-8", errors="replace")
-    normalized = DECIMAL_RE.sub(lambda m: m.group(1), text)
-    return hashlib.md5(normalized.encode("utf-8")).hexdigest()
+    return frozenset(c.lower() for c in HEX_COLOR_RE.findall(text))
 
 
 def parse(filename: str):
@@ -188,9 +195,10 @@ for core, variants in records.items():
     oo = variants.get("OverOrange")
     if oo is None:
         continue
-    # Only ship the over_orange asset when it's meaningfully different from
-    # the regular. Many of them are just re-exports with float rounding noise.
-    if norm_hash(oo) == norm_hash(light):
+    # Only ship the over_orange asset when it actually recolors the artwork.
+    # If it shares the regular's palette, it's just a Figma re-export with
+    # rounded coordinates and would render identically.
+    if palette(oo) == palette(light):
         skipped_over_orange += 1
         continue
     write_imageset(f"{core}OverOrange", oo, None)
