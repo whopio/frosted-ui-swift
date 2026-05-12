@@ -11,13 +11,12 @@
 #   * Each base asset becomes ONE imageset that holds the regular SVG as
 #     the universal image and the `_dark.svg` as the dark-appearance image.
 #     iOS picks automatically based on userInterfaceStyle.
-#   * `_over_orange.svg` files become their OWN imagesets, exposed as a
-#     separate enum case (e.g. `barcodeOverOrange`). To avoid bloating the
-#     library with re-exports, the over_orange asset is only shipped when
-#     its color palette actually differs from the regular sibling. Roughly
-#     half are pure Figma re-exports (same palette, just rounded coords)
-#     and the rest are real recolorings that swap the orange fills out for
-#     a blue/green/etc. so the asset reads on an orange background.
+#   * `_over_orange.svg` files become their OWN imagesets, named after the
+#     color the variant actually uses (e.g. `balloonBlue`, `droneGreen`).
+#     The script picks the dominant non-gray color that the variant adds
+#     vs. the regular and turns that into the suffix. Files that don't
+#     actually recolor anything (same palette, or only gray/orange swaps)
+#     are dropped — the regular asset reads fine on orange already.
 #
 # Usage:
 #   ./generate_frosted_brand_assets.sh /path/to/folder        # Folder of SVGs
@@ -85,7 +84,7 @@ from pathlib import Path
 src_root = Path(sys.argv[1])
 dest_root = Path(sys.argv[2])
 
-HEX_COLOR_RE = re.compile(r"#[0-9a-fA-F]{6}")
+FILL_COLOR_RE = re.compile(r'fill="(#[0-9a-fA-F]{6})"')
 
 
 def to_camel(raw: str) -> str:
@@ -99,17 +98,96 @@ def to_camel(raw: str) -> str:
     return camel
 
 
-def palette(path: Path) -> frozenset:
-    """Return the set of hex colors used in the SVG, lowercased.
-
-    Figma sometimes re-exports the same artwork with coordinates nudged by a
-    pixel, so a content hash can flag near-identical files as different.
-    Comparing palettes is a tighter signal: a real over_orange variant always
-    swaps the orange fills (#fa4616 etc.) for a different color, while a
-    re-export keeps every color the same.
-    """
+def fill_counts(path: Path) -> dict[str, int]:
+    """Count each `fill="#rrggbb"` reference in the SVG, lowercased."""
     text = path.read_text(encoding="utf-8", errors="replace")
-    return frozenset(c.lower() for c in HEX_COLOR_RE.findall(text))
+    counts: dict[str, int] = {}
+    for match in FILL_COLOR_RE.findall(text):
+        counts[match.lower()] = counts.get(match.lower(), 0) + 1
+    return counts
+
+
+def color_family(hex_color: str) -> str | None:
+    """Classify a hex color into a coarse family by HSL.
+
+    Returns None for mid-tone grays that don't carry a useful label. Very
+    dark / very light colors get bucketed as "black" / "white" since the
+    brand library actually uses them as recolor targets (e.g. the rocket
+    tip flips from orange to black in the over-orange variant).
+    """
+    r = int(hex_color[1:3], 16) / 255
+    g = int(hex_color[3:5], 16) / 255
+    b = int(hex_color[5:7], 16) / 255
+    cmax, cmin = max(r, g, b), min(r, g, b)
+    delta = cmax - cmin
+    lightness = (cmax + cmin) / 2
+    if lightness < 0.15:
+        return "black"
+    if lightness > 0.93:
+        return "white"
+    if delta == 0:
+        return None
+    saturation = delta / (1 - abs(2 * lightness - 1))
+    if saturation < 0.2:
+        return None
+    if cmax == r:
+        hue = ((g - b) / delta) % 6
+    elif cmax == g:
+        hue = (b - r) / delta + 2
+    else:
+        hue = (r - g) / delta + 4
+    hue *= 60
+    if hue < 30 or hue >= 330:
+        return "red"
+    if hue < 70:
+        return "orange"
+    if hue < 165:
+        return "green"
+    if hue < 260:
+        return "blue"
+    return "purple"
+
+
+def variant_suffix(core: str, regular: Path, over_orange: Path) -> str | None:
+    """Pick the color suffix that names the over_orange variant.
+
+    The two SVGs often share the same palette but redistribute the fills —
+    e.g. one orange path becomes black, or a few orange paths become green.
+    So we compare per-color fill counts, bucket the deltas by color family,
+    and pick the family with the largest net gain. Families whose gain is
+    cancelled out by an equal loss in the same family (Figma swapping one
+    orange shade for another) net to zero and get skipped.
+
+    Returns None when nothing meaningfully recolors. Falls back to a
+    generic suffix when the chosen family would duplicate a word already
+    in the base name (e.g. stadiumGreen's variant is still green).
+    """
+    reg_counts = fill_counts(regular)
+    oo_counts = fill_counts(over_orange)
+
+    family_net: dict[str, int] = {}
+    for color in set(reg_counts) | set(oo_counts):
+        delta = oo_counts.get(color, 0) - reg_counts.get(color, 0)
+        if delta == 0:
+            continue
+        family = color_family(color)
+        if family is None:
+            continue
+        family_net[family] = family_net.get(family, 0) + delta
+
+    gainers = {f: d for f, d in family_net.items() if d > 0}
+    if not gainers:
+        return None
+    # Prefer chromatic families — when Figma swaps a near-gray background
+    # shade (e9e9e9 -> f3f3f3) alongside a real recolor, we want to name
+    # the variant by the brand color, not the noisy background tweak.
+    chromatic = {f: d for f, d in gainers.items() if f not in ("black", "white")}
+    pool = chromatic or gainers
+    best = max(pool.items(), key=lambda kv: (kv[1], -ord(kv[0][0])))
+    suffix = best[0].capitalize()
+    if core.lower().endswith(suffix.lower()):
+        return "OverOrange"
+    return suffix
 
 
 def parse(filename: str):
@@ -195,13 +273,11 @@ for core, variants in records.items():
     oo = variants.get("OverOrange")
     if oo is None:
         continue
-    # Only ship the over_orange asset when it actually recolors the artwork.
-    # If it shares the regular's palette, it's just a Figma re-export with
-    # rounded coordinates and would render identically.
-    if palette(oo) == palette(light):
+    suffix = variant_suffix(core, light, oo)
+    if suffix is None:
         skipped_over_orange += 1
         continue
-    write_imageset(f"{core}OverOrange", oo, None)
+    write_imageset(f"{core}{suffix}", oo, None)
     created_over_orange += 1
 
 print(

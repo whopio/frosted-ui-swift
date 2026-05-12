@@ -24,7 +24,7 @@ The script will:
 2. Group each set of SVGs by base name and ship them as one imageset per base:
    - The regular SVG goes in as the universal image.
    - If a `_dark.svg` sibling exists, it is added to the same imageset with `appearance: dark`, so iOS automatically picks the right one for light/dark mode.
-3. Treat each `_over_orange.svg` as a separate asset (a separate enum case like `barcodeOverOrange`). To avoid bloating the library with re-exports, an `_over_orange` SVG is only shipped when its content — after stripping decimal noise from re-exported coords — actually differs from the regular sibling. The roughly half that are byte-identical-after-normalization to the regular are dropped.
+3. Treat each `_over_orange.svg` as a separate asset, named after the color that replaces the orange in the variant (e.g. `bookBlue`, `droneGreen`). The script picks the dominant non-gray color family that the variant introduces, ignoring shade-only tweaks. Variants that don't actually recolor anything (Figma re-exports with the same palette) are dropped — the regular asset reads fine on orange already.
 4. Convert each filename to lowerCamelCase (`BEAKER-GREEN.svg` → `beakerGreen`). Names that start with a digit are prefixed with `asset` (`3D-PRINTER-GREEN.svg` → `asset3DPrinterGreen`).
 5. Compress every SVG with [`svgo`](https://github.com/svg/svgo) (auto-installed via `npm install -g svgo` if missing).
 6. Regenerate `BrandAsset+Extensions.swift` with one `FrostedBrandAsset` case per imageset and `Image` / `UIImage` initializers.
@@ -37,8 +37,8 @@ Image(FrostedBrandAsset.beakerGreen)
     .resizable()
     .scaledToFit()
 
-// Reach for the over-orange variant explicitly when drawing on orange:
-Image(FrostedBrandAsset.barcodeOverOrange)
+// Reach for the orange-friendly variant explicitly when drawing on orange:
+Image(FrostedBrandAsset.bookBlue)
     .resizable()
     .scaledToFit()
 ```
