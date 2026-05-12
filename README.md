@@ -21,9 +21,7 @@ To regenerate them from a folder (or zip) of SVGs:
 The script will:
 
 1. Clear `Sources/FrostedUI/Resources/BrandAssets.xcassets` (preserving its `Contents.json`).
-2. Group each set of SVGs by base name and ship them as one imageset per base:
-   - The regular SVG goes in as the universal image.
-   - If a `_dark.svg` sibling exists, it is added to the same imageset with `appearance: dark`, so iOS automatically picks the right one for light/dark mode.
+2. Group each set of SVGs by base name and ship them as one imageset per base. Only the regular SVG is shipped — `_dark.svg` siblings are currently skipped because they only tweak a few near-black shades (no perceivable difference at runtime) and would double the asset bundle. Dark-mode shipping is one commented line away in `generate_frosted_brand_assets.sh` (search for `DARK MODE DISABLED`) when those files diverge enough to matter.
 3. Treat each `_over_orange.svg` as a separate asset, named after the color that replaces the orange in the variant (e.g. `bookBlue`, `droneGreen`). The script picks the dominant non-gray color family that the variant introduces, ignoring shade-only tweaks. Variants that don't actually recolor anything (Figma re-exports with the same palette) are dropped — the regular asset reads fine on orange already.
 4. Convert each filename to lowerCamelCase (`BEAKER-GREEN.svg` → `beakerGreen`). Names that start with a digit are prefixed with `asset` (`3D-PRINTER-GREEN.svg` → `asset3DPrinterGreen`).
 5. Compress every SVG with [`svgo`](https://github.com/svg/svgo) (auto-installed via `npm install -g svgo` if missing).

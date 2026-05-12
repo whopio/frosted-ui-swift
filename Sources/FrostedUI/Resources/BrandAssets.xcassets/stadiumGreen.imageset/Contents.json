@@ -3,16 +3,6 @@
     {
       "filename": "stadiumGreen.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "stadiumGreen-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

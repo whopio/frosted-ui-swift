@@ -3,16 +3,6 @@
     {
       "filename": "card.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "card-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

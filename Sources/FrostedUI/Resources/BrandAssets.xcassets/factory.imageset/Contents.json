@@ -3,16 +3,6 @@
     {
       "filename": "factory.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "factory-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

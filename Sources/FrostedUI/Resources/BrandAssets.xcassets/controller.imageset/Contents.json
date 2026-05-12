@@ -3,16 +3,6 @@
     {
       "filename": "controller.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "controller-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

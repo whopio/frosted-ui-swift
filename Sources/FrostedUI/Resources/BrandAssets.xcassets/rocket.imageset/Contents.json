@@ -3,16 +3,6 @@
     {
       "filename": "rocket.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "rocket-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

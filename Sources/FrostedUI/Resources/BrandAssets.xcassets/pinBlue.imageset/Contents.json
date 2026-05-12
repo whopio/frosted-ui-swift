@@ -3,16 +3,6 @@
     {
       "filename": "pinBlue.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "pinBlue-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

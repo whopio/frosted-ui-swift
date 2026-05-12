@@ -3,16 +3,6 @@
     {
       "filename": "laptop.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "laptop-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

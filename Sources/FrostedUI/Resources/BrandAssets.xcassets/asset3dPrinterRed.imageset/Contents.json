@@ -3,16 +3,6 @@
     {
       "filename": "asset3dPrinterRed.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "asset3dPrinterRed-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

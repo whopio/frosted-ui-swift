@@ -3,16 +3,6 @@
     {
       "filename": "dish.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "dish-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

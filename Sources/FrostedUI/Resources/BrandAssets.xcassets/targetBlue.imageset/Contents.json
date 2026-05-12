@@ -3,16 +3,6 @@
     {
       "filename": "targetBlue.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "targetBlue-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

@@ -3,16 +3,6 @@
     {
       "filename": "bridgeBlue.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "bridgeBlue-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

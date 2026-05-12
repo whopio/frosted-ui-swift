@@ -3,16 +3,6 @@
     {
       "filename": "cityBlue.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "cityBlue-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

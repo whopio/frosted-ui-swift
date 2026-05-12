@@ -3,16 +3,6 @@
     {
       "filename": "box.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "box-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

@@ -3,16 +3,6 @@
     {
       "filename": "solar.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "solar-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

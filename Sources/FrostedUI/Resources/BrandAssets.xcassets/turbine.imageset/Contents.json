@@ -3,16 +3,6 @@
     {
       "filename": "turbine.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "turbine-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

@@ -3,16 +3,6 @@
     {
       "filename": "ship.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "ship-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

@@ -3,16 +3,6 @@
     {
       "filename": "trainBlue.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "trainBlue-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

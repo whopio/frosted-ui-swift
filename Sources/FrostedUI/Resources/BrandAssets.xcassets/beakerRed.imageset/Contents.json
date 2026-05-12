@@ -3,16 +3,6 @@
     {
       "filename": "beakerRed.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "beakerRed-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

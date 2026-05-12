@@ -3,16 +3,6 @@
     {
       "filename": "barcode.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "barcode-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {
