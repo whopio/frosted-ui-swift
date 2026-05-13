@@ -3,16 +3,6 @@
     {
       "filename": "skateboard.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "skateboard-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

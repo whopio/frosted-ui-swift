@@ -3,16 +3,6 @@
     {
       "filename": "satellite.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "satellite-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

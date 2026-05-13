@@ -3,16 +3,6 @@
     {
       "filename": "gas.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "gas-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

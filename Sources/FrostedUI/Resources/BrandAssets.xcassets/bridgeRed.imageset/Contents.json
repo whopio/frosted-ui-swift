@@ -3,16 +3,6 @@
     {
       "filename": "bridgeRed.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "bridgeRed-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

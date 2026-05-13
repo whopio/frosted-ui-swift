@@ -3,16 +3,6 @@
     {
       "filename": "bars.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "bars-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

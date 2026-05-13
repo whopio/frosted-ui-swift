@@ -3,16 +3,6 @@
     {
       "filename": "cone.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "cone-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

@@ -3,16 +3,6 @@
     {
       "filename": "shopBlue.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "shopBlue-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

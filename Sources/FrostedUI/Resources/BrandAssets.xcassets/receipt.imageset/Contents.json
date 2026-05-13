@@ -3,16 +3,6 @@
     {
       "filename": "receipt.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "receipt-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

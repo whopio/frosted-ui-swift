@@ -3,16 +3,6 @@
     {
       "filename": "book.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "book-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

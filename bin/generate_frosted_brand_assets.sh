@@ -9,8 +9,12 @@
 #
 # Variant handling:
 #   * Each base asset becomes ONE imageset that holds the regular SVG as
-#     the universal image and the `_dark.svg` as the dark-appearance image.
-#     iOS picks automatically based on userInterfaceStyle.
+#     the universal image. Dark-appearance shipping is currently disabled
+#     (see the "DARK MODE DISABLED" block below) because the `_dark.svg`
+#     variants only differ from the regular by a few-shade tweak to the
+#     near-black fills, so they look the same in practice and would double
+#     the asset bundle. To re-enable, restore the commented line at the
+#     `write_imageset` call site.
 #   * `_over_orange.svg` files become their OWN imagesets, named after the
 #     color the variant actually uses (e.g. `balloonBlue`, `droneGreen`).
 #     The script picks the dominant non-gray color that the variant adds
@@ -266,7 +270,13 @@ for core, variants in records.items():
     if light is None:
         print(f"Skipping orphan asset (no regular variant): {core}", file=sys.stderr)
         continue
-    dark = variants.get("Dark")
+    # --- DARK MODE DISABLED ---
+    # The `_dark.svg` variants only swap a few near-black shades (e.g.
+    # #151515 -> #1E1E1E) and read the same as the regular at runtime,
+    # but shipping them doubles the asset bundle. Restore the next line
+    # to re-enable dark mode.
+    # dark = variants.get("Dark")
+    dark = None
     write_imageset(core, light, dark)
     created_regular += 1
 

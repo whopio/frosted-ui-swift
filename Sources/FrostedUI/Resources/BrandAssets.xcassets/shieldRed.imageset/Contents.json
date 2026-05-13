@@ -3,16 +3,6 @@
     {
       "filename": "shieldRed.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "shieldRed-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

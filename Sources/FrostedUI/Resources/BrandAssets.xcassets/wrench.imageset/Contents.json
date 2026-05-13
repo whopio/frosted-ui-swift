@@ -3,16 +3,6 @@
     {
       "filename": "wrench.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "wrench-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

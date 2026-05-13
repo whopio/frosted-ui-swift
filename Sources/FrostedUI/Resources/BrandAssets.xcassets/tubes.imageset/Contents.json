@@ -3,16 +3,6 @@
     {
       "filename": "tubes.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "tubes-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

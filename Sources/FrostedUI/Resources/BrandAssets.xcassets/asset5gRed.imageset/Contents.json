@@ -3,16 +3,6 @@
     {
       "filename": "asset5gRed.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "asset5gRed-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

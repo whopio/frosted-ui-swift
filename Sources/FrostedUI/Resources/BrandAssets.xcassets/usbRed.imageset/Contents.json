@@ -3,16 +3,6 @@
     {
       "filename": "usbRed.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "usbRed-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

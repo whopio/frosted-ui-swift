@@ -3,16 +3,6 @@
     {
       "filename": "phoneRed.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "phoneRed-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

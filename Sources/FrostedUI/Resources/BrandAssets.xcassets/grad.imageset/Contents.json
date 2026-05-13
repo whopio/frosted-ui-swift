@@ -3,16 +3,6 @@
     {
       "filename": "grad.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "grad-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

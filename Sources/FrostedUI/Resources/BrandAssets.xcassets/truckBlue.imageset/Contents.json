@@ -3,16 +3,6 @@
     {
       "filename": "truckBlue.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "truckBlue-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

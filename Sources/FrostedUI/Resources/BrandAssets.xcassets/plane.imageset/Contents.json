@@ -3,16 +3,6 @@
     {
       "filename": "plane.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "plane-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

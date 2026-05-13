@@ -3,16 +3,6 @@
     {
       "filename": "registerBlue.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "registerBlue-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {

@@ -3,16 +3,6 @@
     {
       "filename": "news.svg",
       "idiom": "universal"
-    },
-    {
-      "appearances": [
-        {
-          "appearance": "luminosity",
-          "value": "dark"
-        }
-      ],
-      "filename": "news-dark.svg",
-      "idiom": "universal"
     }
   ],
   "info": {
