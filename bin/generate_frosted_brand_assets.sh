@@ -194,8 +194,22 @@ def variant_suffix(core: str, regular: Path, over_orange: Path) -> str | None:
     return suffix
 
 
+PICTOGRAM_RE = re.compile(r"^pictogram=(.+), background=(Light|Dark|Orange)$")
+
+BACKGROUND_TO_VARIANT = {"Light": "", "Dark": "Dark", "Orange": "OverOrange"}
+
+
 def parse(filename: str):
+    """Return (core_raw, variant) where variant is '', 'Dark', or 'OverOrange'."""
     base = filename[:-4]  # strip .svg
+    # Current Figma export format:
+    #   "pictogram=<Name>, background=<Light|Dark|Orange>.svg"
+    m = PICTOGRAM_RE.match(base)
+    if m:
+        return m.group(1), BACKGROUND_TO_VARIANT[m.group(2)]
+    # Legacy format from the prior Brand Library export, kept so older
+    # source folders still work:
+    #   "<NAME>_over_orange.svg" / "<NAME>_dark.svg" / "<NAME>.svg"
     if "_over_orange" in base:
         return base.replace("_over_orange", ""), "OverOrange"
     if "_dark" in base:
