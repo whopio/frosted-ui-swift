@@ -130,19 +130,21 @@ fi
 # Run svgo on all SVGs in the destination directory
 svgo -rf "$DEST_PATH" || true
 
-# Run the generate_icon_extensions.sh script
-ICON_EXT_SCRIPT="$SCRIPT_DIR/generate_icon_extensions.sh"
-if [ -f "$ICON_EXT_SCRIPT" ]; then
-    echo "Running generate_icon_extensions.sh..."
-    bash "$ICON_EXT_SCRIPT"
+# Trim the freshly downloaded set down to icons-allowlist.txt (which then
+# regenerates Icon+Extensions.swift). Keeps every Figma sync limited to the
+# icons consumers actually reference instead of re-shipping the full ~5,000.
+TRIM_SCRIPT="$SCRIPT_DIR/trim_icons.sh"
+if [ -f "$TRIM_SCRIPT" ]; then
+    echo "Running trim_icons.sh..."
+    bash "$TRIM_SCRIPT"
     if [ $? -eq 0 ]; then
-        echo "generate_icon_extensions.sh ran successfully!"
+        echo "trim_icons.sh ran successfully!"
     else
-        echo "generate_icon_extensions.sh encountered an error."
+        echo "trim_icons.sh encountered an error."
         exit 1
     fi
 else
-    echo "generate_icon_extensions.sh not found at $ICON_EXT_SCRIPT. Skipping Swift icon generation."
+    echo "trim_icons.sh not found at $TRIM_SCRIPT. Skipping Swift icon generation."
 fi
 
 echo "Done."
