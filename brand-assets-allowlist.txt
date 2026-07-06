@@ -1,0 +1,53 @@
+# brand-assets-allowlist.txt
+#
+# Brand asset imageset names (one per line) that ship in BrandAssets.xcassets.
+# Every other imageset is deleted by bin/trim_brand_assets.sh so the compiled
+# Assets.car only carries illustrations that consumers actually reference.
+#
+# Unlike icons, brand assets have no size suffix: each color variant is its own
+# imageset (e.g. `shield` and `shieldGreen`, `phone` and `phoneBlue`), so every
+# entry here is a full imageset name that must match on disk exactly. The full
+# Figma set is 96 imagesets; the whop apps use 26.
+#
+# Because FrostedBrandAsset is generated from the imagesets present on disk, a
+# trimmed asset becomes a compile error the moment a consumer references it.
+# There is no runtime fallback and no dynamic (rawValue / allCases) lookup in
+# any consumer, so the allowlist IS the enforcement.
+#
+# To add a brand asset:
+#   1. Add its imageset name below (keep the list sorted).
+#   2. Run: ./bin/trim_brand_assets.sh
+#      (re-downloads nothing; deletes non-allowlisted imagesets, then
+#       regenerates BrandAsset+Extensions.swift). If the asset was never
+#       generated, run ./bin/generate_frosted_brand_assets.sh <src> first to
+#       rebuild the full set.
+#   3. Commit the allowlist change, the surviving imagesets, and the
+#      regenerated BrandAsset+Extensions.swift together.
+#
+# Comment lines (starting with #) and blank lines are ignored.
+balloon
+cam
+card
+chat
+cityBlue
+compass
+cone
+dish
+envelope
+laptop
+mailboxDown
+megaphone
+money
+news
+phone
+phoneBlue
+piggyBank
+pin
+receipt
+rocket
+satellite
+shield
+shieldGreen
+stadium
+storeBlue
+testTubes

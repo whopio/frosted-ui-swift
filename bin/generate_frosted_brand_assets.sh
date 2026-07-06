@@ -328,12 +328,15 @@ fi
 # Running with || true to skip errors for now. Fix the source SVGs in Figma.
 svgo -rf "$DEST_PATH" || true
 
-EXT_SCRIPT="$SCRIPT_DIR/generate_brand_asset_extensions.sh"
-if [ -f "$EXT_SCRIPT" ]; then
-    echo "Running generate_brand_asset_extensions.sh..."
-    bash "$EXT_SCRIPT"
+# Trim the freshly generated set down to brand-assets-allowlist.txt (which then
+# regenerates BrandAsset+Extensions.swift). Keeps every sync limited to the
+# assets consumers actually reference instead of re-shipping all 96.
+TRIM_SCRIPT="$SCRIPT_DIR/trim_brand_assets.sh"
+if [ -f "$TRIM_SCRIPT" ]; then
+    echo "Running trim_brand_assets.sh..."
+    bash "$TRIM_SCRIPT"
 else
-    echo "generate_brand_asset_extensions.sh not found at $EXT_SCRIPT. Skipping Swift generation."
+    echo "trim_brand_assets.sh not found at $TRIM_SCRIPT. Skipping trim + Swift generation."
 fi
 
 echo "Done."
