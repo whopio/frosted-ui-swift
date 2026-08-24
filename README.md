@@ -40,3 +40,26 @@ Image(FrostedBrandAsset.bookBlue)
     .resizable()
     .scaledToFit()
 ```
+
+## Sync pictograms
+
+Run the `Sync Frosted Pictograms` GitHub action to pull the committed light,
+dark, and orange SVGs from
+[`whopio/frosted-ui/packages/frosted-ui-icons/pictograms`](https://github.com/whopio/frosted-ui/tree/main/packages/frosted-ui-icons/pictograms).
+The action opens a draft pull request containing the regenerated
+`Pictograms.xcassets` catalog and `FrostedPictogram` Swift API.
+
+To generate the same output locally:
+
+```bash
+./bin/generate_frosted_pictograms.sh /path/to/frosted-ui/packages/frosted-ui-icons/pictograms
+```
+
+The default variant automatically follows light and dark appearance. Use the
+orange variant when rendering on an orange surface:
+
+```swift
+Image(FrostedPictogram.airplane)
+
+Image(FrostedPictogram.airplane, variant: .orange)
+```
