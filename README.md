@@ -40,3 +40,20 @@ Image(FrostedBrandAsset.bookBlue)
     .resizable()
     .scaledToFit()
 ```
+
+## Sync pictograms
+
+Run the `Sync Frosted Pictograms` GitHub action to pull the committed light,
+dark, and orange SVGs from
+[`whopio/frosted-ui/packages/frosted-ui-icons/pictograms`](https://github.com/whopio/frosted-ui/tree/main/packages/frosted-ui-icons/pictograms).
+The action opens a draft pull request containing the regenerated
+`BrandAssets.xcassets` catalog and `FrostedBrandAsset` Swift API. It uses the
+existing brand-asset generator to omit near-duplicate dark variants, discard
+orange variants that do not materially recolor the artwork, and compress the
+remaining SVGs with a pinned SVGO version.
+
+To generate the same output locally:
+
+```bash
+./bin/generate_frosted_brand_assets.sh /path/to/frosted-ui/packages/frosted-ui-icons/pictograms
+```

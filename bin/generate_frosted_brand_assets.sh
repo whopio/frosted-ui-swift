@@ -196,7 +196,18 @@ def variant_suffix(core: str, regular: Path, over_orange: Path) -> str | None:
 
 PICTOGRAM_RE = re.compile(r"^pictogram=(.+), background=(Light|Dark|Orange)$")
 
+# Filenames committed by packages/frosted-ui-icons/pictograms:
+#   "<name>-<light|dark|orange>-pictogram.svg"
+PACKAGED_PICTOGRAM_RE = re.compile(
+    r"^(.+)-(light|dark|orange)-pictogram$"
+)
+
 BACKGROUND_TO_VARIANT = {"Light": "", "Dark": "Dark", "Orange": "OverOrange"}
+PACKAGED_BACKGROUND_TO_VARIANT = {
+    "light": "",
+    "dark": "Dark",
+    "orange": "OverOrange",
+}
 
 
 def parse(filename: str):
@@ -207,6 +218,9 @@ def parse(filename: str):
     m = PICTOGRAM_RE.match(base)
     if m:
         return m.group(1), BACKGROUND_TO_VARIANT[m.group(2)]
+    m = PACKAGED_PICTOGRAM_RE.match(base)
+    if m:
+        return m.group(1), PACKAGED_BACKGROUND_TO_VARIANT[m.group(2)]
     # Legacy format from the prior Brand Library export, kept so older
     # source folders still work:
     #   "<NAME>_over_orange.svg" / "<NAME>_dark.svg" / "<NAME>.svg"
@@ -315,18 +329,10 @@ PY
 echo "Cleaning up temporary files..."
 rm -rf "$TMP_DIR"
 
-if ! command -v svgo &> /dev/null; then
-    echo "svgo could not be found. Installing it using 'npm install -g svgo'."
-    npm install -g svgo
-    if [ $? -ne 0 ]; then
-        echo "Failed to install svgo. Please install it manually."
-        exit 1
-    fi
-fi
-
 # Some SVGs from Figma have malformed content that svgo can't parse.
-# Running with || true to skip errors for now. Fix the source SVGs in Figma.
-svgo -rf "$DEST_PATH" || true
+# Pin the version so local and CI generation remain deterministic. Running with
+# || true skips malformed source SVGs for now; fix those at the source.
+npx --yes svgo@4.1.0 -rf "$DEST_PATH" || true
 
 EXT_SCRIPT="$SCRIPT_DIR/generate_brand_asset_extensions.sh"
 if [ -f "$EXT_SCRIPT" ]; then
