@@ -1,5 +1,20 @@
 import SwiftUI
+#if canImport(UIKit)
 import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
+
+enum FrostedFontMetrics {
+    static func lineHeight(ofSize size: CGFloat) -> CGFloat {
+        #if canImport(UIKit)
+        UIFont.systemFont(ofSize: size).lineHeight
+        #elseif canImport(AppKit)
+        let font = NSFont.systemFont(ofSize: size)
+        return font.ascender - font.descender + font.leading
+        #endif
+    }
+}
 
 public enum FrostedTextSize: CaseIterable {
     case zero
@@ -58,16 +73,16 @@ public enum FrostedTextSize: CaseIterable {
         }
     }
 
-    private static let fontLineHeight0 = UIFont.systemFont(ofSize: 10).lineHeight
-    private static let fontLineHeight1 = UIFont.systemFont(ofSize: 12).lineHeight
-    private static let fontLineHeight2 = UIFont.systemFont(ofSize: 14).lineHeight
-    private static let fontLineHeight3 = UIFont.systemFont(ofSize: 16).lineHeight
-    private static let fontLineHeight4 = UIFont.systemFont(ofSize: 18).lineHeight
-    private static let fontLineHeight5 = UIFont.systemFont(ofSize: 20).lineHeight
-    private static let fontLineHeight6 = UIFont.systemFont(ofSize: 24).lineHeight
-    private static let fontLineHeight7 = UIFont.systemFont(ofSize: 28).lineHeight
-    private static let fontLineHeight8 = UIFont.systemFont(ofSize: 35).lineHeight
-    private static let fontLineHeight9 = UIFont.systemFont(ofSize: 60).lineHeight
+    private static let fontLineHeight0 = FrostedFontMetrics.lineHeight(ofSize: 10)
+    private static let fontLineHeight1 = FrostedFontMetrics.lineHeight(ofSize: 12)
+    private static let fontLineHeight2 = FrostedFontMetrics.lineHeight(ofSize: 14)
+    private static let fontLineHeight3 = FrostedFontMetrics.lineHeight(ofSize: 16)
+    private static let fontLineHeight4 = FrostedFontMetrics.lineHeight(ofSize: 18)
+    private static let fontLineHeight5 = FrostedFontMetrics.lineHeight(ofSize: 20)
+    private static let fontLineHeight6 = FrostedFontMetrics.lineHeight(ofSize: 24)
+    private static let fontLineHeight7 = FrostedFontMetrics.lineHeight(ofSize: 28)
+    private static let fontLineHeight8 = FrostedFontMetrics.lineHeight(ofSize: 35)
+    private static let fontLineHeight9 = FrostedFontMetrics.lineHeight(ofSize: 60)
 
     var fontLineHeight: CGFloat {
         switch self {
@@ -130,11 +145,11 @@ public enum FrostedHeadingSize: CaseIterable {
         }
     }
 
-    private static let fontLineHeight1 = UIFont.systemFont(ofSize: 24).lineHeight
-    private static let fontLineHeight2 = UIFont.systemFont(ofSize: 32).lineHeight
-    private static let fontLineHeight3 = UIFont.systemFont(ofSize: 40).lineHeight
-    private static let fontLineHeight4 = UIFont.systemFont(ofSize: 48).lineHeight
-    private static let fontLineHeight5 = UIFont.systemFont(ofSize: 64).lineHeight
+    private static let fontLineHeight1 = FrostedFontMetrics.lineHeight(ofSize: 24)
+    private static let fontLineHeight2 = FrostedFontMetrics.lineHeight(ofSize: 32)
+    private static let fontLineHeight3 = FrostedFontMetrics.lineHeight(ofSize: 40)
+    private static let fontLineHeight4 = FrostedFontMetrics.lineHeight(ofSize: 48)
+    private static let fontLineHeight5 = FrostedFontMetrics.lineHeight(ofSize: 64)
 
     var fontLineHeight: CGFloat {
         switch self {
@@ -184,7 +199,7 @@ public extension Text {
     ) -> some View {
         font(.system(size: size.fontSize, weight: weight.fontWeight))
             .tracking(size.letterSpacing)
-            .lineSpacing(trim ? 0 : size.lineSpacing)
+            .lineSpacing(trim ? 0 : max(0, size.lineSpacing))
             .padding(.vertical, trim ? 0 : size.verticalPadding)
             .foregroundColor(rawColor)
     }
@@ -260,7 +275,7 @@ public extension Text {
     ) -> some View {
         font(.system(size: size.fontSize, weight: weight.fontWeight))
             .tracking(size.letterSpacing)
-            .lineSpacing(trim ? 0 : size.lineSpacing)
+            .lineSpacing(trim ? 0 : max(0, size.lineSpacing))
             .padding(.vertical, trim ? 0 : size.verticalPadding)
             .foregroundColor(rawColor)
     }

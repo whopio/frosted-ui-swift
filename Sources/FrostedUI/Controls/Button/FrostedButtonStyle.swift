@@ -15,6 +15,12 @@ struct FrostedButtonStyleViewModifier: ViewModifier {
     let disabled: Bool
     let loading: Bool
 
+    @State private var isHovered = false
+
+    private var isInteractive: Bool { !disabled && !loading }
+    private var showsPressed: Bool { isInteractive && pressed }
+    private var showsHover: Bool { isInteractive && isHovered }
+
     init(
         variant: FrostedButtonStyle.Variant,
         size: FrostedButtonStyle.Size,
@@ -54,8 +60,17 @@ struct FrostedButtonStyleViewModifier: ViewModifier {
             }
         }
 
+        if showsHover && !showsPressed {
+            return switch variant {
+            case .solid: highContrast ? tint.twelve : tint.ten
+            case .soft: tint.A4
+            case .ghost: tint.A3
+            case .surface: Color(FrostedColor.frostedGrayA2)
+            }
+        }
+
         if highContrast {
-            return switch (variant, pressed) {
+            return switch (variant, showsPressed) {
             // solid
             case (.solid, false): tint.twelve
             case (.solid, true): tint.twelve
@@ -70,7 +85,7 @@ struct FrostedButtonStyleViewModifier: ViewModifier {
             case (.surface, true): Color(FrostedColor.frostedGrayA3)
             }
         } else {
-            return switch (variant, pressed) {
+            return switch (variant, showsPressed) {
             // solid
             case (.solid, false): tint.nine
             case (.solid, true): tint.ten
@@ -228,18 +243,24 @@ struct FrostedButtonStyleViewModifier: ViewModifier {
         .clipShape(.rect(cornerRadius: cornerRadius))
         .shadow(color: hasShadow ? .black.opacity(0.06) : .clear, radius: 1, x: 0, y: 1)
         // css: brightness(.92) saturate(1.1)
-        .brightness(!highContrast && pressed ? 0.08 : 0)
-        .saturation(!highContrast && pressed ? 1.1 : 1)
+        .brightness(!highContrast && showsPressed ? 0.08 : 0)
+        .saturation(!highContrast && showsPressed ? 1.1 : 1)
         // css: contrast(.82) saturate(1.2) brightness(1.16)
-        .contrast(highContrast && pressed ? 0.82 : 1)
-        .brightness(highContrast && pressed ? 0.08 : 0) // it should be 0.18, but it looks too different to web
-        .saturation(highContrast && pressed ? 1.2 : 1)
+        .contrast(highContrast && showsPressed ? 0.82 : 1)
+        .brightness(highContrast ? (showsPressed ? 0.08 : (showsHover && variant == .solid ? 0.04 : 0)) : 0)
+        .saturation(highContrast && showsPressed ? 1.2 : 1)
         .overlay(
             RoundedRectangle(cornerRadius: cornerRadius)
                 .strokeBorder(Color(FrostedColor.frostedGray5), lineWidth: 1)
                 .opacity(hasBorder ? 1 : 0)
         )
-        .allowsHitTesting(!loading && !disabled)
+        .contentShape(.rect(cornerRadius: cornerRadius))
+        .onHover { isHovered = $0 }
+        .onChange(of: isInteractive) { _, interactive in
+            if !interactive { isHovered = false }
+        }
+        .onDisappear { isHovered = false }
+        .allowsHitTesting(isInteractive)
     }
 }
 

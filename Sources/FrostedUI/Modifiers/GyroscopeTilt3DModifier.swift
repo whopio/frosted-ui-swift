@@ -1,5 +1,7 @@
+#if os(iOS)
 import CoreMotion
 import QuartzCore
+#endif
 import SwiftUI
 
 private struct GyroscopeTilt3DModifier: ViewModifier {
@@ -139,8 +141,12 @@ private final class GyroscopeTiltAnimator {
     private(set) var pitch: Double = 0
     private(set) var roll: Double = 0
 
+    #if os(iOS)
     private let motionManager = CMMotionManager()
     private var displayLink: CADisplayLink?
+    #else
+    private var animationTimer: Timer?
+    #endif
     private var phase: Double = 0
     private var isUsingGyroscope = false
     private var hasInitialReading = false
@@ -154,13 +160,18 @@ private final class GyroscopeTiltAnimator {
     func start() {
         stop()
         hasInitialReading = false
+        #if os(iOS)
         if motionManager.isDeviceMotionAvailable {
             startGyroscope()
         } else {
             startFallbackAnimation()
         }
+        #else
+        startFallbackAnimation()
+        #endif
     }
 
+    #if os(iOS)
     private func startGyroscope() {
         isUsingGyroscope = true
         motionManager.deviceMotionUpdateInterval = 1.0 / 60.0
@@ -187,13 +198,23 @@ private final class GyroscopeTiltAnimator {
         }
     }
 
+    #endif
+
     private func startFallbackAnimation() {
         isUsingGyroscope = false
+        #if os(iOS)
         let target = DisplayLinkProxy { [weak self] in
             self?.updateFallback()
         }
         displayLink = CADisplayLink(target: target, selector: #selector(DisplayLinkProxy.handleDisplayLink))
         displayLink?.add(to: .main, forMode: .common)
+        #else
+        let timer = Timer(timeInterval: 1.0 / 60.0, repeats: true) { [weak self] _ in
+            self?.updateFallback()
+        }
+        animationTimer = timer
+        RunLoop.main.add(timer, forMode: .common)
+        #endif
     }
 
     private func updateFallback() {
@@ -203,20 +224,30 @@ private final class GyroscopeTiltAnimator {
     }
 
     func stop() {
+        #if os(iOS)
         if isUsingGyroscope {
             motionManager.stopDeviceMotionUpdates()
         }
         displayLink?.invalidate()
         displayLink = nil
+        #else
+        animationTimer?.invalidate()
+        animationTimer = nil
+        #endif
         pitch = 0
         roll = 0
     }
 
     deinit {
+        #if os(iOS)
         displayLink?.invalidate()
+        #else
+        animationTimer?.invalidate()
+        #endif
     }
 }
 
+#if os(iOS)
 private final class DisplayLinkProxy: NSObject {
     let callback: () -> Void
 
@@ -228,3 +259,4 @@ private final class DisplayLinkProxy: NSObject {
         callback()
     }
 }
+#endif
