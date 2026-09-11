@@ -1,15 +1,26 @@
+import Foundation
+#if canImport(UIKit)
 import CoreHaptics
 import UIKit
+#endif
 
 @MainActor
 public class HapticManager {
     public static let shared: HapticManager = .init()
 
+    #if canImport(UIKit)
+    public typealias NotificationFeedbackType = UINotificationFeedbackGenerator.FeedbackType
+    public typealias ImpactFeedbackStyle = UIImpactFeedbackGenerator.FeedbackStyle
+    #else
+    public enum NotificationFeedbackType { case success, warning, error }
+    public enum ImpactFeedbackStyle { case light, medium, heavy, soft, rigid }
+    #endif
+
     public enum HapticType {
         case buttonPress
         case dataRefresh(intensity: CGFloat)
-        case notification(_ type: UINotificationFeedbackGenerator.FeedbackType)
-        case impact(_ style: UIImpactFeedbackGenerator.FeedbackStyle, intensity: CGFloat? = nil, duration: TimeInterval? = nil)
+        case notification(_ type: NotificationFeedbackType)
+        case impact(_ style: ImpactFeedbackStyle, intensity: CGFloat? = nil, duration: TimeInterval? = nil)
         case tabSelection
         case success
         case error
@@ -50,6 +61,7 @@ public class HapticManager {
         }
     }
 
+    #if canImport(UIKit)
     private let selectionGenerator = UISelectionFeedbackGenerator()
     private let notificationGenerator = UINotificationFeedbackGenerator()
 
@@ -114,4 +126,12 @@ public class HapticManager {
     public var supportsHaptics: Bool {
         CHHapticEngine.capabilitiesForHardware().supportsHaptics
     }
+    #else
+    public init() {}
+
+    /// UIKit impact and notification haptics are unavailable on native macOS.
+    public func fireHaptic(_ type: HapticType) {}
+
+    public var supportsHaptics: Bool { false }
+    #endif
 }

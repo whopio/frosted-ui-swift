@@ -1,5 +1,4 @@
 import SwiftUI
-import UIKit
 
 public enum FrostedCreditCardStyle {
     /// Vivid filled card. Uses `tint.nine` as background and

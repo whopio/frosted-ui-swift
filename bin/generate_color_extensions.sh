@@ -20,7 +20,14 @@ if [ ! -d "$OUTPUT_DIR" ]; then
 fi
 
 # Start the Swift file with the import statement and enum definition
-echo "import SwiftUI" > "$OUTPUT_FILE"
+cat <<'EOT' > "$OUTPUT_FILE"
+import SwiftUI
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
+EOT
 echo "" >> "$OUTPUT_FILE"
 echo "public enum FrostedColor: String, CaseIterable, Identifiable {" >> "$OUTPUT_FILE"
 echo "    public var id: String { rawValue }" >> "$OUTPUT_FILE"
@@ -74,6 +81,7 @@ public extension Color {
     }
 }
 
+#if canImport(UIKit)
 public extension UIColor {
     /// Fallback to clear color if the color is not found
     convenience init(_ color: FrostedColor, fallbackColor: UIColor = .clear) {
@@ -84,6 +92,16 @@ public extension UIColor {
         }
     }
 }
+#elseif canImport(AppKit)
+public extension NSColor {
+    /// Falls back to the supplied color while preserving light/dark appearances.
+    convenience init(_ color: FrostedColor, fallbackColor: NSColor = .clear) {
+        self.init(name: nil) { _ in
+            NSColor(named: color.rawValue, bundle: .module) ?? fallbackColor
+        }
+    }
+}
+#endif
 
 #Preview {
     ScrollView {

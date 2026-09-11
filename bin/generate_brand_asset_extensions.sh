@@ -30,7 +30,14 @@ IFS=$'\n' asset_names=($(sort <<<"${asset_names[*]}"))
 unset IFS
 
 {
-    echo "import SwiftUI"
+    cat <<'EOT'
+import SwiftUI
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
+EOT
     echo ""
     echo "public enum FrostedBrandAsset: String, CaseIterable, Identifiable {"
     echo "    public var id: String { rawValue }"
@@ -50,11 +57,22 @@ public extension Image {
     }
 }
 
+#if canImport(UIKit)
 public extension UIImage {
     convenience init?(_ asset: FrostedBrandAsset) {
         self.init(named: asset.rawValue, in: .module, compatibleWith: nil)
     }
 }
+#elseif canImport(AppKit)
+public extension NSImage {
+    convenience init?(_ asset: FrostedBrandAsset) {
+        guard let image = Bundle.module.image(forResource: asset.rawValue) else { return nil }
+        self.init(size: image.size)
+        addRepresentations(image.representations)
+        isTemplate = image.isTemplate
+    }
+}
+#endif
 
 #Preview {
     ScrollView {

@@ -1,5 +1,9 @@
 import SwiftUI
+#if canImport(UIKit)
 import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
 
 /// Applies the flip's 3D Y-axis rotation together with a subtle scale-dip that
 /// peaks when the card is edge-on (90° / 270°).
@@ -266,7 +270,12 @@ private struct CopyableField: View {
     }
 
     private func copy() {
+        #if canImport(UIKit)
         UIPasteboard.general.string = value
+        #elseif canImport(AppKit)
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(value, forType: .string)
+        #endif
         HapticManager.shared.fireHaptic(.impact(.light))
         withAnimation(.snappy(duration: 0.25)) { didCopy = true }
         Task {
