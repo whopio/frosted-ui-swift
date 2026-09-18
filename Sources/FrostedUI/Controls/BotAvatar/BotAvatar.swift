@@ -15,7 +15,7 @@ public struct BotAvatar: View {
 
     private let size: CGFloat
     private let shape: BotAvatarShape
-    private let coordinates: BotAvatarVector
+    private let coordinates: [Double]
     private let tint: FrostedTint?
     private let expression: BotAvatarExpression?
     private let status: BotAvatarStatus?
@@ -47,7 +47,7 @@ public struct BotAvatar: View {
         let derived = identity.map(BotAvatarIdentity.init)
         self.size = size.isFinite ? max(0, size) : 0
         self.shape = shape ?? derived?.shape ?? .circle
-        self.coordinates = self.shape.coordinates
+        self.coordinates = self.shape.morphCoordinates
         self.tint = tint ?? derived?.tint
         self.expression = expression
         self.status = status
@@ -85,12 +85,13 @@ public struct BotAvatar: View {
                 gazing: activeGaze != nil
             )
             ZStack {
-                BotAvatarSilhouette(animatableData: coordinates)
+                BotAvatarSilhouette(coordinates: coordinates)
                     .fill(highContrast ? palette.twelve : palette.nine)
+                    .animation(motionEnabled ? .spring(response: 0.5, dampingFraction: 0.6) : nil, value: shape)
                 if let resolvedExpression {
                     BotAvatarFace(expression: resolvedExpression, shape: shape, mouth: mouth,
                                   color: highContrast ? palette.one : palette.contrastNine,
-                                  size: size, blink: motion.blink)
+                                  size: size, blink: motion.blink, animated: motionEnabled)
                         .offset(x: size * (motion.x + (activeGaze?.x ?? 0) * 0.1),
                                 y: size * (motion.y + (activeGaze?.y ?? 0) * 0.07))
                 }
@@ -110,26 +111,24 @@ public struct BotAvatar: View {
                     .transition(.scale.combined(with: .opacity))
             }
         }
-        .animation(motionEnabled ? .spring(response: 0.5, dampingFraction: 0.6) : nil, value: shape)
-        .animation(motionEnabled ? .spring(response: 0.5, dampingFraction: 0.6) : nil, value: resolvedExpression)
         .animation(motionEnabled ? .spring(response: 0.5, dampingFraction: 0.6) : nil, value: mouth)
         .animation(motionEnabled ? .easeOut(duration: 0.3) : nil, value: activeGaze)
         .animation(motionEnabled ? .easeOut(duration: 0.3) : nil, value: status)
         .animation(motionEnabled ? .easeOut(duration: 0.2) : nil, value: notification)
         .animation(.easeOut(duration: 0.3), value: palette)
         .animation(.easeOut(duration: 0.3), value: highContrast)
-        .onContinuousHover { phase in
-            guard followPointer, motionEnabled, size > 0 else { return }
-            switch phase {
-            case .active(let location):
-                pointerGaze = CGPoint(x: (location.x - size / 2) / max(size * 3, 160),
-                                      y: (location.y - size / 2) / max(size * 3, 160))
-            case .ended: pointerGaze = nil
+        .background {
+            if followPointer && motionEnabled && resolvedExpression != nil {
+                BotAvatarPointerTracking(enabled: true) { pointerGaze = $0 }
             }
         }
         .onChange(of: status) { statusStarted = Date() }
         .onChange(of: blinkTrigger) { blinkStarted = motionEnabled ? Date() : nil }
         .onChange(of: motionEnabled) { pointerGaze = nil }
+        .onChange(of: followPointer) { pointerGaze = nil }
+        .onChange(of: resolvedExpression) {
+            if resolvedExpression == nil { pointerGaze = nil }
+        }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text("Bot", bundle: .module))
         .accessibilityValue(accessibilityStatus)
@@ -155,32 +154,31 @@ private struct BotAvatarFace: View {
     let color: Color
     let size: CGFloat
     let blink: CGFloat
+    let animated: Bool
+
+    private var morph: Animation? {
+        animated ? .spring(response: 0.5, dampingFraction: 0.6) : nil
+    }
 
     var body: some View {
-        let fit = shape.faceFit(withMouth: mouth)
         ZStack {
-            eye(expression.eyes.0)
-            eye(expression.eyes.1)
+            eye(expression.eyes.0.fitted(to: shape))
+            eye(expression.eyes.1.fitted(to: shape))
             if mouth {
-                let feature = expression.mouth
-                BotAvatarMouth(curvature: feature.curvature)
-                    .fill(color)
-                    .frame(width: feature.width * size, height: feature.height * size)
-                    .rotationEffect(.degrees(feature.tilt))
-                    .position(x: feature.x * size, y: feature.y * size)
+                let feature = expression.mouth.fitted(to: shape)
+                feature.fill(color)
+                    // The eyes react first; the mouth follows 70ms later.
+                    .animation(morph?.delay(0.07), value: feature)
             }
         }
         .frame(width: size, height: size)
-        .scaleEffect(fit.scale, anchor: UnitPoint(x: 0.5, y: 0.45))
-        .offset(y: fit.dy * size)
     }
 
     private func eye(_ feature: BotAvatarFeature) -> some View {
-        Capsule()
-            .fill(color)
-            .frame(width: feature.width * size, height: feature.height * size)
-            .scaleEffect(x: 1, y: blink)
-            .rotationEffect(.degrees(feature.tilt))
-            .position(x: feature.x * size, y: feature.y * size)
+        feature.fill(color)
+            // Tilt is already in the path. Blink vertically around its bounds,
+            // matching the frontend's transform-box: fill-box behavior.
+            .scaleEffect(x: 1, y: blink, anchor: UnitPoint(x: 0.5, y: feature.bounds.midY))
+            .animation(morph, value: feature)
     }
 }

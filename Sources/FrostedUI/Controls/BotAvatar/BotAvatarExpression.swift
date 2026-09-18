@@ -10,29 +10,41 @@ public enum BotAvatarExpression: String, CaseIterable, Sendable {
     case sad
     case suspicious
 
+    // Keep this vocabulary in sync with frosted-ui's bot-avatar.expressions.ts.
+    // Every feature has four cubic segments, so any expression can morph into any other.
     var eyes: (BotAvatarFeature, BotAvatarFeature) {
         switch self {
-        case .neutral: (.init(0.36, 0.44, 0.13, 0.3, -10), .init(0.64, 0.44, 0.13, 0.3, -10))
-        case .happy: (.init(0.36, 0.42, 0.14, 0.17, -10), .init(0.64, 0.42, 0.14, 0.17, -10))
-        case .wide: (.init(0.36, 0.44, 0.17, 0.34, -6), .init(0.64, 0.44, 0.17, 0.34, -6))
-        case .wink: (.init(0.36, 0.44, 0.13, 0.3, -10), .init(0.64, 0.46, 0.15, 0.05, -10))
-        case .sleepy: (.init(0.36, 0.48, 0.14, 0.13, -10), .init(0.64, 0.48, 0.14, 0.13, -10))
-        case .angry: (.init(0.36, 0.45, 0.13, 0.24, -22), .init(0.64, 0.45, 0.13, 0.24, 22))
-        case .sad: (.init(0.36, 0.46, 0.13, 0.24, 18), .init(0.64, 0.46, 0.13, 0.24, -18))
-        case .suspicious: (.init(0.36, 0.44, 0.15, 0.1, 0), .init(0.64, 0.44, 0.15, 0.1, 0))
+        case .neutral:
+            (.oval(0.35, 0.43, 0.0725, 0.0725), .oval(0.65, 0.43, 0.0725, 0.0725))
+        case .happy:
+            (.crescentEye(0.346, 0.416), .crescentEye(0.654, 0.416))
+        case .wide:
+            (.oval(0.345, 0.408, 0.09, 0.09), .oval(0.655, 0.408, 0.09, 0.09))
+        case .wink:
+            (.oval(0.35, 0.43, 0.0725, 0.0725),
+             .blob((0.58, 0.452), (0.65, 0.443), (0.72, 0.452), (0.65, 0.398))
+                .rotated(around: CGPoint(x: 0.65, y: 0.43), degrees: -6))
+        case .sleepy:
+            (.tiltedOval(0.35, 0.463, 0.0725, 0.032, -7), .tiltedOval(0.65, 0.463, 0.0725, 0.032, 7))
+        case .angry:
+            (.tiltedOval(0.355, 0.452, 0.0775, 0.037, 21), .tiltedOval(0.645, 0.452, 0.0775, 0.037, -21))
+        case .sad:
+            (.tiltedOval(0.353, 0.474, 0.064, 0.0575, -12), .tiltedOval(0.647, 0.474, 0.064, 0.0575, 12))
+        case .suspicious:
+            (.oval(0.35, 0.437, 0.0775, 0.031), .oval(0.65, 0.428, 0.0775, 0.044))
         }
     }
 
     var mouth: BotAvatarFeature {
         switch self {
-        case .neutral: .init(0.5, 0.63, 0.19, 0.06, -3, curvature: 0)
-        case .happy: .init(0.5, 0.625, 0.3, 0.13, 0, curvature: 1)
-        case .wide: .init(0.5, 0.66, 0.14, 0.12, 0, curvature: 0)
-        case .wink: .init(0.52, 0.63, 0.21, 0.065, -8, curvature: 1)
-        case .sleepy: .init(0.5, 0.65, 0.09, 0.09, 0, curvature: 0)
-        case .angry: .init(0.5, 0.655, 0.23, 0.09, 0, curvature: -1)
-        case .sad: .init(0.5, 0.66, 0.19, 0.075, 0, curvature: -1)
-        case .suspicious: .init(0.5, 0.635, 0.14, 0.05, -6, curvature: 0)
+        case .neutral: .blob((0.385, 0.612), (0.5, 0.655), (0.615, 0.612), (0.5, 0.586))
+        case .happy: .blob((0.315, 0.59), (0.5, 0.727), (0.685, 0.59), (0.5, 0.572))
+        case .wide: .oval(0.5, 0.657, 0.075, 0.09)
+        case .wink: .blob((0.378, 0.627), (0.518, 0.705), (0.645, 0.586), (0.505, 0.586))
+        case .sleepy: .oval(0.5, 0.664, 0.044, 0.052)
+        case .angry: .blob((0.345, 0.678), (0.5, 0.662), (0.655, 0.678), (0.5, 0.604))
+        case .sad: .blob((0.383, 0.7), (0.5, 0.684), (0.617, 0.7), (0.5, 0.614))
+        case .suspicious: .blob((0.425, 0.645), (0.515, 0.664), (0.605, 0.625), (0.515, 0.606))
         }
     }
 }
@@ -48,19 +60,5 @@ public enum BotAvatarStatus: String, CaseIterable, Sendable {
         case .blocked: .sad
         case .done: .happy
         }
-    }
-}
-
-struct BotAvatarFeature {
-    var x, y, width, height, tilt: CGFloat
-    var curvature: CGFloat
-
-    init(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, _ tilt: CGFloat, curvature: CGFloat = 0) {
-        self.x = x
-        self.y = y
-        self.width = width
-        self.height = height
-        self.tilt = tilt
-        self.curvature = curvature
     }
 }
