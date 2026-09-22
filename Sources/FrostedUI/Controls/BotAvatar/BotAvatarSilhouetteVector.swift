@@ -78,7 +78,7 @@ private struct BotAvatarContour {
                     if (curve.split(at: mid).0.end.x - 0.5) * left > 0 { lo = mid } else { hi = mid }
                 }
                 let t = (lo + hi) / 2, y = curve.split(at: t).0.end.y
-                if origin == nil || y < origin!.y { origin = (index, t, y) }
+                if origin == nil || y < origin!.y { origin = (index, t, Double(y)) }
             }
         }
         if let origin {
