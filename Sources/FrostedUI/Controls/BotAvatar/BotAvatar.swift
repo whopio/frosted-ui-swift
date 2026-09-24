@@ -8,6 +8,7 @@ public struct BotAvatar: View {
     @Environment(\.frostedTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.colorScheme) private var colorScheme
     @State private var pointerGaze: CGPoint?
     @State private var lifeOffset = Double.random(in: 0..<5.2)
     @State private var statusStarted = Date()
@@ -75,28 +76,36 @@ public struct BotAvatar: View {
 
     public var body: some View {
         let palette = tint ?? theme.accent
-        TimelineView(.animation(minimumInterval: 1.0 / 30, paused: !motionEnabled || resolvedExpression == nil)) { context in
-            let motion = BotAvatarMotion(
-                time: context.date.timeIntervalSinceReferenceDate + lifeOffset,
-                statusTime: context.date.timeIntervalSince(statusStarted),
-                blinkTime: blinkStarted.map { context.date.timeIntervalSince($0) },
-                status: status,
-                enabled: motionEnabled && resolvedExpression != nil,
-                gazing: activeGaze != nil
-            )
-            ZStack {
-                BotAvatarSilhouette(coordinates: coordinates)
-                    .fill(highContrast ? palette.twelve : palette.nine)
-                    .animation(motionEnabled ? .spring(response: 0.5, dampingFraction: 0.6) : nil, value: shape)
-                if let resolvedExpression {
-                    BotAvatarFace(expression: resolvedExpression, shape: shape, mouth: mouth,
-                                  color: highContrast ? palette.one : palette.contrastNine,
-                                  size: size, blink: motion.blink, animated: motionEnabled)
-                        .offset(x: size * (motion.x + (activeGaze?.x ?? 0) * 0.1),
-                                y: size * (motion.y + (activeGaze?.y ?? 0) * 0.07))
+        Group {
+            if motionEnabled, let resolvedExpression {
+                BotAvatarLayer(state: BotAvatarLayerState(
+                    size: size,
+                    coordinates: coordinates,
+                    eyes: [resolvedExpression.eyes.0.fitted(to: shape), resolvedExpression.eyes.1.fitted(to: shape)],
+                    mouth: mouth ? resolvedExpression.mouth.fitted(to: shape) : nil,
+                    bodyColor: highContrast ? palette.twelve : palette.nine,
+                    faceColor: highContrast ? palette.one : palette.contrastNine,
+                    colorScheme: colorScheme,
+                    status: status,
+                    statusStarted: statusStarted,
+                    lifeOffset: lifeOffset,
+                    gaze: activeGaze,
+                    blinkStarted: blinkStarted
+                ))
+            } else {
+                let motion = BotAvatarMotion(time: 0, statusTime: 0, blinkTime: nil, status: status, enabled: false, gazing: activeGaze != nil)
+                ZStack {
+                    BotAvatarSilhouette(coordinates: coordinates)
+                        .fill(highContrast ? palette.twelve : palette.nine)
+                    if let resolvedExpression {
+                        BotAvatarFace(expression: resolvedExpression, shape: shape, mouth: mouth,
+                                      color: highContrast ? palette.one : palette.contrastNine,
+                                      size: size, blink: motion.blink, animated: false)
+                            .offset(x: size * (motion.x + (activeGaze?.x ?? 0) * 0.1),
+                                    y: size * (motion.y + (activeGaze?.y ?? 0) * 0.07))
+                    }
                 }
             }
-            .scaleEffect(motion.scale)
         }
         .frame(width: size, height: size)
         .overlay(alignment: .topTrailing) {
