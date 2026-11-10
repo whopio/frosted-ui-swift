@@ -22,7 +22,7 @@ public struct FrostedTheme: Equatable {
         neutral: FrostedTint = .gray,
         danger: FrostedTint = .red,
         info: FrostedTint = .sky,
-        success: FrostedTint = .green,
+        success: FrostedTint = .lime,
         warning: FrostedTint = .amber
     ) {
         self.accent = accent
@@ -38,7 +38,7 @@ public struct FrostedTheme: Equatable {
         neutral: .gray,
         danger: .red,
         info: .sky,
-        success: .green,
+        success: .lime,
         warning: .amber
     )
 
