@@ -1,0 +1,30 @@
+name: FrostedUI
+options:
+  deploymentTarget:
+    iOS: "17.0"
+    macOS: "15.0"
+targets:
+  FrostedUI:
+    type: framework
+    platform: auto
+    supportedDestinations: [iOS, macOS]
+    sources:
+      - path: Sources/FrostedUI
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.whop.FrostedUI
+        PRODUCT_MODULE_NAME: FrostedUI
+        GENERATE_INFOPLIST_FILE: YES
+        BUILD_LIBRARY_FOR_DISTRIBUTION: YES
+        SKIP_INSTALL: NO
+        SWIFT_VERSION: "5.0"
+        SWIFT_EMIT_LOC_STRINGS: NO
+        SUPPORTS_MACCATALYST: NO
+        APPLICATION_EXTENSION_API_ONLY: YES
+        MARKETING_VERSION: "0.0.0"
+        CURRENT_PROJECT_VERSION: "1"
+      configs:
+        Release:
+          SWIFT_COMPILATION_MODE: wholemodule
+          SWIFT_OPTIMIZATION_LEVEL: -Osize
+    scheme: {}
