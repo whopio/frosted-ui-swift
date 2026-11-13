@@ -1,34 +1,15 @@
 // swift-tools-version: 6.0
-// The swift-tools-version declares the minimum version of Swift required to build this package.
-
 import PackageDescription
 
 let package = Package(
     name: "FrostedUI",
     platforms: [.iOS(.v17), .macOS(.v15)],
-    products: [
-        .library(
-            name: "FrostedUI",
-            type: .dynamic,
-            targets: ["FrostedUI"]),
-    ],
-    dependencies: [
-        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.18.0"),
-    ],
+    products: [.library(name: "FrostedUI", targets: ["FrostedUI"])],
     targets: [
-        .target(
+        .binaryTarget(
             name: "FrostedUI",
-            dependencies: [],
-            resources: [.process("Resources")]
+            url: "https://github.com/whopio/frosted-ui-swift/releases/download/0.9.0/FrostedUI.xcframework.zip",
+            checksum: "f30048d0792160f5e3fd680f452185da3a848b606c1f6ae4581f07022a84a7ec"
         ),
-        .testTarget(
-            name: "FrostedUITests",
-            dependencies: [
-                "FrostedUI",
-                .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
-            ],
-            exclude: ["__Snapshots__"]
-        ),
-    ],
-    swiftLanguageModes: [.v5]
+    ]
 )
