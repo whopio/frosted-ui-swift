@@ -1,0 +1,109 @@
+name: Release XCFramework
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing published source release tag
+        required: true
+        type: string
+  pull_request:
+    paths:
+      - Sources/**
+      - bin/build_xcframework.sh
+      - bin/publish_xcframework.rb
+      - bin/verify_xcframework.sh
+      - project-xcframework.yml
+      - Tests/ReleaseTests/**
+      - .github/workflows/release-xcframework.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: xcframework-${{ github.event.release.tag_name || inputs.tag || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    if: github.event_name != 'release' || (!github.event.release.prerelease && !startsWith(github.event.release.tag_name, 'binary/'))
+    runs-on: macos-26
+    timeout-minutes: 45
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.5.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name || inputs.tag || github.sha }}
+          persist-credentials: false
+      - name: Set version
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name || inputs.tag || '0.0.0' }}
+        run: |
+          set -euo pipefail
+          [[ "$RELEASE_TAG" =~ ^v?[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          echo "FROSTED_VERSION=${RELEASE_TAG#v}" >> "$GITHUB_ENV"
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4"
+      - name: Test publication recovery
+        run: ruby Tests/ReleaseTests/test_publish_xcframework.rb
+      - name: Build distribution archives
+        run: bash bin/build_xcframework.sh
+      - name: Compile binary consumers for every architecture
+        run: bash bin/verify_xcframework.sh .build/xcframework/FrostedUI.xcframework
+      - name: Validate binary package manifest
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name || inputs.tag || '0.0.0' }}
+        run: |
+          set -euo pipefail
+          ruby bin/publish_xcframework.rb "$RELEASE_TAG" .build/xcframework/FrostedUI.xcframework.zip --prepare-only .build/Package.binary.swift
+          mkdir -p .build/binary-package
+          cp .build/Package.binary.swift .build/binary-package/Package.swift
+          swift package --package-path .build/binary-package dump-package > /dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FrostedUI-xcframework
+          path: .build/xcframework/FrostedUI.xcframework.zip
+          if-no-files-found: error
+
+  publish:
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      # uploads the release archive and creates its binary tag
+      contents: write
+    steps:
+      - name: Validate source release before checkout
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.event.release.tag_name || inputs.tag }}
+        run: |
+          set -euo pipefail
+          [[ "$RELEASE_TAG" =~ ^v?[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_TAG" --jq 'select(.draft == false and .prerelease == false) | .tag_name' | grep -Fx "$RELEASE_TAG"
+          status=$(gh api "repos/$GITHUB_REPOSITORY/compare/main...$RELEASE_TAG" --jq .status)
+          [[ "$status" == identical || "$status" == behind ]]
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name || inputs.tag }}
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: FrostedUI-xcframework
+          path: artifact
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4"
+      - name: Publish archive and binary tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.event.release.tag_name || inputs.tag }}
+        run: |
+          set -euo pipefail
+          ruby bin/publish_xcframework.rb "$RELEASE_TAG" artifact/FrostedUI.xcframework.zip

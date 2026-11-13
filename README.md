@@ -1,5 +1,42 @@
 # frosted-ui-swift
 
+## Binary distribution
+
+Publishing a stable GitHub release (for example, `0.9.0`) runs `Release XCFramework`.
+It archives iOS, iOS Simulator and macOS with Xcode 26.5, checks imports for every
+architecture, attaches `FrostedUI.xcframework.zip` to that release, and creates the
+matching `binary/0.9.0` tag. The source release must be a commit on `main`.
+
+The binary tag keeps the source tree and replaces only `Package.swift` with a
+checksum-pinned binary target. Consumers opt in without changing their imports:
+
+```swift
+.package(url: "https://github.com/whopio/frosted-ui-swift.git", revision: "binary/0.9.0")
+```
+
+Use a binary tag only after its release workflow succeeds. Ordinary version tags
+continue to build from source. Develop and run snapshot tests on a source tag or
+`main`; do not edit generated binary tags. To recover an interrupted publication,
+dispatch the workflow with the same source release tag. It reuses an already
+uploaded archive after verifying its source revision and refuses to replace an
+existing binary tag with different contents.
+
+GitHub-hosted CI archives the libraries without a signing certificate; consuming
+apps sign the embedded framework with their own identity. Local distribution
+builds can sign with an installed Apple identity:
+
+```sh
+FROSTED_SIGNING_IDENTITY="<Apple signing identity>" bash bin/build_xcframework.sh
+bash bin/verify_xcframework.sh .build/xcframework/FrostedUI.xcframework
+```
+
+The framework carries its compiled `Assets.car`. Raw catalogs and generated icon
+declarations remain in the binary tag for consumers that trim assets. Trim only
+the framework embedded in the app, then re-sign it before signing the app. Do not
+modify SwiftPM's downloaded XCFramework or shared build products. Extensions that
+link the host app's framework share its assets; a separately embedded App Clip
+framework can be trimmed to its own usage.
+
 ## Generate icons from Figma
 
 Just run the [Github action](https://github.com/whopio/frosted-ui-swift/actions/workflows/generate-icons.yml) to pull the icons and generate the xcassets + Image extensions.
