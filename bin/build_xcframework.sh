@@ -12,11 +12,12 @@ OUTPUT="$(cd "$OUTPUT" && pwd)"
 xcodegen generate --spec "$ROOT/project-xcframework.yml" --project "$ROOT"
 
 framework_args=()
-for platform in ios simulator macos; do
+for platform in ios simulator macos catalyst; do
     case "$platform" in
         ios) destination="generic/platform=iOS" ;;
         simulator) destination="generic/platform=iOS Simulator" ;;
         macos) destination="generic/platform=macOS" ;;
+        catalyst) destination="generic/platform=macOS,variant=Mac Catalyst" ;;
     esac
     archive="$OUTPUT/$platform.xcarchive"
     xcodebuild archive -project "$ROOT/FrostedUI.xcodeproj" -scheme FrostedUI \
