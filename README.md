@@ -3,9 +3,9 @@
 ## Binary distribution
 
 Publishing a stable GitHub release (for example, `0.9.0`) runs `Release XCFramework`.
-It archives iOS, iOS Simulator and macOS with Xcode 26.5, checks imports for every
-architecture, attaches `FrostedUI.xcframework.zip` to that release, and creates the
-matching `binary/0.9.0` tag. The source release must be a commit on `main`.
+It archives iOS, iOS Simulator, macOS and Mac Catalyst with Xcode 26.5, checks imports
+for every architecture, attaches `FrostedUI.xcframework.zip` to that release, and
+creates the matching `binary/0.9.0` tag. The source release must be a commit on `main`.
 
 The binary tag keeps the source tree and replaces only `Package.swift` with a
 checksum-pinned binary target. Consumers opt in without changing their imports:
